@@ -1,7 +1,7 @@
-export const movies = 
+export const movie = 
     {
-        title: "Filmer",
-        name: "movies",
+        title: "Film",
+        name: "movie",
         type: "document",
         fields: [
             {

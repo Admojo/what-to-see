@@ -1,3 +1,4 @@
 import { users } from "./users"
-import { movies } from "./movies"
-export const schemaTypes = [users, movies]
+import { movie } from "./movie"
+import { genre } from "./genre"
+export const schemaTypes = [users, movie, genre]
