@@ -9,6 +9,7 @@ nav {
     height: 100px;
     @media only screen and (max-width: 625px) {
         padding-top: 75px;
+        justify-content: center;
     }
     #logoButton {
         color: rgb(255, 255, 255);
