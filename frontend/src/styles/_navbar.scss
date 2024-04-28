@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700&display=swap');
+
 nav {
     display: flex;
     flex-wrap: wrap;
@@ -6,28 +8,35 @@ nav {
     background-color: rgb(51, 29, 93);
     align-items: center;
     width: 100%;
-    height: 100px;
-    @media only screen and (max-width: 625px) {
-        padding-top: 75px;
-        justify-content: center;
+    // height: 100px;
+    @media only screen and (max-width: 775px) {
+        padding-top: 30px;
+        justify-content: space-around;
     }
     #logoButton {
         color: rgb(255, 255, 255);
         text-decoration: underline;
         position: absolute;
         left: 20px;
-        @media only screen and (max-width: 625px) {
-            left: 50%;
+        font-family: 'Rubik', sans-serif;
+        font-weight: bold;
+        font-size: 30px;
+        @media only screen and (max-width: 775px) {
+            left: 32%;
+            right: 14%;
             top: 30px;
+            position: static;
+            margin-left: 0.5rem;
         }
     }
     ul {
         color: rgb(255, 255, 255);
-        @media only screen and (max-width: 625px) {
+        @media only screen and (max-width: 775px) {
             display: flex;
             margin-block-start: 1em;
             margin-block-end: 1em;
             padding-inline-start: 10px;
+            -webkit-flex-direction: column;
         }
         li {
             color: rgb(251, 255, 251);
@@ -50,7 +59,7 @@ nav {
             padding: 0.5rem;
             border-radius: .01rem;
             button {
-                background-color: rgb(216, 129, 143);
+                background-color: rgb(237, 162, 176);
                 color: rgb(51, 29, 93);
                 text-decoration: none;
                 font-weight: bold;
