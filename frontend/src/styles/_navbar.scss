@@ -8,8 +8,7 @@ nav {
     background-color: rgb(51, 29, 93);
     align-items: center;
     width: 100%;
-    // height: 100px;
-    @media only screen and (max-width: 840px) {
+    @media only screen and (max-width: 1000px) {
         padding-top: 30px;
         justify-content: space-around;
     }
@@ -21,17 +20,16 @@ nav {
         font-family: 'Rubik', sans-serif;
         font-weight: bold;
         font-size: 30px;
-        @media only screen and (max-width: 840px) {
+        @media only screen and (max-width: 1000px) {
             left: 32%;
             right: 14%;
             top: 30px;
             position: static;
-            margin-left: 1rem;
         }
     }
     ul {
         color: rgb(255, 255, 255);
-        @media only screen and (max-width: 840px) {
+        @media only screen and (max-width: 1000px) {
             display: flex;
             margin-block-start: 1em;
             margin-block-end: 1em;
@@ -43,21 +41,17 @@ nav {
             display: inline;
             margin-left: 1rem;
             margin-right: 1rem;
-            padding: 0.5rem;
+            margin-bottom: 1rem;
             text-decoration: underline;
-            @media only screen and (max-width: 950px) {
-                margin-left: 1px;
-                margin-right: .5rem;
-            }
             a {
                 color: rgb(255, 255, 255);
                 width: 100%;
-                // padding: 5px;
                 padding: 0.6em 1.2em;
             }
         }
         #pinkButtonNav {
             margin-left: 20px;
+            margin-right: 40px;
             display: inline;
             padding: 0.5rem;
             border-radius: .01rem;
