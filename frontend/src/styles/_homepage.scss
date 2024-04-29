@@ -1,0 +1,30 @@
+main {
+    margin-left: 60px;
+    margin-right: 60px;
+    h1 {
+        font-size: xx-large;
+        // margin-left: 1rem;
+    }
+    div {
+        display: flex;
+        justify-content: space-evenly;
+        #moviesWatchLaterSection {
+            width: 30%;
+            h2 {
+                margin: 1rem;
+            }
+        }
+        #wishlistSection {
+            width: 30%;
+            p { 
+                margin: 1rem;
+            }
+        }
+        #watchTogetherSection {
+            background-color: rgb(225, 225, 225);
+            padding-top: 7px;
+            padding-left: 10px;
+            width: 40%;
+        }
+    }
+}
