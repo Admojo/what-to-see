@@ -1,0 +1,13 @@
+header {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-end;
+    background-color: rgb(51, 29, 93);
+    align-items: center;
+    width: 100%;
+    @media only screen and (max-width: 1000px) {
+        padding-top: 30px;
+        justify-content: space-around;
+    }
+}

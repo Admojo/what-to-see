@@ -3,6 +3,7 @@ import { FaCircleUser } from "react-icons/fa6";
 import { FaTv } from "react-icons/fa";
 
 export default function Nav() {
+   
 
     return(
     <nav>
@@ -10,7 +11,7 @@ export default function Nav() {
         <ul>
             <li id="pinkButtonNav">< Link to="/home"><button><FaTv /> Hva skal jeg se?</button></Link></li>
             <li><Link to ="/genre">Bla gjennom sjangere</Link></li>
-            <li><Link to ="/login"><FaCircleUser /> USERNAME</Link></li>
+            {/* <li><Link to ="/login"><FaCircleUser /> USERNAME</Link></li> */}
         </ul>
     </nav>
     )
