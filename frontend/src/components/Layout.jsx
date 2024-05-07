@@ -1,8 +1,11 @@
+import { useState } from "react"
 import Nav from "./Nav"
 
-export default function Layout({children, username}){
+export default function Layout({children}){
 
-    if (username != null) {
+    const [user, setUser] = useState()
+
+    if (user == null) {
         return(
         <div id="container">
             <header>
