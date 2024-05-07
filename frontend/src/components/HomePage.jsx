@@ -1,5 +1,6 @@
 import { FaStar } from "react-icons/fa6";
 import { VscSmiley } from "react-icons/vsc";
+import MovieCard from "./MovieCard";
 
 export default function HomePage(){
  
@@ -7,6 +8,7 @@ export default function HomePage(){
         <main>
             <h1>Hei, USERNAME</h1>
             <div>
+                <MovieCard />
                 <section id="moviesWatchLaterSection">
                     <h2><FaStar /> Filmer jeg skal se!</h2>
                     <ul>
