@@ -1,65 +1,66 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700&display=swap');
-
-nav {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: flex-end;
-    background-color: rgb(51, 29, 93);
-    align-items: center;
-    width: 100%;
-    @media only screen and (max-width: 1000px) {
-        padding-top: 30px;
-        justify-content: space-around;
-    }
-    #logoButton {
-        color: rgb(255, 255, 255);
-        text-decoration: underline;
-        position: absolute;
-        left: 20px;
-        font-family: 'Rubik', sans-serif;
-        font-weight: bold;
-        font-size: 30px;
+header {
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: flex-end;
+        background-color: rgb(51, 29, 93);
+        align-items: center;
+        width: 100%;
         @media only screen and (max-width: 1000px) {
-            left: 32%;
-            right: 14%;
-            top: 30px;
-            position: static;
+            padding-top: 30px;
+            justify-content: space-around;
         }
-    }
-    ul {
-        color: rgb(255, 255, 255);
-        @media only screen and (max-width: 1000px) {
-            display: flex;
-            margin-block-start: 1em;
-            margin-block-end: 1em;
-            padding-inline-start: 10px;
-            -webkit-flex-direction: column;
-        }
-        li {
-            color: rgb(251, 255, 251);
-            display: inline;
-            margin-left: 1rem;
-            margin-right: 1rem;
-            margin-bottom: 1rem;
+        #logoButton {
+            color: rgb(255, 255, 255);
             text-decoration: underline;
-            a {
-                color: rgb(255, 255, 255);
-                width: 100%;
-                padding: 0.6em 1.2em;
+            position: absolute;
+            left: 20px;
+            font-family: 'Rubik', sans-serif;
+            font-weight: bold;
+            font-size: 30px;
+            @media only screen and (max-width: 1000px) {
+                left: 32%;
+                right: 14%;
+                top: 30px;
+                position: static;
             }
         }
-        #pinkButtonNav {
-            margin-left: 20px;
-            margin-right: 40px;
-            display: inline;
-            padding: 0.5rem;
-            border-radius: .01rem;
-            button {
-                background-color: rgb(237, 162, 176);
-                color: rgb(51, 29, 93);
-                text-decoration: none;
-                font-weight: bold;
+        ul {
+            color: rgb(255, 255, 255);
+            @media only screen and (max-width: 1000px) {
+                display: flex;
+                margin-block-start: 1em;
+                margin-block-end: 1em;
+                padding-inline-start: 10px;
+                -webkit-flex-direction: column;
+            }
+            li {
+                color: rgb(251, 255, 251);
+                display: inline;
+                margin-left: 1rem;
+                margin-right: 1rem;
+                margin-bottom: 1rem;
+                text-decoration: underline;
+                a {
+                    color: rgb(255, 255, 255);
+                    width: 100%;
+                    padding: 0.6em 1.2em;
+                }
+            }
+            #pinkButtonNav {
+                margin-left: 20px;
+                margin-right: 40px;
+                display: inline;
+                padding: 0.5rem;
+                border-radius: .01rem;
+                button {
+                    background-color: rgb(237, 162, 176);
+                    color: rgb(51, 29, 93);
+                    text-decoration: none;
+                    font-weight: bold;
+                }
             }
         }
     }

@@ -31,7 +31,6 @@ export default function HomePage(){
                     </ul>
                 </section>
             </div>
-            
         </main>
     ) 
 }
