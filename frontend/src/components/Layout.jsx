@@ -12,7 +12,7 @@ export default function Layout({children, user, setUser}){
             <main>
                 {children}
             </main>
-            <footer> Copyright Gruppe 4 - 2024 </footer>
+            {/* <footer> Copyright Gruppe 4 - 2024 </footer> */}
         </div>
         )
     }
