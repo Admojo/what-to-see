@@ -5,6 +5,7 @@ import HomePage from './components/HomePage';
 import Genre from './components/Genre';
 import { Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import GenrePage from './components/GenrePage';
 
 function App() {
 
@@ -45,7 +46,8 @@ function App() {
       <Routes>
             <Route path="/login" element={<LoginPage />}/>
             <Route path="/home" element={<HomePage user={user}/>}/>
-            <Route path="/genre" element={<Genre />} />
+            <Route path="/genre" element={<Genre setGenre={setGenre} />} />
+            <Route path="/genrepage" element={<GenrePage user={user} genre={genre} />}/>
         </Routes>
     </Layout>
   )

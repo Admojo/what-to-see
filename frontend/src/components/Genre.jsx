@@ -1,6 +1,7 @@
+import { Link } from "react-router-dom"
 import { fetchAllGenres } from "../../services/genreServices"
 import { useState, useEffect } from "react"
-export default function Genre() {
+export default function Genre({setGenre}) {
 
     const [genreList, setGenrelist] = useState(null)
 
@@ -19,7 +20,10 @@ export default function Genre() {
             <section id="genreContent">
                     <ul>
                         {genreList?.map((item, i) =>
-                        <li key={i+"rat"}><p>{item.genre}</p><button> Legg til favoritt</button></li>
+                        <li key={i+"rat"}>
+                            <Link to="/genrepage" onClick={()=> setGenre(item.genre)}>{item.genre}</Link>
+                            <button>Legg til favoritt</button>
+                        </li>
                         )}
                     </ul>
             </section>
