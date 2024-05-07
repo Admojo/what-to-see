@@ -16,7 +16,6 @@ export default function Genre({setGenre, user, genre}) {
         }, [])
 
     const handleClick = async (genre) => {
-        () => setGenre(item.genre)}
         console.log("user-clicked",user)
         console.log("genre-clicked",genre)
         addFavoriteGenre(user, genre)
@@ -31,7 +30,7 @@ export default function Genre({setGenre, user, genre}) {
                         {genreList?.map((item, i) =>
                         <li key={i+"rat"}>
                             <Link to="/genrepage" onClick={()=> setGenre(item.genre)}>{item.genre}</Link>
-                            <button onClick={handleClick}>Legg til favoritt</button>
+                            <button onClick={() => setGenre(item.genre)}>Legg til favoritt</button>
                         </li>
                         )}
                     </ul>
