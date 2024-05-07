@@ -9,11 +9,13 @@ import { useEffect, useState } from 'react';
 
 function App() {
 
-const [query, setQuery] = useState ("James Bond")
+const [query, setQuery] = useState ("")
 const [movies, setMovies] = useState ("James Bond")
+const [genre, setGenre] = useState ("action")
 
 
-const url = 'https://moviesdatabase.p.rapidapi.com/titles/tt4896340';
+// Endre til parameter Movie with: id, title, imdb, moviecover
+const url = `https://moviesdatabase.p.rapidapi.com/titles/titles?info=base_info&genre=${genre}`;
 const options = {
 	method: 'GET',
 	headers: {
