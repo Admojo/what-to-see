@@ -42,6 +42,16 @@ useEffect(() => {
   getData(url)
 },[])
 
+// const getData = async(urlGenre) => {
+//   try {
+//     const response = await fetch(url, options);
+//     const result = await response.text();
+//     console.log(result);
+//     setMovies(result);
+//   } catch (error) {
+//     console.error(error);
+//   }
+// }
 
 // useEffect(()=>{
 //   getData(urlGenre)
