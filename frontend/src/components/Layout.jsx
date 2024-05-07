@@ -1,15 +1,14 @@
 import { useState } from "react"
 import Nav from "./Nav"
+import LoginPage from "./LoginPage"
 
-export default function Layout({children}){
+export default function Layout({children, user, setUser}){
 
-    const [user, setUser] = useState()
-
-    if (user == null) {
+    if (user != null) {
         return(
         <div id="container">
             <header>
-                <Nav></Nav>
+                <Nav user={user}></Nav>
             </header>
             <main>
                 {children}
@@ -21,7 +20,7 @@ export default function Layout({children}){
     else {
         return(
             <main>
-                {children}
+                <LoginPage setUser={setUser} />
             </main>
         )
     }

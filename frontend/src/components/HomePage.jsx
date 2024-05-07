@@ -4,13 +4,14 @@ import MovieCard from "./MovieCard";
 
 export default function HomePage({movielist, title}){
 
+export default function HomePage({user}){
     // En konstant som holder på alle filmer
     const movieWishList = movielist?.docs;
     console.log({title})
  
     return (
         <main>
-            <h1>Hei, USERNAME</h1>
+            <h1>Hei, {user}</h1>
             <div>
                 <section id="moviesWatchLaterSection">
                     <h2><FaStar /> Filmer jeg skal se!</h2>
