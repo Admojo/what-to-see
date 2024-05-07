@@ -9,3 +9,24 @@ export async function fetchAllUsers(){
     `)
     return data
 }
+
+/*
+import { fetchAllUsers } from "../../services/userServices"
+import { useState, useEffect } from "react"
+
+const [userList, setUserlist] = useState(null)
+
+const getAllUsers = async () => {
+    const data = await fetchAllUsers()
+    setUserlist(data)
+}
+
+useEffect(() => {
+getAllUsers
+}, [])
+
+{userList?.map((item, i) => 
+    <li key={i+"mouse"}>
+        {item.name}
+    </li>)}
+*/
