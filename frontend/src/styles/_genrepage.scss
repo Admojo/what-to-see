@@ -1,0 +1,10 @@
+#genreContent {
+    width: 350px;
+    ul {
+        li {
+            justify-content: space-between;
+            display: flex;
+            padding-bottom: 1rem;
+        }
+    }
+}

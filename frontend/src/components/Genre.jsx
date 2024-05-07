@@ -16,14 +16,12 @@ export default function Genre() {
     return (
         <>
             <h1>Sjangere</h1>
-            <section>
-                <article>
+            <section id="genreContent">
                     <ul>
                         {genreList?.map((item, i) =>
                         <li key={i+"rat"}><p>{item.genre}</p><button> Legg til favoritt</button></li>
                         )}
                     </ul>
-                </article>
             </section>
             {/* Skrive ut liste med sjangere */}
         </>
