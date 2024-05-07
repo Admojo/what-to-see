@@ -20,7 +20,7 @@ export default function Genre() {
                 <article>
                     <ul>
                         {genreList?.map((item, i) =>
-                        <li><p>{item.genre}</p><button> Legg til favoritt</button></li>
+                        <li key={i+"rat"}><p>{item.genre}</p><button> Legg til favoritt</button></li>
                         )}
                     </ul>
                 </article>
