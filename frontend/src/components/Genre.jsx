@@ -15,9 +15,11 @@ export default function Genre({setGenre, user, genre}) {
         getAllGenres()
         }, [])
 
-    const handleClick = () => {
+    const handleClick = async (genre) => {
+        () => setGenre(item.genre)}
+        console.log("user-clicked",user)
+        console.log("genre-clicked",genre)
         addFavoriteGenre(user, genre)
-        console.log("clicked")
 
     }
 
