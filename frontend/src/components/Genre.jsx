@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom"
 import { fetchAllGenres } from "../../services/genreServices"
 import { useState, useEffect } from "react"
-export default function Genre({setGenre}) {
+import { addFavoriteGenre } from "../../services/userServices"
+export default function Genre({setGenre, user, genre}) {
 
     const [genreList, setGenrelist] = useState(null)
 
@@ -14,6 +15,12 @@ export default function Genre({setGenre}) {
         getAllGenres()
         }, [])
 
+    const handleClick = () => {
+        addFavoriteGenre(user, genre)
+        console.log("clicked")
+
+    }
+
     return (
         <>
             <h1>Sjangere</h1>
@@ -22,7 +29,7 @@ export default function Genre({setGenre}) {
                         {genreList?.map((item, i) =>
                         <li key={i+"rat"}>
                             <Link to="/genrepage" onClick={()=> setGenre(item.genre)}>{item.genre}</Link>
-                            <button>Legg til favoritt</button>
+                            <button onClick={handleClick}>Legg til favoritt</button>
                         </li>
                         )}
                     </ul>

@@ -12,13 +12,21 @@ export async function fetchAllUsers(){
     return data
 }
 
-export async function addFavoriteGenre(users, genre, genrelist) {
+export async function addFavoriteGenre(user, genre) {
     const result = await writeClient
-    .patch(users)
+    .patch(user)
     .setIfMissing({genrelist: []})
     .append("genrelist", [{genre: genre}])
     .commit({autoGenerateArrayKeys: true})
     .then(() => {return "Success"})
     .catch((error) => {return "Error: " + error.message})
     return result
+}
+
+export async function fetchFavoriteGenresForUser(id) {
+
+    const data = await client.fetch(`*[_type == "users" && id == ${id}] {
+        genrelist
+    }
+    `)
 }

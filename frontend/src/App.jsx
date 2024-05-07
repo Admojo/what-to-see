@@ -46,7 +46,7 @@ function App() {
       <Routes>
             <Route path="/login" element={<LoginPage />}/>
             <Route path="/home" element={<HomePage user={user}/>}/>
-            <Route path="/genre" element={<Genre setGenre={setGenre} />} />
+            <Route path="/genre" element={<Genre setGenre={setGenre} user={user} genre={genre}/>} />
             <Route path="/genrepage" element={<GenrePage user={user} genre={genre} />}/>
         </Routes>
     </Layout>
