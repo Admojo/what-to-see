@@ -4,17 +4,16 @@ import LoginPage from './components/LoginPage'
 import HomePage from './components/HomePage';
 import Genre from './components/Genre';
 import { Routes, Route } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 function App() {
 
-// const [query,setQuery] = useState ("James Bond")
+const [query, setQuery] = useState ("James Bond")
+const [movies, setMovies] = useState ("James Bond")
 
-// const API_URL = ''
 
-
-const url = 'https://moviesdatabase.p.rapidapi.com/titles/%7Bid%7D';
+const url = 'https://moviesdatabase.p.rapidapi.com/titles/tt4896340';
 const options = {
 	method: 'GET',
 	headers: {
@@ -23,21 +22,28 @@ const options = {
 	}
 };
 
-try {
-	const response = await fetch(url, options);
-	const result = await response.text();
-	console.log(result);
-} catch (error) {
-	console.error(error);
+const getData = async(url) => {
+  try {
+    const response = await fetch(url, options);
+    const result = await response.text();
+    console.log(result);
+    setMovies(result);
+  } catch (error) {
+    console.error(error);
+  }
 }
 
+useEffect(() => {
+  getData(url)
+},[])
 
+console.log("movies", movies)
 
   return (
     <Layout>
       <Routes>
             <Route path="/login" element={<LoginPage />}/>
-            <Route path="/home" element={<HomePage />}/>
+            <Route path="/home" element={<HomePage movielist={movies} title={query} />}/>
             <Route path="/genre" element={<Genre />} />
         </Routes>
     </Layout>
