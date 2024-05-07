@@ -4,11 +4,41 @@ import LoginPage from './components/LoginPage'
 import HomePage from './components/HomePage';
 import Genre from './components/Genre';
 import { Routes, Route } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
 
   const [user, setUser] = useState(null)
+  const [movies, setMovies] = useState(null)
+  const [genre, setGenre] = useState(null)
+
+  const urlGenre = `https://moviesdatabase.p.rapidapi.com/titles?info=base_info&genre=${genre}`;
+  //const urlFavorites = `https://moviesdatabase.p.rapidapi.com/titles/x/titles-by-ids?idsList=${user.favorites}&info=base_info`; // Må % mellom id i listen
+  //const urlMovies = `https://moviesdatabase.p.rapidapi.com/titles?info=base_info`;
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-RapidAPI-Key': 'ad97b2da57mshea14e44c7ca71c2p19c8c9jsn525facd6154e',
+      'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
+    }
+  };
+  
+  const getData = async(url)=>{
+    try {
+      const response = await fetch(url, options);
+      const result = await response.json();
+      console.log(result);
+      setMovies(result);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(()=>{
+    getData(urlGenre)
+  },[])
+
+  console.log("movies", movies)
 
   return (
     <Layout user={user} setUser={setUser}>
