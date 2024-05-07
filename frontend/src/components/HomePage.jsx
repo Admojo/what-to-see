@@ -1,11 +1,11 @@
 import { FaStar } from "react-icons/fa6";
 import { VscSmiley } from "react-icons/vsc";
 
-export default function HomePage(){
+export default function HomePage({user}){
  
     return (
         <main>
-            <h1>Hei, USERNAME</h1>
+            <h1>Hei, {user}</h1>
             <div>
                 <section id="moviesWatchLaterSection">
                     <h2><FaStar /> Filmer jeg skal se!</h2>
