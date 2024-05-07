@@ -2,7 +2,7 @@
 //TODO:MovieCard-komponentet viser posterbilde basert på informasjon fra API-objectet
 
 
-export default function MovieCard({id, title, imdb, moviecover }) {
+export default function MovieCard({id, /*title,*/ imdb, moviecover }) {
 
 
     return (

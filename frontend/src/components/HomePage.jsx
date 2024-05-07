@@ -2,9 +2,8 @@ import { FaStar } from "react-icons/fa6";
 import { VscSmiley } from "react-icons/vsc";
 import MovieCard from "./MovieCard";
 
-export default function HomePage({movielist, title}){
+export default function HomePage({user, movielist, title}){
 
-export default function HomePage({user}){
     // En konstant som holder på alle filmer
     const movieWishList = movielist?.docs;
     console.log({title})
