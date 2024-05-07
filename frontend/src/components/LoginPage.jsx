@@ -10,7 +10,7 @@ const getAllUsers = async () => {
 }
 
 useEffect(() => {
-getAllUsers()
+getAllUsers();
 }, [])
 
 console.log("users", userList)

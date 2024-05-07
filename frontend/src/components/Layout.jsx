@@ -1,4 +1,3 @@
-import { useState } from "react"
 import Nav from "./Nav"
 import LoginPage from "./LoginPage"
 
@@ -20,7 +19,7 @@ export default function Layout({children, user, setUser}){
     else {
         return(
             <main>
-                <LoginPage setUser={setUser} />
+                <LoginPage setUser={setUser}/>
             </main>
         )
     }
