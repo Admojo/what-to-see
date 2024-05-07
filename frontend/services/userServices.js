@@ -1,4 +1,4 @@
-import { client } from "../sanity/client";
+import { client, writeClient } from "../sanity/client";
 
 export async function fetchAllUsers(){
 
@@ -10,4 +10,12 @@ export async function fetchAllUsers(){
     `)
 
     return data
+}
+
+export async function fetchFavoriteGenresForUser(id) {
+
+    const data = await client.fetch(`*[_type == "users" && id == ${id}] {
+        genrelist
+    }
+    `)
 }
