@@ -8,7 +8,7 @@ export default function Layout({children, user, setUser}){
         return(
         <div id="container">
             <header>
-                <Nav></Nav>
+                <Nav user={user}></Nav>
             </header>
             <main>
                 {children}

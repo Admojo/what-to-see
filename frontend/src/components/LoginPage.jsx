@@ -22,7 +22,7 @@ console.log("users", userList)
             <section>
                 {userList?.map((user, i) => 
                 <li key={i+"mouse"}>
-                    <button onClick={()=> setUser(user._id)} >{user.name}</button>
+                    <button onClick={()=> setUser(user.name)} >{user.name}</button>
                 </li>)}
             </section>
         </main>
