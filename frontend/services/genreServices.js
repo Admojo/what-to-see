@@ -12,7 +12,7 @@ export async function fetchAllGenres(){
 
 /*
 import { fetchAllGenres } from "../../services/genreServices"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 const [genreList, setGenrelist] = useState(null)
 
@@ -20,6 +20,10 @@ const getAllGenres = async () => {
     const data = await fetchAllGenres()
     setGenrelist(data)
 }
+
+useEffect(() => {
+getAllGenres
+}, [])
 
 {genreList?.map((item, i) => 
     <li key={i+"mouse"}>
