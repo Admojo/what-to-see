@@ -9,24 +9,3 @@ export async function fetchAllGenres(){
     `)
     return data
 }
-
-/*
-import { fetchAllGenres } from "../../services/genreServices"
-import { useState, useEffect } from "react"
-
-const [genreList, setGenrelist] = useState(null)
-
-const getAllGenres = async () => {
-    const data = await fetchAllGenres()
-    setGenrelist(data)
-}
-
-useEffect(() => {
-getAllGenres
-}, [])
-
-{genreList?.map((item, i) => 
-    <li key={i+"mouse"}>
-        <Link to={"/sjanger/"+item.genreslug}>{item.genre}</Link>
-    </li>)}
-*/
