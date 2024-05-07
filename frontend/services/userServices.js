@@ -1,4 +1,4 @@
-import { client } from "../sanity/client";
+import { client, writeClient } from "../sanity/client";
 
 export async function fetchAllUsers(){
 
@@ -10,4 +10,15 @@ export async function fetchAllUsers(){
     `)
 
     return data
+}
+
+export async function addFavoriteGenre(users, genre, genrelist) {
+    const result = await writeClient
+    .patch(users)
+    .setIfMissing({genrelist: []})
+    .append("genrelist", [{genre: genre}])
+    .commit({autoGenerateArrayKeys: true})
+    .then(() => {return "Success"})
+    .catch((error) => {return "Error: " + error.message})
+    return result
 }

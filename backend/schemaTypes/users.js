@@ -19,7 +19,7 @@ export const users =
                 name: "genrelist",
                 type: "array",
                 of: [{
-                    type: "genre",
+                    type: "string",
                     name: "genre"
                     }]
             },
@@ -28,7 +28,7 @@ export const users =
                 name: "wishlist",
                 type: "array",
                 of: [{
-                    type: "movie",
+                    type: "string",
                     name: "movie"
                     }]
             },
