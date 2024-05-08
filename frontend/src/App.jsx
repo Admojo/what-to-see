@@ -45,31 +45,13 @@ useEffect(() => {
   getData(url)
 },[])
 
-// const getData = async(urlGenre) => {
-//   try {
-//     const response = await fetch(url, options);
-//     const result = await response.text();
-//     console.log(result);
-//     setMovies(result);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
-
-// useEffect(()=>{
-//   getData(urlGenre)
-// },[])
-
-// console.log("movies", movies)
-// console.log("url:", url)
-
   return (
     <Layout user={user} setUser={setUser}>
       <Routes>
             <Route path="/login" element={<LoginPage />}/>
             <Route path="/home" element={<HomePage movielist={movies} /*title={query}*/ user={user}/>}/>
             <Route path="/genre" element={<Genre setGenre={setGenre} user={user} genre={genre}/>} />
-            <Route path="/genrepage" element={<GenrePage user={user} genre={genre} />}/>
+            <Route path="/genrepage" element={<GenrePage user={user} genre={genre} movielist={movies} setMovies={setMovies} />}/>
         </Routes>
     </Layout>
   )

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { addFavoriteGenre } from "../../services/userServices"
 export default function Genre({setGenre, user, genre}) {
 
-    const [genreList, setGenrelist] = useState(null)
+    const [genreList, setGenrelist] = useState(user.genrelist)
 
     const getAllGenres = async () => {
         const data = await fetchAllGenres()
@@ -26,7 +26,7 @@ export default function Genre({setGenre, user, genre}) {
         const result = await addFavoriteGenre(user._id, genre)
         console.log("result", result)
         if (result === "Success") {
-            user.genrelist.push(genre)
+            user.genreList.push(genre)
         }
 
     }
@@ -46,7 +46,6 @@ export default function Genre({setGenre, user, genre}) {
                         )}
                     </ul>
             </section>
-            {/* Skrive ut liste med sjangere */}
         </>
     )
 }
