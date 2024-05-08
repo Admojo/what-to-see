@@ -15,11 +15,19 @@ export default function Genre({setGenre, user, genre}) {
         getAllGenres()
         }, [])
 
+    const handleFavoriteClick = (genre) => {
+        setGenre(genre)
+        handleClick(genre)
+    }
+
     const handleClick = async (genre) => {
-        () => setGenre(item.genre)}
         console.log("user-clicked",user)
         console.log("genre-clicked",genre)
-        addFavoriteGenre(user, genre)
+        const result = await addFavoriteGenre(user._id, genre)
+        console.log("result", result)
+        if (result === "Success") {
+            user.genrelist.push({genre})
+        }
 
     }
 
@@ -31,7 +39,7 @@ export default function Genre({setGenre, user, genre}) {
                         {genreList?.map((item, i) =>
                         <li key={i+"rat"}>
                             <Link to="/genrepage" onClick={()=> setGenre(item.genre)}>{item.genre}</Link>
-                            <button onClick={handleClick}>Legg til favoritt</button>
+                            <button onClick={() => handleFavoriteClick(item.genre)}>Legg til favoritt</button>
                         </li>
                         )}
                     </ul>
