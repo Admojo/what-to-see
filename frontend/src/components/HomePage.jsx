@@ -20,12 +20,42 @@ export default function HomePage({user}){
                         <li>
                             <MovieCard />
                         </li>
+                        <li>
+                            <MovieCard />
+                        </li>
+                        <li>
+                            <MovieCard />
+                        </li>
+                        <li>
+                            <MovieCard />
+                        </li>
+                        <li>
+                            <MovieCard />
+                        </li>
+                        <li>
+                            <MovieCard />
+                        </li>
                     </ul>
                 </section>
                 <section id="wishlistSection">
                     <p>Disse filmene ligger i ønskelisten din:</p>
                     <ul>
                     <li>
+                            <MovieCard />
+                        </li>
+                        <li>
+                            <MovieCard />
+                        </li>
+                        <li>
+                            <MovieCard />
+                        </li>
+                        <li>
+                            <MovieCard />
+                        </li>
+                        <li>
+                            <MovieCard />
+                        </li>
+                        <li>
                             <MovieCard />
                         </li>
                         <li>

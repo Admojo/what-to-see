@@ -12,7 +12,6 @@ main {
             flex-direction: column;
         }
         #moviesWatchLaterSection {
-            // width: 30%;
             display: flex;
             flex-direction: column;
             h2 {
@@ -23,12 +22,12 @@ main {
                 list-style: none;
                 display: flex;
                 flex-direction: column;
+                flex-wrap: wrap;
                 @media only screen and (max-width: 1300px) {
                     flex-direction: row;
-                    // width: 100%;
+                    align-items: center; 
                 }
-                @media only screen and (max-width: 925px) {
-                    align-items: center;
+                @media only screen and (max-width: 725px) {
                     flex-direction: column;
                     width: 100%;
                 }
@@ -38,9 +37,7 @@ main {
             }
         }
         #wishlistSection {
-            // width: 30%;
             display: flex;
-            flex-shrink: 3;
             flex-direction: column;
             p { 
                 margin: 1rem;
@@ -50,12 +47,12 @@ main {
                 list-style: none;
                 display: flex;
                 flex-direction: column;
+                flex-wrap: wrap;
                 @media only screen and (max-width: 1300px) {   
-                    align-items: center; 
                     flex-direction: row;
-                    // width: 100%;
+                    align-items: center; 
                 }
-                @media only screen and (max-width: 925px) {
+                @media only screen and (max-width: 725px) {
                     flex-direction: column;
                     width: 100%;
                 }
@@ -63,7 +60,6 @@ main {
                     flex: 1;
                 }
             }
-            
         }
         #watchTogetherSection {
             background-image: linear-gradient(rgb(187, 187, 187), white);
