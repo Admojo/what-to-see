@@ -2,13 +2,15 @@
 //TODO:MovieCard-komponentet viser posterbilde basert på informasjon fra API-objectet
 
 
-export default function MovieCard({/*id, title, imdb, moviecover*/ }) {
+export default function MovieCard({imdb/*id, title, imdb, moviecover*/ }) {
 
+    console.log("imdb", imdb)
 
     return (
 
         <>
         <h1> Her kommer flere moviecards! </h1>
+        <p>{imdb}</p>
             {/* <article>
                 <section className="movie-card" id={id}>
                     <img src={''} alt={title}/> 
