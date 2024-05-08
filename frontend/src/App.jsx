@@ -14,8 +14,10 @@ const [movies, setMovies] = useState (null)
 // const [genre, setGenre] = useState (null)
 
 
+
 // Endre til parameter Movie with: id, title, imdb, moviecover
-const url = `https://moviesdatabase.p.rapidapi.com/titles/tt0086250`;
+const url = `https://moviesdatabase.p.rapidapi.com/titles?info=base_info&genre&limit`;
+// const urlTitle = `https://moviesdatabase.p.rapidapi.com//titles/search/title/${title}`;
 // const urlGenre = `https://moviesdatabase.p.rapidapi.com/titles?info=base_info&genre=${genre}`;
 //const urlFavorites = `https://moviesdatabase.p.rapidapi.com/titles/x/titles-by-ids?idsList=${user.favorites}&info=base_info`; // Må % mellom id i listen
 //const urlMovies = `https://moviesdatabase.p.rapidapi.com/titles?info=base_info`;
@@ -31,7 +33,7 @@ const getData = async(url) => {
   try {
     const response = await fetch(url, options);
     const result = await response.text();
-    console.log(result);
+    console.log("result:",result);
     setMovies(result);
   } catch (error) {
     console.error(error);
@@ -58,6 +60,7 @@ useEffect(() => {
 // },[])
 
 console.log("movies", movies)
+console.log("url:", url)
 
   return (
     <Layout user={user} setUser={setUser}>

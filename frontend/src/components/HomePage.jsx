@@ -2,11 +2,14 @@ import { FaStar } from "react-icons/fa6";
 import { VscSmiley } from "react-icons/vsc";
 import MovieCard from "./MovieCard";
 
-export default function HomePage({user, movielist, title}){
+export default function HomePage({user, movielist/*, title*/}){
 
     // En konstant som holder på alle filmer
-    const movieWishList = movielist?.docs;
-    console.log({title})
+    // const movieWishList = movielist?.docs;
+    // console.log({title})
+
+    const movieWishList = movielist;
+    console.log("movielist:", movielist)
  
     return (
         <main>
@@ -27,7 +30,8 @@ export default function HomePage({user, movielist, title}){
                         <li>FILM nr.2</li>
                         <li>FILM nr.3</li>
                     </ul>
-                    <span className='movie-card-wrapper'>
+                    <MovieCard />
+                    {/* <span className='movie-card-wrapper'>
                         {movieWishList?.map((movie, id) =>
                         <li key={id}>
                             <MovieCard key={movie?.id} 
@@ -36,7 +40,7 @@ export default function HomePage({user, movielist, title}){
                             moviecover={movie?.moviecover} />
                         </li>
                         )}
-                    </span>
+                    </span> */}
                 </section>
                 <section id="watchTogetherSection">
                     <h3><VscSmiley /> Jeg skal se sammen med...</h3>
