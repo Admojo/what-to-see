@@ -17,7 +17,7 @@ export async function fetchAllUsers(){
 export async function addFavoriteGenre(usersid, genre) {
     const result = await writeClient
     .patch(usersid)
-    //.setIfMissing({genrelist: []})
+    .setIfMissing({"genrelist": []})
     .append("genrelist", [genre])
     .commit({autoGenerateArrayKeys: true})
     .then(() => {return "Success"})

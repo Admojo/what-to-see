@@ -26,10 +26,12 @@ export default function Genre({setGenre, user, genre}) {
         const result = await addFavoriteGenre(user._id, genre)
         console.log("result", result)
         if (result === "Success") {
-            user.genrelist.push({genre})
+            user.genrelist.push(genre)
         }
 
     }
+
+    console.log("genre refresh", user)
 
     return (
         <>
