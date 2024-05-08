@@ -13,22 +13,34 @@ export default function HomePage({user, movielist/*, title*/}){
  
     return (
         <main>
-            <h1>Hei, {user}</h1>
+            <h1>Hei, {user.name}</h1>
             <div>
                 <section id="moviesWatchLaterSection">
                     <h2><FaStar /> Filmer jeg skal se!</h2>
                     <ul>
-                        <li>FILM nr.1</li>
-                        <li>FILM nr.2</li>
-                        <li>FILM nr.3</li>
+                        <li>
+                            <MovieCard />
+                        </li>
+                        <li>
+                            <MovieCard />
+                        </li>
+                        <li>
+                            <MovieCard />
+                        </li>
                     </ul>
                 </section>
                 <section id="wishlistSection">
                     <p>Disse filmene ligger i ønskelisten din:</p>
                     <ul>
-                        <li>FILM nr.1</li>
-                        <li>FILM nr.2</li>
-                        <li>FILM nr.3</li>
+                    <li>
+                            <MovieCard />
+                        </li>
+                        <li>
+                            <MovieCard />
+                        </li>
+                        <li>
+                            <MovieCard />
+                        </li>
                     </ul>
                     <MovieCard />
                     {/* <span className='movie-card-wrapper'>

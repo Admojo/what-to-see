@@ -1,4 +1,3 @@
-import { useState } from "react"
 import Nav from "./Nav"
 import LoginPage from "./LoginPage"
 
@@ -13,14 +12,14 @@ export default function Layout({children, user, setUser}){
             <main>
                 {children}
             </main>
-            <footer> Copyright Gruppe 4 - 2024 </footer>
+            {/* <footer> Copyright Gruppe 4 - 2024 </footer> */}
         </div>
         )
     }
     else {
         return(
             <main>
-                <LoginPage setUser={setUser} />
+                <LoginPage setUser={setUser}/>
             </main>
         )
     }
