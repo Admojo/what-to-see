@@ -5,7 +5,7 @@ import MovieCard from "./MovieCard";
 export default function HomePage({user}){
  
     return (
-        <main>
+        <>
             <h1>Hei, {user.name}</h1>
             <div>
                 <section id="moviesWatchLaterSection">
@@ -44,6 +44,6 @@ export default function HomePage({user}){
                     </ul>
                 </section>
             </div>
-        </main>
+        </>
     ) 
 }
