@@ -12,7 +12,7 @@ function App() {
 // const [query, setQuery] = useState ("James Bond")
 const [user, setUser] = useState(null)
 const [movies, setMovies] = useState (null)
-// const [genre, setGenre] = useState (null)
+const [genre, setGenre] = useState (null)
 
 
 
@@ -33,7 +33,7 @@ const url = `https://moviesdatabase.p.rapidapi.com/titles?info=base_info&limit=2
 const getData = async(url) => {
   try {
     const response = await fetch(url, options);
-    const result = await response.text();
+    const result = await response.json();
     console.log("result:",result);
     setMovies(result);
   } catch (error) {
