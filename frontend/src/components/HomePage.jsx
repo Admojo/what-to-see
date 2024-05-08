@@ -12,12 +12,27 @@ export default function HomePage({user, movielist/*, title*/}){
     console.log("movielist:", movielist)
  
     return (
-        <main>
+        <>
             <h1>Hei, {user.name}</h1>
             <div>
                 <section id="moviesWatchLaterSection">
                     <h2><FaStar /> Filmer jeg skal se!</h2>
                     <ul>
+                        <li>
+                            <MovieCard />
+                        </li>
+                        <li>
+                            <MovieCard />
+                        </li>
+                        <li>
+                            <MovieCard />
+                        </li>
+                        <li>
+                            <MovieCard />
+                        </li>
+                        <li>
+                            <MovieCard />
+                        </li>
                         <li>
                             <MovieCard />
                         </li>
@@ -33,6 +48,21 @@ export default function HomePage({user, movielist/*, title*/}){
                     <p>Disse filmene ligger i ønskelisten din:</p>
                     <ul>
                     <li>
+                            <MovieCard />
+                        </li>
+                        <li>
+                            <MovieCard />
+                        </li>
+                        <li>
+                            <MovieCard />
+                        </li>
+                        <li>
+                            <MovieCard />
+                        </li>
+                        <li>
+                            <MovieCard />
+                        </li>
+                        <li>
                             <MovieCard />
                         </li>
                         <li>
@@ -62,6 +92,6 @@ export default function HomePage({user, movielist/*, title*/}){
                     </ul>
                 </section>
             </div>
-        </main>
+        </>
     ) 
 }

@@ -20,6 +20,7 @@ header {
             font-family: 'Rubik', sans-serif;
             font-weight: bold;
             font-size: 30px;
+            padding: 1rem;
             @media only screen and (max-width: 1000px) {
                 left: 32%;
                 right: 14%;
@@ -27,7 +28,7 @@ header {
                 position: static;
             }
         }
-        ul {
+        #menyPunkter {
             color: rgb(255, 255, 255);
             @media only screen and (max-width: 1000px) {
                 display: flex;
@@ -47,13 +48,16 @@ header {
                     color: rgb(255, 255, 255);
                     width: 100%;
                     padding: 0.6em 1.2em;
+                    @media only screen and (max-width: 1000px) {
+                        padding-left: 0;
+                    }
                 }
             }
             #pinkButtonNav {
-                margin-left: 20px;
-                margin-right: 40px;
+                // margin-left: 20px;
+                // margin-right: 40px;
                 display: inline;
-                padding: 0.5rem;
+                // padding: 0.5rem;
                 border-radius: .01rem;
                 button {
                     background-color: rgb(237, 162, 176);
