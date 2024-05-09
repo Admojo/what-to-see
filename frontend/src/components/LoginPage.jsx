@@ -1,17 +1,6 @@
-import { fetchAllUsers } from "../../services/userServices"
 import { useState, useEffect } from "react"
-export default function LoginPage({setUser}) {
+export default function LoginPage({setUser, userList}) {
 
-const [userList, setUserList] = useState(null)
-
-const getAllUsers = async () => {
-    const data = await fetchAllUsers()
-    setUserList(data)
-}
-
-useEffect(() => {
-getAllUsers();
-}, [])
 
 console.log("users", userList)
 
