@@ -38,7 +38,7 @@ export default function GenrePage({user, genre, movielist, setMovies}){
     return (
         <main>
         {movielist?.results?.map((item, i) => 
-            <MovieCard key={i+"ok"} imdb={item.id}/>
+            <MovieCard key={i+"ok"} imdb={item.id} title={item.titleText.text} image={item.primaryImage?.url}/>
         )}
         </main>
     ) 

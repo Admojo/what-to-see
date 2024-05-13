@@ -1,36 +1,10 @@
-//TODO: MovieCard-komponentet linker til filmens IMDB-profil
-//TODO:MovieCard-komponentet viser posterbilde basert på informasjon fra API-objectet
+import { Link } from "react-router-dom";
 
-
-export default function MovieCard({imdb/*id, title, imdb, moviecover*/ }) {
-
-    console.log("imdb", imdb)
-
+export default function MovieCard({imdb, title, image}) {
     return (
-
-        <>
-        <h1> Her kommer flere moviecards! </h1>
-        <p>{imdb}</p>
-            {/* <article>
-                <section className="movie-card" id={id}>
-                    <img src={''} alt={title}/> 
-                </section>
-                <section className="movie-redirect">
-                    <h1> Movie title </h1>
-                    <a href={`https://www.imdb.com/titles/${id}`}>{title}</a>
-                </section>
-                <section className="movie-redirect">
-                    <h1> Movie Cover Image </h1>
-                    <a href={`https://www.imdb.com/titles/${id}`}>{moviecover}</a>
-                </section>
-                <section className="movie-redirect">
-                    <h1> Movie Cover IMDB - link </h1>
-                    <a href={`https://www.imdb.com/titles/${id}`}>{imdb}</a>
-                </section>
-            </article> */}
-        </>
-
+    <article className="movieCard">
+        <img src={image === null ? "#" : image} alt="Movie Cover" />
+        <h3><Link to={`https://m.imdb.com/title/${imdb}`}>{title}</Link></h3>
+    </article>
     )
-
-    
 }

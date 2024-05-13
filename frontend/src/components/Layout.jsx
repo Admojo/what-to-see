@@ -1,7 +1,7 @@
 import Nav from "./Nav"
 import LoginPage from "./LoginPage"
 
-export default function Layout({children, user, setUser}){
+export default function Layout({children, user, setUser, userList}){
 
     if (user != null) {
         return(
@@ -19,7 +19,7 @@ export default function Layout({children, user, setUser}){
     else {
         return(
             <main>
-                <LoginPage setUser={setUser}/>
+                <LoginPage setUser={setUser} userList={userList}/>
             </main>
         )
     }
