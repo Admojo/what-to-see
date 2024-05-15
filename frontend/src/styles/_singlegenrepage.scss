@@ -1,0 +1,11 @@
+#singleGenreContent {
+    //background-color: black;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    .movieCard {
+        max-width: 200px;
+        align-self: flex-start;
+    }
+}
