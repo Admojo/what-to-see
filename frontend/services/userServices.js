@@ -41,22 +41,21 @@ export async function addFavoriteGenre(usersid, genre) {
 }
 
 export async function removeFavoriteGenre(usersid, genre) {
+    // lager en ny array, men filtrerer vekk "genre" som er parameter til denne metoden.
+    const doc = await writeClient.getDocument(usersid);
+    const newGenrelist = doc.genrelist.filter(genreElement => genreElement !== genre);
+    // Benytter nytt document som ikke inneholder "genre" i "genrelist". bruker .set-metoden for å legge inn den nye arrayen.
+    // https://www.sanity.io/docs/http-patches#6TPENSW3
     const result = await writeClient
-    // .patch(genre)
-    // .unset(genrelist, [genre])
-    // .commit()
-    // .then(() => {return "Success"})
-    // .catch((error) => {return "Error: " + error.message})
-
     .patch(usersid)
-    .unset([`genrelist [genre=="${genre}"]`])
-    .commit()
-
+    .set({"genrelist": newGenrelist})
+    .commit({autoGenerateArrayKeys: true})
+    .then(() => {return "Success"})
+    .catch((error) => {return "Error: " + error.message})
     return result
 }
 
 export async function fetchFavoriteGenresForUser(id) {
-
     const data = await client.fetch(`*[_type == "users" && _id == ${id}] {
         genrelist
     }

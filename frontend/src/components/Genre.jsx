@@ -32,10 +32,7 @@ export default function Genre({setGenre, user, genre}) {
         handleClickUnfavorite(genre)
     }
     const handleClickUnfavorite = async (genre) => {
-        const result = await removeFavoriteGenre(user?.genrelist, genre)
-        if (result === "Success") {
-           user.genreList.push(genre)
-        }
+        const result = await removeFavoriteGenre(user._id, genre)
     }
 
     return (
