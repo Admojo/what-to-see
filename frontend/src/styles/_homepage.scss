@@ -3,7 +3,6 @@ main {
     margin-right: 60px;
     h1 {
         font-size: xx-large;
-        // margin-left: 1rem;
     }
     div {
         display: flex;
@@ -41,6 +40,7 @@ main {
             flex-direction: column;
             p { 
                 margin: 1rem;
+                margin-top: 1.7rem;
             }
             ul {
                 padding-left: 0;

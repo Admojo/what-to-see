@@ -5,7 +5,7 @@ export default function Layout({children, user, setUser, userList}){
 
     if (user != null) {
         return(
-        <div id="container">
+        <>
             <header>
                 <Nav user={user}></Nav>
             </header>
@@ -13,7 +13,7 @@ export default function Layout({children, user, setUser, userList}){
                 {children}
             </main>
             {/* <footer> Copyright Gruppe 4 - 2024 </footer> */}
-        </div>
+        </>
         )
     }
     else {
