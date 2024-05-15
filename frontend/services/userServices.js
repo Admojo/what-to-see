@@ -31,5 +31,4 @@ export async function fetchFavoriteGenresForUser(id) {
         genrelist
     }
     `)
-
 }
