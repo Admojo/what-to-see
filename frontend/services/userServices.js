@@ -1,7 +1,6 @@
 import { client, writeClient } from "../sanity/client";
 
 export async function fetchAllUsers(){
-
     const data = await client.fetch(`*[_type == "users"] | order(name asc){
         _id,
         _type,
@@ -10,13 +9,10 @@ export async function fetchAllUsers(){
         wishlist,
     }
     `)
-
     return data
 }
 
-
 export async function fetchUser(username){
-
     const data = await client.fetch(`*[_type == "users" && name == ${username}] {
         _id,
         _type,
@@ -25,7 +21,6 @@ export async function fetchUser(username){
         wishlist
     }
     `)
-
     return data
 }
 
@@ -41,10 +36,9 @@ export async function addFavoriteGenre(usersid, genre) {
 }
 
 export async function removeFavoriteGenre(usersid, genre) {
-    // lager en ny array, men filtrerer vekk "genre" som er parameter til denne metoden.
     const doc = await writeClient.getDocument(usersid);
     const newGenrelist = doc.genrelist.filter(genreElement => genreElement !== genre);
-    // Benytter nytt document som ikke inneholder "genre" i "genrelist". bruker .set-metoden for å legge inn den nye arrayen.
+    // Benytter nytt document som ikke inneholder "genre" i "newGenrelist". Bruker .set-metoden for å legge inn den nye arrayen.
     // https://www.sanity.io/docs/http-patches#6TPENSW3
     const result = await writeClient
     .patch(usersid)
