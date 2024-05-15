@@ -31,31 +31,5 @@ export async function fetchFavoriteGenresForUser(id) {
         genrelist
     }
     `)
-<<<<<<< HEAD
+
 }
-
-
-// // Hente favoritt-sjanger for to brukere
-// export async function fetchFavoriteGenresForTwoUsers(userOne, userTwo) {
-
-//     // Sende inn to user.id som input
-//     const data = await client.fetch(`*[_type == "users" && id == ${userOne}] {
-//         id,
-//         genrelist[]->,
-//         "Felles sjangere": *[_type == "users" && id == ${userTwo}].genrelist
-//     }`)
-// }
-
-// TESTING: Hente favoritt-sjanger for to brukere
-// export async function fetchFavoriteGenresForTwoUsersStatic() {
-
-//     // Sende inn to user.id som input
-//     const data = await client.fetch(`*[_type == "users" && name] {
-//         id,
-//         genrelist[]->,
-//         "Felles sjangere": *[_type == "users" && id == ${userTwo}].genrelist
-//     }`)
-// }
-=======
-}
->>>>>>> parent of 69f58ea (skrevet groq spørring som henter favoritt sjangere fra to brukere, i tillegg til sjangere de har til felles)
