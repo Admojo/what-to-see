@@ -3,8 +3,8 @@
     border: solid 1px rgb(214, 214, 214);
     margin: .5rem;
     //padding: 1rem;
-    min-width: 250px;
-    height: 400px;
+    min-width: 350px;
+    height: 650px;
     @media only screen and (max-width: 925px) {
         max-width: 75%;
         max-height: 50%;
@@ -15,9 +15,6 @@
         object-fit: cover;
         // Fant ut av hvordan jeg skulle justere bildet på hvert moviecard riktig med object-fit: cover. Linken under er hvor leste meg opp.
         // https://www.w3schools.com/css/css3_object-fit.asp
-    }
-    @media only screen and (max-width: 1300px) {   
-        //max-width: 100px;
     }
     h3 {
         text-align: center;
