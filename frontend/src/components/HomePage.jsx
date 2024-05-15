@@ -1,6 +1,7 @@
 import { FaStar } from "react-icons/fa6";
 import { VscSmiley } from "react-icons/vsc";
 import MovieCard from "./MovieCard";
+import { fetchWishListForUser } from "../../services/movieServices";
 
 export default function HomePage({user, movielist, userList/*, title*/}){
 
@@ -12,6 +13,7 @@ export default function HomePage({user, movielist, userList/*, title*/}){
 
     const movieWishList = movielist;
     console.log("movielist:", movielist)
+    console.log("dataWishListUser:", fetchWishListForUser(user))
  
     return (
         <>
@@ -49,7 +51,7 @@ export default function HomePage({user, movielist, userList/*, title*/}){
                 <section id="wishlistSection">
                     <p>Disse filmene ligger i ønskelisten din:</p>
                     <ul>
-                    <li>
+                        <li>
                             <MovieCard />
                         </li>
                         <li>
