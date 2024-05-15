@@ -64,8 +64,8 @@ useEffect(() => {
             <Route path="/genrepage" element={<GenrePage user={user} genre={genre} movielist={movies} setMovies={setMovies} />}/>
         </Routes>
     </Layout>
-    // {/* {!logedIn ? <Navigate to="login" replace/> : <Navigate to="/" replace />} */}
-  
+    {/* {!logedIn ? <Navigate to="login" replace/> : <Navigate to="/" replace />} */}
+    </>
   )
 }
 
