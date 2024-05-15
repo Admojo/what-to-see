@@ -14,20 +14,6 @@ export async function fetchAllUsers(){
     return data
 }
 
-export async function fetchUser(username){
-
-    const data = await client.fetch(`*[_type == "users" && name == $username] {
-        _id,
-        _type,
-        name,
-        genrelist,
-        wishlist
-    }
-    `)
-
-    return data
-}
-
 export async function addFavoriteGenre(usersid, genre) {
     const result = await writeClient
     .patch(usersid)
@@ -41,20 +27,8 @@ export async function addFavoriteGenre(usersid, genre) {
 
 export async function fetchFavoriteGenresForUser(id) {
 
-    const data = await client.fetch(`*[_type == "users" && _id == ${id}] {
+    const data = await client.fetch(`*[_type == "users" && id == ${id}] {
         genrelist
     }
     `)
-    return data
-}
-
-export async function fetchGenresForUsers(user1, user2) {
-    const data = await client.fetch(`
-        "user1genres": *[_type == "users" && name == $username1][0].genrelist,
-        "user2genres": *[_type == "users" && name == $username2][0].genrelist,
-        "sharedGenres": *[_type == "users" && name in [$username1, $username2]] {
-          genrelist
-        }[0].genrelist[(@ in *[_type == "users" && name == $username1][0].genrelist) && (@ in *[_type == "users" && name == $username2][0].genrelist)]    
-    `)
-    return data
 }
