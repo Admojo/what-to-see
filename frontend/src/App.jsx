@@ -65,7 +65,7 @@ useEffect(() => {
         </Routes>
     </Layout>
     // {/* {!logedIn ? <Navigate to="login" replace/> : <Navigate to="/" replace />} */}
-   
+  
   )
 }
 
