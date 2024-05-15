@@ -7,7 +7,7 @@ export async function fetchAllUsers(){
         _type,
         name,
         genrelist,
-        wishlist
+        wishlist,
     }
     `)
 
@@ -17,7 +17,7 @@ export async function fetchAllUsers(){
 
 export async function fetchUser(username){
 
-    const data = await client.fetch(`*[_type == "users" && name == $username] {
+    const data = await client.fetch(`*[_type == "users" && name == ${username}] {
         _id,
         _type,
         name,
@@ -40,6 +40,21 @@ export async function addFavoriteGenre(usersid, genre) {
     return result
 }
 
+export async function removeFavoriteGenre(usersid, genre) {
+    const result = await writeClient
+    // .patch(genre)
+    // .unset(genrelist, [genre])
+    // .commit()
+    // .then(() => {return "Success"})
+    // .catch((error) => {return "Error: " + error.message})
+
+    .patch(usersid)
+    .unset([`genrelist [genre=="${genre}"]`])
+    .commit()
+
+    return result
+}
+
 export async function fetchFavoriteGenresForUser(id) {
 
     const data = await client.fetch(`*[_type == "users" && _id == ${id}] {
@@ -59,3 +74,26 @@ export async function fetchGenresForUsers(user1, user2) {
     `)
     return data
 }
+
+
+// // Hente favoritt-sjanger for to brukere
+// export async function fetchFavoriteGenresForTwoUsers(userOne, userTwo) {
+
+//     // Sende inn to user.id som input
+//     const data = await client.fetch(`*[_type == "users" && id == ${userOne}] {
+//         id,
+//         genrelist[]->,
+//         "Felles sjangere": *[_type == "users" && id == ${userTwo}].genrelist
+//     }`)
+// }
+
+// TESTING: Hente favoritt-sjanger for to brukere
+// export async function fetchFavoriteGenresForTwoUsersStatic() {
+
+//     // Sende inn to user.id som input
+//     const data = await client.fetch(`*[_type == "users" && name] {
+//         id,
+//         genrelist[]->,
+//         "Felles sjangere": *[_type == "users" && id == ${userTwo}].genrelist
+//     }`)
+// }
