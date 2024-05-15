@@ -5,19 +5,19 @@ export const movie =
         type: "document",
         fields: [
             {
-                title: "Tittel",
-                name: "title",
-                type: "string"
-            },
-            {
                 title: "imdb",
                 name: "imdb",
                 type: "string"
-            },
+            }, 
             {
-                title: "Filmcover",
-                name: "moviecover",
-                type: "image"
-            },
+                title: "Movie title",
+                name: "title",
+                type: "string"
+            }, 
+            {
+                title: "Genre", 
+                name: "genre", 
+                type: "string"
+            }
         ]
     }

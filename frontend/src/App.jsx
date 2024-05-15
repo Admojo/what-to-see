@@ -3,57 +3,65 @@ import Layout from './components/Layout'
 import LoginPage from './components/LoginPage'
 import HomePage from './components/HomePage';
 import Genre from './components/Genre';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import {useState} from 'react'
+import { Routes, Route } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import GenrePage from './components/GenrePage';
+import { fetchAllUsers } from "../services/userServices"
 
 function App() {
 
-// Holder på staten for en innlogget bruker på et overordnet nivå
-// Burker localStorage og getItem
-const [logedIn, setLogedIn] = useState(() => {
-  const data = localStorage.getItem("logedIn")
-  const logedInData = JSON.parse(data)
-  return logedInData || []
-})
+// const [query, setQuery] = useState ("James Bond")
+const [user, setUser] = useState(null)
+const [movies, setMovies] = useState (null)
+const [genre, setGenre] = useState (null)
+const [userList, setUserList] = useState(null)
 
-const [users, setUser] = useState (() => {
-  const data = localStorage.getItem("users")
-  const usersData = JSON.parse(data)
-  return usersData || []
-})
 
-console.log(users)
 
-const databaseUsers = [
-  {
-    username: "andrea"
-  },
-  {
-    username: "fredrik"
 
-  },
-  {
-    username: "ole"
-  },
-  {
-    username:"kjell-magne"
+// Endre til parameter Movie with: id, title, imdb, moviecover
+// const url = `https://moviesdatabase.p.rapidapi.com/titles?info=base_info&genre&limit`;
+// const urlTitle = `https://moviesdatabase.p.rapidapi.com//titles/search/title/${title}`;
+// const urlGenre = `https://moviesdatabase.p.rapidapi.com/titles?info=base_info&genre=${genre}`;
+// const urlFavorites = `https://moviesdatabase.p.rapidapi.com/titles/x/titles-by-ids?idsList=${user.favorites}&info=base_info`; // Må % mellom id i listen
+const url = `https://moviesdatabase.p.rapidapi.com/titles?info=base_info&limit=2`;
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-RapidAPI-Key': 'ad97b2da57mshea14e44c7ca71c2p19c8c9jsn525facd6154e',
+      'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
+    }
+};
+
+const getData = async(url) => {
+  try {
+    const response = await fetch(url, options);
+    const result = await response.json();
+    console.log("result:",result);
+    setMovies(result);
+  } catch (error) {
+    console.error(error);
   }
-]
+}
 
-localStorage.setItem("users", JSON.stringify(databaseUsers))
-console.log(databaseUsers)
+const getAllUsers = async () => {
+  const data = await fetchAllUsers()
+  setUserList(data)
+  console.log("userdata:", data)
+}
 
+useEffect(() => {
+  getData(url)
+  getAllUsers()
+},[])
 
   return (
-    <>
-    <Layout logedIn={logedIn} setLogedIn={setLogedIn}>
-    {/* <Layout> */}
+    <Layout user={user} setUser={setUser} userList={userList}>
       <Routes>
-            <Route index element={<HomePage />}/>
-            <Route path='/login' element={<LoginPage users={users} setLogedIn={setLogedIn} logedIn={logedIn} />}/>
-            <Route path='/home' element={<HomePage />}/>
-            <Route path='/genre' element={<Genre />} />
-            {/* {!logedIn ? <Navigate to='/login' replace/> : <Navigate to='/' replace />} */}
+            <Route path="/login" element={<LoginPage userList={userList}/>}/>
+            <Route path="/home" element={<HomePage movielist={movies} /*title={query}*/ user={user} userList={userList}/>}/>
+            <Route path="/genre" element={<Genre setGenre={setGenre} user={user} genre={genre}/>} />
+            <Route path="/genrepage" element={<GenrePage user={user} genre={genre} movielist={movies} setMovies={setMovies} />}/>
         </Routes>
     </Layout>
     {/* {!logedIn ? <Navigate to="login" replace/> : <Navigate to="/" replace />} */}

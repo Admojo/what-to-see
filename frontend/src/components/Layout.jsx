@@ -1,30 +1,25 @@
-import { useState } from "react"
 import Nav from "./Nav"
-import { Link } from "react-router-dom";
-import { FaCircleUser } from "react-icons/fa6";
+import LoginPage from "./LoginPage"
 
+export default function Layout({children, user, setUser, userList}){
 
-export default function Layout({children}){
-
-    const [user, setUser] = useState()
-
-    if (user == null) {
+    if (user != null) {
         return(
         <div id="container">
             <header>
-                <Nav></Nav>
+                <Nav user={user}></Nav>
             </header>
             <main>
                 {children}
             </main>
-            <footer> Copyright Gruppe 4 - 2024 </footer>
+            {/* <footer> Copyright Gruppe 4 - 2024 </footer> */}
         </div>
         )
     }
     else {
         return(
             <main>
-                {children}
+                <LoginPage setUser={setUser} userList={userList}/>
             </main>
         )
     }
