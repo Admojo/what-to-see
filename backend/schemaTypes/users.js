@@ -32,5 +32,14 @@ export const users =
                     name: "movie"
                     }]
             },
+            {
+                title: "Favorittliste Filmer", 
+                name: "favouritlist", 
+                type: "array", 
+                of: [{
+                    type: "string", 
+                    name: "movie"
+                }]
+            }
         ]
     }

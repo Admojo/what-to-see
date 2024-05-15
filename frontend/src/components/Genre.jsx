@@ -54,7 +54,9 @@ export default function Genre({setGenre, user, genre}) {
                         </li>
                         )}
                     </ul>
+                </article>
             </section>
+            {/* Skrive ut liste med sjangere */}
         </>
     )
 }

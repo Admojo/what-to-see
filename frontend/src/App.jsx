@@ -47,6 +47,7 @@ const getData = async(url) => {
 const getAllUsers = async () => {
   const data = await fetchAllUsers()
   setUserList(data)
+  console.log("userdata:", data)
 }
 
 useEffect(() => {
@@ -63,6 +64,8 @@ useEffect(() => {
             <Route path="/genrepage" element={<GenrePage user={user} genre={genre} movielist={movies} setMovies={setMovies} />}/>
         </Routes>
     </Layout>
+    // {/* {!logedIn ? <Navigate to="login" replace/> : <Navigate to="/" replace />} */}
+  
   )
 }
 
