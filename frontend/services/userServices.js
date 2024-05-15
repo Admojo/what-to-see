@@ -70,7 +70,7 @@ export async function removeFavoriteGenre(usersid, genre) {
     return result
 }
 
-export async function fetchFavoriteGenresForUser(idInput) {
+export async function fetchFavoriteGenresForUser(id) {
 
     const data = await client.fetch(`*[_type == "users" && _id == ${id}] {
         genrelist
