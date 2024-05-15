@@ -59,3 +59,26 @@ export async function fetchGenresForUsers(user1, user2) {
     `)
     return data
 }
+
+
+// // Hente favoritt-sjanger for to brukere
+// export async function fetchFavoriteGenresForTwoUsers(userOne, userTwo) {
+
+//     // Sende inn to user.id som input
+//     const data = await client.fetch(`*[_type == "users" && id == ${userOne}] {
+//         id,
+//         genrelist[]->,
+//         "Felles sjangere": *[_type == "users" && id == ${userTwo}].genrelist
+//     }`)
+// }
+
+// TESTING: Hente favoritt-sjanger for to brukere
+// export async function fetchFavoriteGenresForTwoUsersStatic() {
+
+//     // Sende inn to user.id som input
+//     const data = await client.fetch(`*[_type == "users" && name] {
+//         id,
+//         genrelist[]->,
+//         "Felles sjangere": *[_type == "users" && id == ${userTwo}].genrelist
+//     }`)
+// }
