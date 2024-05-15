@@ -10,8 +10,8 @@ import { fetchAllUsers } from "../services/userServices"
 
 function App() {
 
-// const [query, setQuery] = useState ("James Bond")
 const [user, setUser] = useState(null)
+
 const [movies, setMovies] = useState (null)
 const [genre, setGenre] = useState (null)
 const [userList, setUserList] = useState(null)

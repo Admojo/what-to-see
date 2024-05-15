@@ -7,7 +7,7 @@ export async function fetchAllUsers(){
         _type,
         name,
         genrelist,
-        wishlist
+        wishlist,
     }
     `)
 
@@ -25,10 +25,26 @@ export async function addFavoriteGenre(usersid, genre) {
     return result
 }
 
-export async function fetchFavoriteGenresForUser(id) {
+export async function removeFavoriteGenre(usersid, genre) {
+    const result = await writeClient
+    // .patch(genre)
+    // .unset(genrelist, [genre])
+    // .commit()
+    // .then(() => {return "Success"})
+    // .catch((error) => {return "Error: " + error.message})
 
-    const data = await client.fetch(`*[_type == "users" && id == ${id}] {
+    .patch(usersid)
+    .unset([`genrelist [genre=="${genre}"]`])
+    .commit()
+
+    return result
+}
+
+export async function fetchFavoriteGenresForUser(idInput) {
+
+    const data = await client.fetch(`*[_type == "users" && _id == "${idInput}"] {
         genrelist
     }
     `)
+    return data
 }
