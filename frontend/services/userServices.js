@@ -31,6 +31,7 @@ export async function fetchFavoriteGenresForUser(id) {
         genrelist
     }
     `)
+<<<<<<< HEAD
 }
 
 
@@ -55,3 +56,6 @@ export async function fetchFavoriteGenresForUser(id) {
 //         "Felles sjangere": *[_type == "users" && id == ${userTwo}].genrelist
 //     }`)
 // }
+=======
+}
+>>>>>>> parent of 69f58ea (skrevet groq spørring som henter favoritt sjangere fra to brukere, i tillegg til sjangere de har til felles)
