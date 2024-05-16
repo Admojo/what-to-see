@@ -13,14 +13,14 @@ export async function fetchAllUsers(){
 }
 
 export async function fetchUser(username){
-    const data = await client.fetch(`*[_type == "users" && name == $username] {
+    const data = await client.fetch(`*[_type == "users" && name == ${username}] {
         _id,
         _type,
         name,
         genrelist,
-        wishlist,
+        wishlist
     }
-    `, {username})
+    `)
     return data
 }
 
@@ -36,15 +36,12 @@ export async function addFavoriteGenre(usersid, genre) {
 }
 
 export async function removeFavoriteGenre(usersid, genre) {
-    // Benytter nytt document der "genre" er filtrert bort. 
-    // https://stackoverflow.com/questions/37385299/filter-and-delete-filtered-elements-in-an-array
     const doc = await writeClient.getDocument(usersid);
     const newGenrelist = doc.genrelist.filter(genreElement => genreElement !== genre);
+    // Benytter nytt document som ikke inneholder "genre" i "newGenrelist". Bruker .set-metoden for å legge inn den nye arrayen.
+    // https://www.sanity.io/docs/http-patches#6TPENSW3
     const result = await writeClient
     .patch(usersid)
-    // Vi bruker set-metoden for å erstatte den gamle arrayen med den oppdaterte arrayen som ikke inneholder "genre".
-    // https://www.sanity.io/docs/http-patches#6TPENSW3
-    // https://www.sanity.io/answers/understanding-how-to-add-and-modify-fields-in-sanity-documents
     .set({"genrelist": newGenrelist})
     .commit({autoGenerateArrayKeys: true})
     .then(() => {return "Success"})
