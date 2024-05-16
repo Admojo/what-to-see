@@ -16,9 +16,6 @@ const [movies, setMovies] = useState (null)
 const [genre, setGenre] = useState (null)
 const [userList, setUserList] = useState(null)
 
-
-
-
 // Endre til parameter Movie with: id, title, imdb, moviecover
 // const url = `https://moviesdatabase.p.rapidapi.com/titles?info=base_info&genre&limit`;
 // const urlTitle = `https://moviesdatabase.p.rapidapi.com//titles/search/title/${title}`;
@@ -47,7 +44,6 @@ const getData = async(url) => {
 const getAllUsers = async () => {
   const data = await fetchAllUsers()
   setUserList(data)
-  console.log("userdata:", data)
 }
 
 useEffect(() => {
@@ -55,17 +51,17 @@ useEffect(() => {
   getAllUsers()
 },[])
 
-  return (
+  return (<>
     <Layout user={user} setUser={setUser} userList={userList}>
       <Routes>
-            <Route path="/login" element={<LoginPage userList={userList}/>}/>
+            <Route path="/login" element={<LoginPage setUser={setUser} userList={userList}/>}/>
             <Route path="/home" element={<HomePage movielist={movies} /*title={query}*/ user={user} userList={userList}/>}/>
             <Route path="/genre" element={<Genre setGenre={setGenre} user={user} genre={genre}/>} />
             <Route path="/genrepage" element={<GenrePage user={user} genre={genre} movielist={movies} setMovies={setMovies} />}/>
         </Routes>
     </Layout>
     // {/* {!logedIn ? <Navigate to="login" replace/> : <Navigate to="/" replace />} */}
-  
+  </>
   )
 }
 

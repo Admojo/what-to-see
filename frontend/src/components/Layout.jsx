@@ -1,26 +1,41 @@
 import Nav from "./Nav"
-import LoginPage from "./LoginPage"
 
-export default function Layout({children, user, setUser, userList}){
+export default function Layout({children}){
 
-    if (user != null) {
+    const currentUser = localStorage.getItem("username");
+
+    // const isLogedIn = () => {
+    //     if (currentUser === "") {
+    //         return false
+    //     }
+    //     else {
+    //         return true
+    //     }
+    // }
+
+    console.log("curr udeddddddr",currentUser)
+
+    //  useEffect(()=>{
+    //       window.location.reload();
+    // },[currentUser])
+
+    if (currentUser != "") {
         return(
-        <>
-            <header>
-                <Nav user={user}></Nav>
-            </header>
-            <main>
-                {children}
-            </main>
-            {/* <footer> Copyright Gruppe 4 - 2024 </footer> */}
-        </>
-        )
+                <>
+                    <header>
+                        <Nav/>
+                    </header>
+                    <main>
+                        {children}
+                    </main>
+                </>)
     }
     else {
         return(
-            <main>
-                <LoginPage setUser={setUser} userList={userList}/>
-            </main>
-        )
+            <>
+                <main>
+                    {children}
+                </main>
+            </>)
     }
 }

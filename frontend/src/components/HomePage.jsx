@@ -1,21 +1,26 @@
 import { FaStar } from "react-icons/fa6";
 import { VscSmiley } from "react-icons/vsc";
 import MovieCard from "./MovieCard";
+import { fetchUser } from "../../services/userServices";
 
-export default function HomePage({user, movielist, userList/*, title*/}){
+export default function HomePage({movielist, userList}){
 
     // En konstant som holder på alle filmer
     // const movieWishList = movielist?.docs;
     // console.log({title})
 
-    const otherUsers = userList.filter(friends => friends !== user)
+    const currentUser = fetchUser(localStorage.getItem("username"));
+
+    console.log("curr usar",currentUser)
+
+    const otherUsers = userList.filter(friends => friends.name !== currentUser)
 
     const movieWishList = movielist;
     console.log("movielist:", movielist)
  
     return (
         <>
-            <h1>Hei, {user.name}</h1>
+            <h1>Hei, {localStorage.getItem("username")}</h1>
             <div>
                 <section id="moviesWatchLaterSection">
                     <h2><FaStar /> Filmer jeg skal se!</h2>
@@ -89,9 +94,9 @@ export default function HomePage({user, movielist, userList/*, title*/}){
                 <section id="watchTogetherSection">
                     <h3><VscSmiley /> Jeg skal se sammen med...</h3>
                     <ul>
-                        {otherUsers?.map((user, i) => 
+                        {otherUsers?.map((currentUser, i) => 
                         <li key={i+"mouse"}>
-                            <button>{user.name}</button>
+                            <button>{currentUser.name}</button>
                         </li>)}
                     </ul>
                 </section>
