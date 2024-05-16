@@ -8,7 +8,7 @@ header {
         background-color: rgb(51, 29, 93);
         align-items: center;
         width: 100%;
-        @media only screen and (max-width: 1000px) {
+        @media only screen and (max-width: 1150px) {
             padding-top: 30px;
             justify-content: space-around;
         }
@@ -21,7 +21,7 @@ header {
             font-weight: bold;
             font-size: 30px;
             padding: 1rem;
-            @media only screen and (max-width: 1000px) {
+            @media only screen and (max-width: 1150px) {
                 left: 32%;
                 right: 14%;
                 top: 30px;
@@ -30,7 +30,7 @@ header {
         }
         #menyPunkter {
             color: rgb(255, 255, 255);
-            @media only screen and (max-width: 1000px) {
+            @media only screen and (max-width: 1150px) {
                 display: flex;
                 margin-block-start: 1em;
                 margin-block-end: 1em;
@@ -48,7 +48,7 @@ header {
                     color: rgb(255, 255, 255);
                     width: 100%;
                     padding: 0.6em 1.2em;
-                    @media only screen and (max-width: 1000px) {
+                    @media only screen and (max-width: 1150px) {
                         padding-left: 0;
                     }
                 }

@@ -5,7 +5,7 @@ export default function LoginPage({setUser, userList}) {
 
     const redirectToHomepage = useNavigate();
 
-    const handleLoginClick =  async (clickedUser) => {
+    const handleLoginClick = (clickedUser) => {
         localStorage.setItem("username", clickedUser.name)
         setUser(clickedUser)
         redirectToHomepage("/home")
