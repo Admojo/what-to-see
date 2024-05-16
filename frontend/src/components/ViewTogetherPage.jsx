@@ -9,9 +9,9 @@ export default function ViewTogetherPage({user, friend, setGenre}){
     const [sharedGenres, setSharedGenres] = useState(null)
     const [usersMovies, setUsersMovies] = useState(null)
     const [sharedMovies, setSharedMovies] = useState(null)
-    const [sharedMoviesIds, setSharedMoviesIds] = useState(null)
+    const [sharedMoviesIds, setSharedMoviesIds] = useState("")
     const [sharedMoviesUrl, setSharedMoviesUrl] = useState(null)
-    const [toggle, setToggle] = useState(false)
+
 
     const options = {
         method: 'GET',
@@ -22,47 +22,57 @@ export default function ViewTogetherPage({user, friend, setGenre}){
     };
     
 
-    const getGenresForUsers = async () => {
+    useEffect(() => {
+        const getGeneresAndMovies = async () => {
+            const genresData = await fetchGenresForUsers(user.name, friend.name);
+            setSharedGenres(genresData);
+            const Moviesdata = await fetchMoviesForUsers(user.name, friend.name);
+            setUsersMovies(Moviesdata);
+          };
+          getGeneresAndMovies()
+    },[user, friend])
 
-        const data = await fetchGenresForUsers(user.name, friend.name)
-        setSharedGenres(data)
-      }
+    useEffect(() => {
+        if (usersMovies?.sharedMovies) {
+            const ids = usersMovies.sharedMovies.join(",");
+            setSharedMoviesIds(ids);
+        }
+    }, [usersMovies]);
 
-    
-      const getMoviesForUsers = async () => {
-        const data = await fetchMoviesForUsers(user.name, friend.name)
-        setUsersMovies(await data)
-      }
+    useEffect(() => {
+        if (sharedMoviesIds) {
+            const url = `https://moviesdatabase.p.rapidapi.com/titles/x/titles-by-ids?idsList=${sharedMoviesIds}&info=base_info`;
+            setSharedMoviesUrl(url);
+        }
+    }, [sharedMoviesIds]);
 
-      //setSharedMoviesIds(usersMovies?.sharedMovies?.join("%"))
-      //setSharedMoviesUrl(`https://moviesdatabase.p.rapidapi.com/titles/x/titles-by-ids?idsList=${sharedMoviesIds}&info=base_info`)
-      
-      useEffect(() => {
-        getGenresForUsers()
-        getMoviesForUsers()
-        setToggle(true)
-        console.log("URL", sharedMoviesUrl)
-      },[])
+    useEffect(() => {
+        const fetchMoviesDetails = async () => {
+            if (sharedMoviesUrl) {
+                const movies = await getMovies(sharedMoviesUrl, options);
+                setSharedMovies(movies);
+            }
+        };
 
-      console.log("user Movies", usersMovies)
-      //useEffect(()=>{
-      //  setSharedMovies(getMovies(setSharedMoviesUrl, options))
-      //},[toggle])
+        fetchMoviesDetails();
+    }, [sharedMoviesUrl]);
 
+    console.log("SHARED MOVIES", sharedMovies)
+    console.log("URL", sharedMoviesUrl)
     return (
         <>
             <h1>Forslag for {user.name} og {friend.name}</h1>
             <div>
                 <section id="moviesWatchLaterSection">
                     <h2>Catch up!</h2>
-                    <p>Dere har ANTALL filmer felles i ønskelisten deres.</p>
-                    {/* <ul>
-                        {sharedMovies?.sharedMovies?.map((item, i) =>
+                    <p>Dere har {sharedMovies?.entries} filmer felles i ønskelisten deres.</p>
+                    <ul>
+                        {sharedMovies?.results?.map((movie, i) =>
                             <li key={i+"bus"}>
-                                <MovieCard key={i+"yes"} imdb={item.id} title={item.titleText.text} image={item.primaryImage?.url}/>
+                                <MovieCard key={i+"yes"} imdb={movie.id} title={movie.titleText.text} image={movie.primaryImage?.url}/>
                             </li>
                         )}
-                    </ul> */}
+                    </ul>
                 </section>
                 <section id="wishlistSection">
                     <h2>Go safe!</h2>
