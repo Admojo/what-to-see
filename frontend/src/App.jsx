@@ -56,13 +56,12 @@ useEffect(() => {
     <Layout user={user} setUser={setUser} userList={userList}>
       <Routes>
             <Route path="/login" element={<LoginPage setUser={setUser} userList={userList} />}/>
-            <Route path="/home" element={<HomePage movielist={movies} /*title={query}*/ user={user} userList={userList} friend={friend} setFriend={setFriend} />}/>
+            <Route path="/home" element={<HomePage movielist={movies} setUser={setUser} user={user} userList={userList} friend={friend} setFriend={setFriend} />}/>
             <Route path="/genre" element={<Genre setGenre={setGenre} user={user} genre={genre} />}/>
             <Route path="/genrepage" element={<GenrePage user={user} genre={genre} movielist={movies} setMovies={setMovies} />}/>
             <Route path="/viewtogether" element={<ViewTogetherPage user={user} friend={friend} setGenre={setGenre}/>}/>
         </Routes>
     </Layout>
-    // {/* {!logedIn ? <Navigate to="login" replace/> : <Navigate to="/" replace />} */}
   </>
   )
 }

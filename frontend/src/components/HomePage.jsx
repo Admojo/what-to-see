@@ -1,21 +1,26 @@
 import { FaStar } from "react-icons/fa6";
 import { VscSmiley } from "react-icons/vsc";
 import MovieCard from "./MovieCard";
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate} from "react-router-dom";
 import { fetchUser } from "../../services/userServices";
+import { useEffect } from "react"; 
 
-export default function HomePage({user, friend, setFriend, movielist, userList/*, title*/}){
+export default function HomePage({user, setUser, friend, setFriend, movielist, userList}){
 
     // En konstant som holder på alle filmer
     // const movieWishList = movielist?.docs;
     // console.log({title})
 
-    const currentUser = fetchUser(localStorage.getItem("username"));
+    const getUser = async () => {
+        const currentUser = await fetchUser(localStorage.getItem("username"));
+        setUser(currentUser);
+    }
+    
+    useEffect(()=> {
+        getUser()
+    }, [])
 
-    console.log("curr usar",currentUser)
-
-    const otherUsers = userList.filter(friends => friends.name !== currentUser)
+    const otherUsers = userList.filter(friends => friends.name !== user.name)
     const redirectToViewTogetherPage = useNavigate();
     const movieWishList = movielist;
     console.log("movielist:", movielist)
@@ -101,9 +106,9 @@ export default function HomePage({user, friend, setFriend, movielist, userList/*
                 <section id="watchTogetherSection">
                     <h3><VscSmiley /> Jeg skal se sammen med...</h3>
                     <ul>
-                        {otherUsers?.map((currentUser, i) => 
+                        {otherUsers?.map((user, i) => 
                         <li key={i+"mouse"}>
-                            <button onClick={() => handleFriendClick(currentUser)}>{currentUser.name}</button>
+                            <button onClick={() => handleFriendClick(user)}>{user.name}</button>
                         </li>)}
                     </ul>
                 </section>

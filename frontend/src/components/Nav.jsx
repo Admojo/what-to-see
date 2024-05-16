@@ -12,10 +12,8 @@ export default function Nav() {
 
     const handleLogout = () => {
         localStorage.setItem("username", "");
-        console.log("Logut username",localStorage.getItem("username"))
         redirectToLoginPage("/login")
     }
-
     return(
     <nav>
         <Link to="/home" id="logoButton">What to see?</Link>
