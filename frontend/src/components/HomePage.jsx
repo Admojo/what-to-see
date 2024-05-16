@@ -3,11 +3,32 @@ import { VscSmiley } from "react-icons/vsc";
 import MovieCard from "./MovieCard";
 import { fetchWishListForUser } from "../../services/movieServices";
 import { useEffect, useState } from "react";
+import { useNavigate} from "react-router-dom";
+import { fetchUser } from "../../services/userServices";
+import { useEffect } from "react"; 
 
-export default function HomePage({user, movielist, userList/*, title*/}){
+export default function HomePage({user, setUser, friend, setFriend, movielist, userList}){
 
-    const [wishList, setWishList] = useState (null)
+    const [wishList, setWishList] = useState ([])
 
+    const getUser = async () => {
+        const currentUser = await fetchUser(localStorage.getItem("username"));
+        setUser(currentUser);
+    }
+    
+    useEffect(()=> {
+        getUser()
+    }, [])
+
+    const otherUsers = userList.filter(friends => friends.name !== user.name)
+    const redirectToViewTogetherPage = useNavigate();
+    const movieWishList = movielist;
+    console.log("movielist:", movielist)
+
+    const handleFriendClick = (user) => {
+        setFriend(user)
+        redirectToViewTogetherPage("/viewtogether")
+    }
     //Skriver ut listen over brukerer som ikke er innlogget
     const otherUsers = userList.filter(friends => friends !== user)
 
@@ -28,7 +49,7 @@ export default function HomePage({user, movielist, userList/*, title*/}){
  
     return (
         <>
-            <h1>Hei, {user.name}</h1>
+            <h1>Hei, {localStorage.getItem("username")}</h1>
             <div>
                 <section id="moviesWatchLaterSection">
                     <h2><FaStar /> Filmer jeg skal se!</h2>
@@ -37,6 +58,21 @@ export default function HomePage({user, movielist, userList/*, title*/}){
                             <p>{movie}</p> 
                         </div>
                         ))} */}
+                    {wishList?.map((movie, index) => <MovieCard key={index} titleSanity={movie}/>)}
+                    {/* {wl?.map((movie, index) => <MovieCard key={index} titleSanity={movie}/>)} */}
+                    {wishList.length > 0 ? (wishList.map((movie, index) => (
+                        <MovieCard key={index} titleSanity={movie}/>
+                        ))
+                        ) : (
+                            <p> Ingen filmer i ønskeliste </p>
+                        )}
+
+                    {/* {wl.length > 0 ? (wl?.map((movie, index) => (
+                        <MovieCard key={index} titleSanity={movie}/>
+                        ))
+                        ): (
+                            <p> Ingen filmer i ønskeliste </p>
+                        )}   */}
                     <ul>
                         <li>
                             <MovieCard />
@@ -109,7 +145,7 @@ export default function HomePage({user, movielist, userList/*, title*/}){
                     <ul>
                         {otherUsers?.map((user, i) => 
                         <li key={i+"mouse"}>
-                            <button>{user.name}</button>
+                            <button onClick={() => handleFriendClick(user)}>{user.name}</button>
                         </li>)}
                     </ul>
                 </section>
