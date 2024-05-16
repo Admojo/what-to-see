@@ -1,7 +1,6 @@
 import { client, writeClient } from "../sanity/client";
 
 export async function fetchAllUsers(){
-
     const data = await client.fetch(`*[_type == "users"] | order(name asc){
         _id,
         _type,
@@ -10,22 +9,18 @@ export async function fetchAllUsers(){
         wishlist,
     }
     `)
-
     return data
 }
 
-
 export async function fetchUser(username){
-
-    const data = await client.fetch(`*[_type == "users" && name == ${username}] {
+    const data = await client.fetch(`*[_type == "users" && name == $username] {
         _id,
         _type,
         name,
         genrelist,
-        wishlist
+        wishlist,
     }
-    `)
-
+    `, {username})
     return data
 }
 
@@ -41,22 +36,23 @@ export async function addFavoriteGenre(usersid, genre) {
 }
 
 export async function removeFavoriteGenre(usersid, genre) {
+    // Benytter nytt document der "genre" er filtrert bort. 
+    // https://stackoverflow.com/questions/37385299/filter-and-delete-filtered-elements-in-an-array
+    const doc = await writeClient.getDocument(usersid);
+    const newGenrelist = doc.genrelist.filter(genreElement => genreElement !== genre);
     const result = await writeClient
-    // .patch(genre)
-    // .unset(genrelist, [genre])
-    // .commit()
-    // .then(() => {return "Success"})
-    // .catch((error) => {return "Error: " + error.message})
-
     .patch(usersid)
-    .unset([`genrelist [genre=="${genre}"]`])
-    .commit()
-
+    // Vi bruker set-metoden for å erstatte den gamle arrayen med den oppdaterte arrayen som ikke inneholder "genre".
+    // https://www.sanity.io/docs/http-patches#6TPENSW3
+    // https://www.sanity.io/answers/understanding-how-to-add-and-modify-fields-in-sanity-documents
+    .set({"genrelist": newGenrelist})
+    .commit({autoGenerateArrayKeys: true})
+    .then(() => {return "Success"})
+    .catch((error) => {return "Error: " + error.message})
     return result
 }
 
 export async function fetchFavoriteGenresForUser(id) {
-
     const data = await client.fetch(`*[_type == "users" && _id == ${id}] {
         genrelist
     }
@@ -65,13 +61,16 @@ export async function fetchFavoriteGenresForUser(id) {
 }
 
 export async function fetchGenresForUsers(user1, user2) {
-    const data = await client.fetch(`
-        "user1genres": *[_type == "users" && name == $username1][0].genrelist,
-        "user2genres": *[_type == "users" && name == $username2][0].genrelist,
-        "sharedGenres": *[_type == "users" && name in [$username1, $username2]] {
+    const query = `{
+        "user1genres": *[_type == "users" && name == $user1][0].genrelist,
+        "user2genres": *[_type == "users" && name == $user2][0].genrelist,
+        "sharedGenres": *[_type == "users" && name in [$user1, $user2]] {
           genrelist
-        }[0].genrelist[(@ in *[_type == "users" && name == $username1][0].genrelist) && (@ in *[_type == "users" && name == $username2][0].genrelist)]    
-    `)
+        }[0].genrelist[(@ in *[_type == "users" && name == $user1][0].genrelist) && (@ in *[_type == "users" && name == $user2][0].genrelist)]    
+    }`;
+
+    const params = { user1, user2 };
+    const data = await client.fetch(query, params)
     return data
 }
 

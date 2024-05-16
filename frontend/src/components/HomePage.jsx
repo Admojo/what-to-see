@@ -3,36 +3,36 @@ import { VscSmiley } from "react-icons/vsc";
 import MovieCard from "./MovieCard";
 import { fetchWishListForUser } from "../../services/movieServices";
 import { useEffect, useState } from "react";
+import { useNavigate} from "react-router-dom";
+import { fetchUser } from "../../services/userServices";
+import { useEffect } from "react"; 
 
-export default function HomePage({user, movielist, userList/*, title*/}){
+export default function HomePage({user, setUser, friend, setFriend, movielist, userList}){
 
     const [wishList, setWishList] = useState ([])
 
-    //Skriver ut listen over brukerer som ikke er innlogget
-    const otherUsers = userList.filter(friends => friends !== user)
-
-    //Henter innhold i en ønskeliste til en bruker
-    const wishListUser =  async (username) => {
-        const data = await fetchWishListForUser(username)
-        setWishList (data)
-        console.log("wishListUser:", data, "username:", username)
-    } 
+    const getUser = async () => {
+        const currentUser = await fetchUser(localStorage.getItem("username"));
+        setUser(currentUser);
+    }
     
-    useEffect (() => {
-        wishListUser(user.name)
-    }, [user])
+    useEffect(()=> {
+        getUser()
+    }, [])
 
-    console.log("wishList1:", wishList)
-    console.log("wishList2:", user.wishlist)
+    const otherUsers = userList.filter(friends => friends.name !== user.name)
+    const redirectToViewTogetherPage = useNavigate();
+    const movieWishList = movielist;
+    console.log("movielist:", movielist)
 
-    // const wl = user.wishlist
-
-    // const output = wishListUser.forEach((title) => console.log (title))
-    // const onskelist = wishList
+    const handleFriendClick = (user) => {
+        setFriend(user)
+        redirectToViewTogetherPage("/viewtogether")
+    }
  
     return (
         <>
-            <h1>Hei, {user.name}</h1>
+            <h1>Hei, {localStorage.getItem("username")}</h1>
             <div>
                 <section id="moviesWatchLaterSection">
                     <h2><FaStar /> Filmer jeg skal se!</h2>
@@ -123,7 +123,7 @@ export default function HomePage({user, movielist, userList/*, title*/}){
                     <ul>
                         {otherUsers?.map((user, i) => 
                         <li key={i+"mouse"}>
-                            <button>{user.name}</button>
+                            <button onClick={() => handleFriendClick(user)}>{user.name}</button>
                         </li>)}
                     </ul>
                 </section>

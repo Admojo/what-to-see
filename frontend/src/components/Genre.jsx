@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom"
 import { fetchAllGenres } from "../../services/genreServices"
 import { useState, useEffect } from "react"
-import { addFavoriteGenre, removeFavoriteGenre } from "../../services/userServices"
+import { addFavoriteGenre, fetchUser, removeFavoriteGenre } from "../../services/userServices"
 import { FaRegStar } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
 
-export default function Genre({setGenre, user, genre}) {
+export default function Genre({setGenre}) {
 
-    const [genreList, setGenrelist] = useState(user.genrelist)
+    const currentUser = fetchUser(localStorage.getItem("username"));
+
+    const [genreList, setGenrelist] = useState(currentUser.genrelist)
 
     const getAllGenres = async () => {
         const data = await fetchAllGenres()
@@ -21,10 +23,10 @@ export default function Genre({setGenre, user, genre}) {
         handleClick(genre)
     }
     const handleClick = async (genre) => {
-        const result = await addFavoriteGenre(user._id, genre)
+        const result = await addFavoriteGenre(currentUser._id, genre)
         console.log("result", result)
         if (result === "Success") {
-            user.genreList.push(genre)
+            currentUser.genreList.push(genre)
         }
     }
     const handleUnFavoriteClick = (genre) => {
@@ -32,10 +34,7 @@ export default function Genre({setGenre, user, genre}) {
         handleClickUnfavorite(genre)
     }
     const handleClickUnfavorite = async (genre) => {
-        const result = await removeFavoriteGenre(user?.genrelist, genre)
-        if (result === "Success") {
-           user.genreList.push(genre)
-        }
+        const result = await removeFavoriteGenre(currentUser._id, genre)
     }
 
     return (
@@ -46,7 +45,7 @@ export default function Genre({setGenre, user, genre}) {
                         {genreList?.map((item, i) =>
                         <li key={i+"rat"}>
                             <Link to="/genrepage" onClick={()=> setGenre(item.genre)}>{item.genre}</Link>
-                            {user?.genrelist?.includes(item.genre) ? (
+                            {currentUser?.genrelist?.includes(item.genre) ? (
                                 <button className="removeFavoriteGenreButton" onClick={() => handleUnFavoriteClick(item.genre)}><FaStar color="orange"/> Favorittsjanger</button>
                             ) : (
                                 <button className="addFavoriteGenreButton" onClick={() => handleFavoriteClick(item.genre)}><FaRegStar /> Legg til i favorittliste</button>

@@ -1,27 +1,26 @@
 import { useNavigate } from 'react-router-dom'
+import { fetchUser } from '../../services/userServices';
 
 export default function LoginPage({setUser, userList}) {
 
-    // Funnet en måte å alltid komme til homePage når en logger inn.
-    // https://reactrouter.com/en/main/hooks/use-navigate
     const redirectToHomepage = useNavigate();
 
-    const handleLoginClick = (user) => {
-        setUser(user)
+    const handleLoginClick =  async (clickedUser) => {
+        localStorage.setItem("username", clickedUser.name)
+        const currentUser = await fetchUser(localStorage.getItem("username"));
+        setUser(currentUser)
         redirectToHomepage("/home")
     }
 
-console.log("users", userList)
-
     return (
-        <main>
+        <>
             <h1>Hvem skal se i dag?</h1>
             <section>
                 {userList?.map((user, i) => 
                 <li key={i+"mouse"}>
-                    <button onClick={() => handleLoginClick(user)} >{user.name}</button>
+                    <button onClick={() => handleLoginClick(user)}>{user.name}</button>
                 </li>)}
             </section>
-        </main>
+        </>
     ) 
 }

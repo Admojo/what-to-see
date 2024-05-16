@@ -7,17 +7,15 @@ import { Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import GenrePage from './components/GenrePage';
 import { fetchAllUsers } from "../services/userServices"
+import ViewTogetherPage from './components/ViewTogetherPage';
 
 function App() {
 
 const [user, setUser] = useState(null)
-
+const [friend, setFriend] = useState(null)
 const [movies, setMovies] = useState (null)
 const [genre, setGenre] = useState (null)
 const [userList, setUserList] = useState(null)
-
-
-
 
 // Endre til parameter Movie with: id, title, imdb, moviecover
 // const url = `https://moviesdatabase.p.rapidapi.com/titles?info=base_info&genre&limit`;
@@ -47,7 +45,6 @@ const getData = async(url) => {
 const getAllUsers = async () => {
   const data = await fetchAllUsers()
   setUserList(data)
-  console.log("userdata:", data)
 }
 
 useEffect(() => {
@@ -55,17 +52,17 @@ useEffect(() => {
   getAllUsers()
 },[])
 
-  return (
+  return (<>
     <Layout user={user} setUser={setUser} userList={userList}>
       <Routes>
-            <Route path="/login" element={<LoginPage userList={userList}/>}/>
-            <Route path="/home" element={<HomePage movielist={movies} /*title={query}*/ user={user} userList={userList}/>}/>
-            <Route path="/genre" element={<Genre setGenre={setGenre} user={user} genre={genre}/>} />
+            <Route path="/login" element={<LoginPage setUser={setUser} userList={userList} />}/>
+            <Route path="/home" element={<HomePage movielist={movies} setUser={setUser} user={user} userList={userList} friend={friend} setFriend={setFriend} />}/>
+            <Route path="/genre" element={<Genre setGenre={setGenre} user={user} genre={genre} />}/>
             <Route path="/genrepage" element={<GenrePage user={user} genre={genre} movielist={movies} setMovies={setMovies} />}/>
+            <Route path="/viewtogether" element={<ViewTogetherPage user={user} friend={friend} setGenre={setGenre}/>}/>
         </Routes>
     </Layout>
-    // {/* {!logedIn ? <Navigate to="login" replace/> : <Navigate to="/" replace />} */}
-  
+  </>
   )
 }
 
