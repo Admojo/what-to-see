@@ -7,12 +7,11 @@ export default function Layout({children, user, setUser, userList}){
         return(
         <>
             <header>
-                <Nav user={user}></Nav>
+                <Nav/>
             </header>
             <main>
                 {children}
             </main>
-            {/* <footer> Copyright Gruppe 4 - 2024 </footer> */}
         </>
         )
     }

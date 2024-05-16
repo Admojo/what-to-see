@@ -22,7 +22,7 @@ export default function HomePage({user, friend, setFriend, movielist, userList/*
  
     return (
         <>
-            <h1>Hei, {user.name}</h1>
+            <h1>Hei, {localStorage.getItem("username")}</h1>
             <div>
                 <section id="moviesWatchLaterSection">
                     <h2><FaStar /> Filmer jeg skal se!</h2>
