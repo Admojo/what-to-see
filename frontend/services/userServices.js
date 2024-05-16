@@ -71,6 +71,20 @@ export async function fetchGenresForUsers(user1, user2) {
     return data
 }
 
+export async function fetchMoviesForUsers(user1, user2) {
+    const query = `{
+        "user1movies": *[_type == "users" && name == $user1][0].wishlist,
+        "user2movies": *[_type == "users" && name == $user2][0].wishlist,
+        "sharedMovies": *[_type == "users" && name in [$user1, $user2]] {
+            wishlist
+        }[0].wishlist[(@ in *[_type == "users" && name == $user1][0].wishlist) && (@ in *[_type == "users" && name == $user2][0].wishlist)]    
+    }`;
+
+    const params = { user1, user2 };
+    const data = await client.fetch(query, params)
+    return data
+}
+
 
 // // Hente favoritt-sjanger for to brukere
 // export async function fetchFavoriteGenresForTwoUsers(userOne, userTwo) {

@@ -9,6 +9,17 @@ import GenrePage from './components/GenrePage';
 import { fetchAllUsers } from "../services/userServices"
 import ViewTogetherPage from './components/ViewTogetherPage';
 
+export async function getMovies(url, options) {
+  try {
+    const response = await fetch(url, options);
+    const result = await response.json();
+    console.log("result:",result);
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 function App() {
 
 const [user, setUser] = useState(null)
@@ -22,10 +33,10 @@ const [userList, setUserList] = useState(null)
 
 // Endre til parameter Movie with: id, title, imdb, moviecover
 // const url = `https://moviesdatabase.p.rapidapi.com/titles?info=base_info&genre&limit`;
-// const urlTitle = `https://moviesdatabase.p.rapidapi.com//titles/search/title/${title}`;
-// const urlGenre = `https://moviesdatabase.p.rapidapi.com/titles?info=base_info&genre=${genre}`;
-// const urlFavorites = `https://moviesdatabase.p.rapidapi.com/titles/x/titles-by-ids?idsList=${user.favorites}&info=base_info`; // Må % mellom id i listen
-const url = `https://moviesdatabase.p.rapidapi.com/titles?info=base_info&limit=2`;
+// const urlSearch = `https://moviesdatabase.p.rapidapi.com/titles/search/akas/${keyword}?info=base_info`;  URL FOR SEARCH FUNCTION
+// const urlGenre = `https://moviesdatabase.p.rapidapi.com/titles?info=base_info&genre=${genre}`; FILM SØK PÅ SJANGER
+// const urlMovies = `https://moviesdatabase.p.rapidapi.com/titles/x/titles-by-ids?idsList=${user.favorites}&info=base_info`;  @@ Må % mellom id i listen @@ SØK FLERE FILMERS ID
+const urlAllMovies = `https://moviesdatabase.p.rapidapi.com/titles?info=base_info`;
   const options = {
     method: 'GET',
     headers: {
@@ -34,16 +45,6 @@ const url = `https://moviesdatabase.p.rapidapi.com/titles?info=base_info&limit=2
     }
 };
 
-const getData = async(url) => {
-  try {
-    const response = await fetch(url, options);
-    const result = await response.json();
-    console.log("result:",result);
-    setMovies(result);
-  } catch (error) {
-    console.error(error);
-  }
-}
 
 const getAllUsers = async () => {
   const data = await fetchAllUsers()
@@ -52,7 +53,7 @@ const getAllUsers = async () => {
 }
 
 useEffect(() => {
-  getData(url)
+  setMovies(getMovies(urlAllMovies, options))
   getAllUsers()
 },[])
 
