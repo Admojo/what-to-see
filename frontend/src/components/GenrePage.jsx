@@ -1,7 +1,4 @@
 import { useEffect } from "react";
-import App from "../App";
-import { FaStar } from "react-icons/fa6";
-import { VscSmiley } from "react-icons/vsc";
 import MovieCard from "./MovieCard";
 
 export default function GenrePage({user, genre, movielist, setMovies}){
