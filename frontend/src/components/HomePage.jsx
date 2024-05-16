@@ -5,11 +5,31 @@ import { fetchWishListForUser } from "../../services/movieServices";
 import { useEffect, useState } from "react";
 import { useNavigate} from "react-router-dom";
 import { fetchUser } from "../../services/userServices";
-import { useEffect } from "react"; 
+import MovieCardTest from "./MovieCardTest";
 
 export default function HomePage({user, setUser, friend, setFriend, movielist, userList}){
 
     const [wishList, setWishList] = useState ([])
+
+
+    //Henter innhold i en ønskeliste til en bruker
+    const wishListUser =  async (user) => {
+        const data = await fetchWishListForUser(user)
+        setWishList(data)
+        console.log("wishListUser:", data, "username:", user)
+    }
+
+    
+    useEffect (() => {
+        wishListUser(user)
+        console.log("wishlistuser:", user)
+    }, [user])
+
+    console.log("wishList1:", wishList)
+    // console.log("wishlistuser:",wishListUser([].wishlist))
+    // [0].wishlist
+    // [0].wishlist[0]
+
 
     const getUser = async () => {
         const currentUser = await fetchUser(localStorage.getItem("username"));
@@ -20,33 +40,20 @@ export default function HomePage({user, setUser, friend, setFriend, movielist, u
         getUser()
     }, [])
 
+     //Skriver ut listen over brukerer som ikke er innlogget
+    // const otherUsers = userList.filter(friends => friends !== user)
+
     const otherUsers = userList.filter(friends => friends.name !== user.name)
     const redirectToViewTogetherPage = useNavigate();
-    const movieWishList = movielist;
-    console.log("movielist:", movielist)
+    // const movieWishList = movielist;
+    // console.log("movielist:", movielist)
 
     const handleFriendClick = (user) => {
         setFriend(user)
         redirectToViewTogetherPage("/viewtogether")
     }
-    //Skriver ut listen over brukerer som ikke er innlogget
-    const otherUsers = userList.filter(friends => friends !== user)
+   
 
-    //Henter innhold i en ønskeliste til en bruker
-    const wishListUser =  async (user) => {
-        const data = await fetchWishListForUser(user.name)
-        setWishList (data)
-        console.log("wishListUser:", data, "username:", user.name)
-    } 
-    
-    useEffect (() => {
-        wishListUser(user)
-    }, [user])
-
-    // console.log("wishList1:", wishList)
-
-
- 
     return (
         <>
             <h1>Hei, {localStorage.getItem("username")}</h1>
@@ -58,10 +65,10 @@ export default function HomePage({user, setUser, friend, setFriend, movielist, u
                             <p>{movie}</p> 
                         </div>
                         ))} */}
-                    {wishList?.map((movie, index) => <MovieCard key={index} titleSanity={movie}/>)}
+                    {wishList?.map((movie, index) => <MovieCardTest key={index} titleSanity={movie}/>)}
                     {/* {wl?.map((movie, index) => <MovieCard key={index} titleSanity={movie}/>)} */}
                     {wishList.length > 0 ? (wishList.map((movie, index) => (
-                        <MovieCard key={index} titleSanity={movie}/>
+                        <MovieCardTest key={index} titleSanity={movie}/>
                         ))
                         ) : (
                             <p> Ingen filmer i ønskeliste </p>
