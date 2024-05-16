@@ -49,6 +49,7 @@ const getData = async(url) => {
 const getAllUsers = async () => {
   const data = await fetchAllUsers()
   setUserList(data)
+  console.log("userdata:", data)
 }
 
 useEffect(() => {
@@ -66,6 +67,8 @@ useEffect(() => {
             <Route path="/viewtogether" element={<ViewTogetherPage user={user} friend={friend} setGenre={setGenre}/>}/>
         </Routes>
     </Layout>
+    // {/* {!logedIn ? <Navigate to="login" replace/> : <Navigate to="/" replace />} */}
+  
   )
 }
 

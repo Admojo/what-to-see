@@ -14,6 +14,7 @@ export async function fetchAllUsers(){
     return data
 }
 
+
 export async function fetchUser(username){
 
     const data = await client.fetch(`*[_type == "users" && name == $username] {
