@@ -7,11 +7,13 @@ import { Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import GenrePage from './components/GenrePage';
 import { fetchAllUsers } from "../services/userServices"
+import ViewTogetherPage from './components/ViewTogetherPage';
 
 function App() {
 
 // const [query, setQuery] = useState ("James Bond")
 const [user, setUser] = useState(null)
+const [friend, setFriend] = useState(null)
 const [movies, setMovies] = useState (null)
 const [genre, setGenre] = useState (null)
 const [userList, setUserList] = useState(null)
@@ -57,10 +59,11 @@ useEffect(() => {
   return (
     <Layout user={user} setUser={setUser} userList={userList}>
       <Routes>
-            <Route path="/login" element={<LoginPage userList={userList}/>}/>
-            <Route path="/home" element={<HomePage movielist={movies} /*title={query}*/ user={user} userList={userList}/>}/>
-            <Route path="/genre" element={<Genre setGenre={setGenre} user={user} genre={genre}/>} />
+            <Route path="/login" element={<LoginPage userList={userList} />}/>
+            <Route path="/home" element={<HomePage movielist={movies} /*title={query}*/ user={user} userList={userList} friend={friend} setFriend={setFriend} />}/>
+            <Route path="/genre" element={<Genre setGenre={setGenre} user={user} genre={genre} />}/>
             <Route path="/genrepage" element={<GenrePage user={user} genre={genre} movielist={movies} setMovies={setMovies} />}/>
+            <Route path="/viewtogether" element={<ViewTogetherPage user={user} friend={friend} setGenre={setGenre}/>}/>
         </Routes>
     </Layout>
   )

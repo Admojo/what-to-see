@@ -49,12 +49,15 @@ export async function fetchFavoriteGenresForUser(id) {
 }
 
 export async function fetchGenresForUsers(user1, user2) {
-    const data = await client.fetch(`
-        "user1genres": *[_type == "users" && name == $username1][0].genrelist,
-        "user2genres": *[_type == "users" && name == $username2][0].genrelist,
-        "sharedGenres": *[_type == "users" && name in [$username1, $username2]] {
+    const query = `{
+        "user1genres": *[_type == "users" && name == $user1][0].genrelist,
+        "user2genres": *[_type == "users" && name == $user2][0].genrelist,
+        "sharedGenres": *[_type == "users" && name in [$user1, $user2]] {
           genrelist
-        }[0].genrelist[(@ in *[_type == "users" && name == $username1][0].genrelist) && (@ in *[_type == "users" && name == $username2][0].genrelist)]    
-    `)
+        }[0].genrelist[(@ in *[_type == "users" && name == $user1][0].genrelist) && (@ in *[_type == "users" && name == $user2][0].genrelist)]    
+    }`;
+
+    const params = { user1, user2 };
+    const data = await client.fetch(query, params)
     return data
 }

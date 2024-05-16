@@ -1,41 +1,36 @@
-import { FaStar } from "react-icons/fa6";
-import { VscSmiley } from "react-icons/vsc";
+import { Link } from "react-router-dom";
+import { fetchGenresForUsers } from "../../services/userServices";
 import MovieCard from "./MovieCard";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react"; 
+
+export default function ViewTogetherPage({user, friend, setGenre}){
 
 
-export default function HomePage({user, friend, setFriend, movielist, userList/*, title*/}){
 
-    // En konstant som holder på alle filmer
-    // const movieWishList = movielist?.docs;
-    // console.log({title})
+    const [sharedGenres, setSharedGenres] = useState([])
 
-    const otherUsers = userList.filter(friends => friends !== user)
-    const redirectToViewTogetherPage = useNavigate();
-    const movieWishList = movielist;
-    console.log("movielist:", movielist)
 
-    const handleFriendClick = (user) => {
-        setFriend(user)
-        redirectToViewTogetherPage("/viewtogether")
-    }
- 
+    console.log("shared", sharedGenres)
+
+    const getGenresForUsers = async () => {
+        console.log("user", user.name)
+        console.log("friend", friend.name)
+        const data = await fetchGenresForUsers(user.name, friend.name)
+        setSharedGenres(data)
+      }
+      
+      useEffect(() => {
+        getGenresForUsers()
+      },[])
+
     return (
         <>
-            <h1>Hei, {user.name}</h1>
+            <h1>Forslag for {user.name} og {friend.name}</h1>
             <div>
                 <section id="moviesWatchLaterSection">
-                    <h2><FaStar /> Filmer jeg skal se!</h2>
+                    <h2>Catch up!</h2>
+                    <p>Dere har ANTALL filmer felles i ønskelisten deres.</p>
                     <ul>
-                        <li>
-                            <MovieCard />
-                        </li>
-                        <li>
-                            <MovieCard />
-                        </li>
-                        <li>
-                            <MovieCard />
-                        </li>
                         <li>
                             <MovieCard />
                         </li>
@@ -54,17 +49,9 @@ export default function HomePage({user, friend, setFriend, movielist, userList/*
                     </ul>
                 </section>
                 <section id="wishlistSection">
-                    <p>Disse filmene ligger i ønskelisten din:</p>
+                    <h2>Go safe!</h2>
+                    <p>Dere har ANTALL filmer felles i favorittlisten deres.</p>
                     <ul>
-                    <li>
-                            <MovieCard />
-                        </li>
-                        <li>
-                            <MovieCard />
-                        </li>
-                        <li>
-                            <MovieCard />
-                        </li>
                         <li>
                             <MovieCard />
                         </li>
@@ -81,7 +68,6 @@ export default function HomePage({user, friend, setFriend, movielist, userList/*
                             <MovieCard />
                         </li>
                     </ul>
-                    <MovieCard />
                     {/* <span className='movie-card-wrapper'>
                         {movieWishList?.map((movie, id) =>
                         <li key={id}>
@@ -93,13 +79,15 @@ export default function HomePage({user, friend, setFriend, movielist, userList/*
                         )}
                     </span> */}
                 </section>
-                <section id="watchTogetherSection">
-                    <h3><VscSmiley /> Jeg skal se sammen med...</h3>
+                <section>
+                    <h2>Utforsk!</h2>
+                    <p>Dere liker begge disse sjangerne, sjekk hvilke filmer som finnes å velge mellom:</p>
                     <ul>
-                        {otherUsers?.map((user, i) => 
-                        <li key={i+"mouse"}>
-                            <button onClick={() => handleFriendClick(user)}>{user.name}</button>
-                        </li>)}
+                        {sharedGenres?.sharedGenres?.map((item, i) =>
+                            <li key={i+"car"}>
+                                <Link to="/genrepage" onClick={()=> setGenre(item)}>{item}</Link>
+                            </li>
+                        )}
                     </ul>
                 </section>
             </div>
