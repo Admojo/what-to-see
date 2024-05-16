@@ -1,6 +1,6 @@
 import Nav from "./Nav"
 
-export default function Layout({children}){
+export default function Layout({children, user, setUser, userList}){
     const currentUser = localStorage.getItem("username");
 
     const showNavBar = () => {
@@ -15,7 +15,7 @@ export default function Layout({children}){
             {showNavBar() ? (
                 <> 
                     <header>
-                        <Nav/>
+                        <Nav user={user}/>
                     </header>
                     <main>
                         {children}

@@ -3,7 +3,7 @@ import { FaCircleUser } from "react-icons/fa6";
 import { FaTv } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom'
 
-export default function Nav() {
+export default function Nav({user}) {
 
     const currentUser = localStorage.getItem("username");
     console.log("current user loginpage",currentUser)
@@ -13,7 +13,11 @@ export default function Nav() {
     const handleLogout = () => {
         localStorage.setItem("username", "");
         redirectToLoginPage("/login")
+        // for å kunne være på loginpage uten at nav-bar er synlig så må man refreshe siden først. Dette løste vi med en quickfix med linjen under.
+        // fant løsningen på stackowerflow: https://stackoverflow.com/questions/41481522/how-to-refresh-a-page-using-react-route-link
+        window.location.reload();
     }
+    if (user !== "") {
     return(
     <nav>
         <Link to="/home" id="logoButton">What to see?</Link>
@@ -25,4 +29,7 @@ export default function Nav() {
         </ul>
     </nav>
     )
+} else {
+    return(<></>)
+}
 }

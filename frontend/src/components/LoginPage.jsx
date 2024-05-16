@@ -1,7 +1,12 @@
 import { useNavigate } from 'react-router-dom'
 import { fetchUser } from '../../services/userServices';
+import { useEffect } from 'react';
 
 export default function LoginPage({setUser, userList}) {
+
+    useEffect(() => {
+        localStorage.setItem("username", "")
+        }, [])
 
     const redirectToHomepage = useNavigate();
 

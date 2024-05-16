@@ -18,9 +18,9 @@ export default function Genre({setGenre}) {
     useEffect(() => {
         getAllGenres()
         }, [])
-    const handleFavoriteClick = (genre) => {
-        setGenre(genre)
-        handleClick(genre)
+    const handleFavoriteClick = async (genre) => {
+        setGenre(await genre)
+        handleClick(await genre)
     }
     const handleClick = async (genre) => {
         const result = await addFavoriteGenre(currentUser._id, genre)
@@ -29,9 +29,9 @@ export default function Genre({setGenre}) {
             currentUser.genreList.push(genre)
         }
     }
-    const handleUnFavoriteClick = (genre) => {
+    const handleUnFavoriteClick = async (genre) => {
         //setGenre(null)
-        handleClickUnfavorite(genre)
+        handleClickUnfavorite(await genre)
     }
     const handleClickUnfavorite = async (genre) => {
         const result = await removeFavoriteGenre(currentUser._id, genre)
