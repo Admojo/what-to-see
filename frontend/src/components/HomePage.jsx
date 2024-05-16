@@ -2,18 +2,29 @@ import { FaStar } from "react-icons/fa6";
 import { VscSmiley } from "react-icons/vsc";
 import MovieCard from "./MovieCard";
 import { fetchWishListForUser } from "../../services/movieServices";
+import { useEffect, useState } from "react";
 
 export default function HomePage({user, movielist, userList/*, title*/}){
 
-    // En konstant som holder på alle filmer
-    // const movieWishList = movielist?.docs;
-    // console.log({title})
+    const [wishList, setWishList] = useState (null)
 
+    //Skriver ut listen over brukerer som ikke er innlogget
     const otherUsers = userList.filter(friends => friends !== user)
 
-    const movieWishList = movielist;
-    console.log("movielist:", movielist)
-    console.log("dataWishListUser:", fetchWishListForUser(user))
+    //Henter innhold i en ønskeliste til en bruker
+    const wishListUser =  async (user) => {
+        const data = await fetchWishListForUser(user.name)
+        setWishList (data)
+        console.log("wishListUser:", data, "username:", user.name)
+    } 
+    
+    useEffect (() => {
+        wishListUser(user)
+    }, [user])
+
+    // console.log("wishList1:", wishList)
+
+
  
     return (
         <>
@@ -21,6 +32,11 @@ export default function HomePage({user, movielist, userList/*, title*/}){
             <div>
                 <section id="moviesWatchLaterSection">
                     <h2><FaStar /> Filmer jeg skal se!</h2>
+                    {/* {wishList?.map((movie, index) => (
+                        <div key={index}>
+                            <p>{movie}</p> 
+                        </div>
+                        ))} */}
                     <ul>
                         <li>
                             <MovieCard />
