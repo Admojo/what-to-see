@@ -3,7 +3,7 @@ import { VscSmiley } from "react-icons/vsc";
 import MovieCard from "./MovieCard";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react"; 
-import { getMovies } from "../App";
+import { getMovies, options } from "../App";
 import { fetchWishlistForUsers, fetchFavoritesForUsers} from "../../services/userServices";
 
 
@@ -19,14 +19,6 @@ export default function HomePage({user, setFriend, userList}){
     const [favorites, setFavorites] = useState(null)
     const [favoritesIds, setFavoritesIds] = useState("")
     const [favoritesUrl, setFavoritesUrl] = useState(null)
-
-    const options = {
-        method: 'GET',
-        headers: {
-          'X-RapidAPI-Key': 'ad97b2da57mshea14e44c7ca71c2p19c8c9jsn525facd6154e',
-          'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
-        }
-    };
 
     useEffect(() => {
         const getMovies = async () => {

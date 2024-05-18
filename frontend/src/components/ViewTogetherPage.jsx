@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { fetchGenresForUsers, fetchWishlistForUsers, fetchFavoritesForUsers} from "../../services/userServices";
 import MovieCard from "./MovieCard";
 import { useState, useEffect } from "react"; 
-import { getMovies } from "../App";
+import { getMovies, options } from "../App";
 
 export default function ViewTogetherPage({user, friend, setGenre}){
 
@@ -15,17 +15,7 @@ export default function ViewTogetherPage({user, friend, setGenre}){
     const [sharedFavorites, setSharedFavorites] = useState(null)
     const [sharedFavoritesIds, setSharedFavoritesIds] = useState("")
     const [sharedFavoritesUrl, setSharedFavoritesUrl] = useState(null)
-
-
-    const options = {
-        method: 'GET',
-        headers: {
-          'X-RapidAPI-Key': 'ad97b2da57mshea14e44c7ca71c2p19c8c9jsn525facd6154e',
-          'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
-        }
-    };
     
-
     useEffect(() => {
         const getGeneresAndMovies = async () => {
             const genresData = await fetchGenresForUsers(user.name, friend.name);

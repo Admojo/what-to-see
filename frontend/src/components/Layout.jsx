@@ -3,7 +3,8 @@ import LoginPage from "./LoginPage"
 
 export default function Layout({children, user, setUser, userList}){
 
-    if (user != null) {
+    console.log("Userlist LAYOUT::::", userList)
+    if (localStorage.getItem("username") != null) {
         return(
         <>
             <header>
@@ -18,7 +19,7 @@ export default function Layout({children, user, setUser, userList}){
     else {
         return(
             <main>
-                <LoginPage setUser={setUser} userList={userList}/>
+                {<LoginPage setUser={setUser} userList={userList}/>}
             </main>
         )
     }
