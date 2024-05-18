@@ -31,7 +31,11 @@ export const options = {
 function App() {
 
   const currentUserName = localStorage.getItem("username");
-  const currentUser = fetchUser(currentUserName);
+  const currentUser = ()=> {
+      if (currentUserName){
+        fetchUser(currentUserName)}
+      else {return}
+    }
 
   const [user, setUser] = useState(currentUser)
   const [friend, setFriend] = useState(null)
