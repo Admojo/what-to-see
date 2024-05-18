@@ -4,19 +4,13 @@ import MovieCard from "./MovieCard";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react"; 
 import { getMovies } from "../App";
-import { Link } from "react-router-dom";
 import { fetchWishlistForUsers, fetchFavoritesForUsers} from "../../services/userServices";
 
 
-export default function HomePage({user, friend, setFriend, movielist, userList/*, title*/}){
-
-    // En konstant som holder på alle filmer
-    // const movieWishList = movielist?.docs;
-    // console.log({title})
+export default function HomePage({user, setFriend, userList}){
 
     const otherUsers = userList.filter(friends => friends !== user)
     const redirectToViewTogetherPage = useNavigate();
-    const movieWishList = movielist;
     const [userWishlist, setUserWishlist] = useState(null)
     const [wishlist, setWishlist] = useState(null)
     const [wishlistIds, setWishlistIds] = useState("")
@@ -45,29 +39,35 @@ export default function HomePage({user, friend, setFriend, movielist, userList/*
     },[user])
 
     useEffect(() => {
-        if (userWishlist?.user1movies && userFavorites?.user1movies) {
+        if (userWishlist?.user1movies) {
             const wishlistIds = userWishlist.user1movies.join(",");
-            const favoritesIds = userFavorites.user1movies.join(",");
             setWishlistIds(wishlistIds);
+        }
+        if (userFavorites?.user1movies){
+            const favoritesIds = userFavorites.user1movies.join(",");
             setFavoritesIds(favoritesIds);
         }
     }, [userWishlist, userFavorites]);
 
     useEffect(() => {
-        if (wishlistIds && favoritesIds){
+        if (wishlistIds){
             const wishlistUrl = `https://moviesdatabase.p.rapidapi.com/titles/x/titles-by-ids?idsList=${wishlistIds}&info=base_info`;
-            const favoritesUrl = `https://moviesdatabase.p.rapidapi.com/titles/x/titles-by-ids?idsList=${favoritesIds}&info=base_info`;
             setWishlistUrl(wishlistUrl);
+        }
+        if (favoritesIds){
+            const favoritesUrl = `https://moviesdatabase.p.rapidapi.com/titles/x/titles-by-ids?idsList=${favoritesIds}&info=base_info`;
             setFavoritesUrl(favoritesUrl);
         }
     }, [wishlistIds, favoritesIds]);
 
     useEffect(() => {
         const fetchMoviesDetails = async () => {
-            if (wishlistUrl && favoritesUrl) {
+            if (wishlistUrl) {
                 const wishlist = await getMovies(wishlistUrl, options);
-                const favorites = await getMovies(favoritesUrl, options);
                 setWishlist(wishlist);
+            }
+            if (favoritesUrl) {
+                const favorites = await getMovies(favoritesUrl, options);
                 setFavorites(favorites)
             }
         };
@@ -79,7 +79,7 @@ export default function HomePage({user, friend, setFriend, movielist, userList/*
         setFriend(user)
         redirectToViewTogetherPage("/viewtogether")
     }
- 
+ // tt0222518, tt0237765, tt0230804, tt0388629
     return (
         <>
             <h1>Hei, {user.name}</h1>
@@ -87,11 +87,12 @@ export default function HomePage({user, friend, setFriend, movielist, userList/*
                 <section id="moviesWatchLaterSection">
                     <h2><FaStar /> Filmer jeg skal se!</h2>
                     <ul>
-                        {favorites?.results?.map((movie, i) =>
+                        {favorites?.results ?
+                        favorites?.results?.map((movie, i) =>
                             <li key={i+"bus"}>
                                 <MovieCard key={i+"yes"} imdb={movie.id} title={movie.originalTitleText.text} image={movie.primaryImage?.url}/>
                             </li>
-                        )}
+                        ) : <li>Du har ingen filmer i "filmer jeg skal se" listen</li>}
                     </ul>
                 </section>
                 <section id="wishlistSection">

@@ -39,29 +39,35 @@ export default function ViewTogetherPage({user, friend, setGenre}){
     },[user, friend])
 
     useEffect(() => {
-        if (usersWishlist?.sharedMovies && usersFavorites?.sharedMovies) {
+        if (usersWishlist?.sharedMovies) {
             const wishlistIds = usersWishlist.sharedMovies.join(",");
-            const favoritesIds = usersFavorites.sharedMovies.join(",");
             setSharedWishlistIds(wishlistIds);
+        }
+        if (usersFavorites?.sharedMovies){
+            const favoritesIds = usersFavorites.sharedMovies.join(",");
             setSharedFavoritesIds(favoritesIds);
         }
     }, [usersWishlist, usersFavorites]);
 
     useEffect(() => {
-        if (sharedWishlistIds && sharedFavoritesIds) {
+        if (sharedWishlistIds) {
             const wishlistUrl = `https://moviesdatabase.p.rapidapi.com/titles/x/titles-by-ids?idsList=${sharedWishlistIds}&info=base_info`;
+            setSharedWishlistUrl(wishlistUrl);            
+        }
+        if (sharedFavoritesIds){
             const favoritesUrl = `https://moviesdatabase.p.rapidapi.com/titles/x/titles-by-ids?idsList=${sharedFavoritesIds}&info=base_info`;
-            setSharedWishlistUrl(wishlistUrl);
             setSharedFavoritesUrl(favoritesUrl);
         }
     }, [sharedWishlistIds, sharedFavoritesIds]);
 
     useEffect(() => {
         const fetchMoviesDetails = async () => {
-            if (sharedWishlistUrl && sharedFavoritesUrl) {
+            if (sharedWishlistUrl) {
                 const wishlist = await getMovies(sharedWishlistUrl, options);
-                const favorites = await getMovies(sharedFavoritesUrl, options);
                 setSharedWishlist(wishlist);
+            }
+            if (sharedFavoritesUrl) {
+                const favorites = await getMovies(sharedFavoritesUrl, options);
                 setSharedFavorites(favorites)
             }
         };
@@ -79,7 +85,7 @@ export default function ViewTogetherPage({user, friend, setGenre}){
             <div>
                 <section id="moviesWatchLaterSection">
                     <h2>Catch up!</h2>
-                    <p>Dere har {sharedWishlist?.entries} filmer felles i ønskelisten deres.</p>
+                    {sharedWishlist ? <p>Dere har {sharedWishlist?.entries} filmer felles i ønskelisten deres.</p> : <p>Dere har ingen filmer til felles i ønskelisten deres.</p>}
                     <ul>
                         {sharedWishlist?.results?.map((movie, i) =>
                             <li key={i+"bus"}>
@@ -90,7 +96,7 @@ export default function ViewTogetherPage({user, friend, setGenre}){
                 </section>
                 <section id="wishlistSection">
                     <h2>Go safe!</h2>
-                    <p>Dere har {sharedFavorites?.entries} filmer felles i favorittlisten deres.</p>
+                    {sharedFavorites ? <p>Dere har {sharedFavorites?.entries} filmer felles i favorittlisten deres.</p> : <p>Dere har ingen filmer til felles i favorittlisten deres.</p>}
                     <ul>
                         {sharedFavorites?.results?.map((movie, i) =>
                             <li key={i+"bus"}>
@@ -101,7 +107,7 @@ export default function ViewTogetherPage({user, friend, setGenre}){
                 </section>
                 <section>
                     <h2>Utforsk!</h2>
-                    <p>Dere liker begge disse sjangerne, sjekk hvilke filmer som finnes å velge mellom:</p>
+                    {sharedGenres?.sharedGenres?.length > 0 ? <p>Dere liker begge disse sjangerne, sjekk hvilke filmer som finnes å velge mellom:</p> : <p>Dere har ingen sjangere til felles.</p>}
                     <ul>
                         {sharedGenres?.sharedGenres?.map((item, i) =>
                             <li key={i+"car"}>
