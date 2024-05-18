@@ -20,6 +20,14 @@ export async function getMovies(url, options) {
   }
 }
 
+export const options = {
+  method: 'GET',
+  headers: {
+    'X-RapidAPI-Key': 'ad97b2da57mshea14e44c7ca71c2p19c8c9jsn525facd6154e',
+    'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
+  }
+};
+
 function App() {
 
 const [user, setUser] = useState(null)
@@ -28,28 +36,15 @@ const [movies, setMovies] = useState (null)
 const [genre, setGenre] = useState (null)
 const [userList, setUserList] = useState(null)
 
-
-
-
-// Endre til parameter Movie with: id, title, imdb, moviecover
-// const url = `https://moviesdatabase.p.rapidapi.com/titles?info=base_info&genre&limit`;
+// const url = `https://moviesdatabase.p.rapidapi.com/titles?info=base_info&genre&limit`;  Alle Filmer
 // const urlSearch = `https://moviesdatabase.p.rapidapi.com/titles/search/akas/${keyword}?info=base_info`;  URL FOR SEARCH FUNCTION
 // const urlGenre = `https://moviesdatabase.p.rapidapi.com/titles?info=base_info&genre=${genre}`; FILM SØK PÅ SJANGER
 // const urlMovies = `https://moviesdatabase.p.rapidapi.com/titles/x/titles-by-ids?idsList=${user.favorites}&info=base_info`;  @@ Må % mellom id i listen @@ SØK FLERE FILMERS ID
 const urlAllMovies = `https://moviesdatabase.p.rapidapi.com/titles?info=base_info`;
-  const options = {
-    method: 'GET',
-    headers: {
-      'X-RapidAPI-Key': 'ad97b2da57mshea14e44c7ca71c2p19c8c9jsn525facd6154e',
-      'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
-    }
-};
-
 
 const getAllUsers = async () => {
   const data = await fetchAllUsers()
   setUserList(data)
-  console.log("userdata:", data)
 }
 
 useEffect(() => {
@@ -57,18 +52,17 @@ useEffect(() => {
   getAllUsers()
 },[])
 
-  return (
+  return (<>
     <Layout user={user} setUser={setUser} userList={userList}>
       <Routes>
-            <Route path="/login" element={<LoginPage userList={userList} />}/>
-            <Route path="/home" element={<HomePage movielist={movies} /*title={query}*/ user={user} userList={userList} friend={friend} setFriend={setFriend} />}/>
-            <Route path="/genre" element={<Genre setGenre={setGenre} user={user} genre={genre} />}/>
+            <Route path="/login" element={<LoginPage setUser={setUser} userList={userList} />}/>
+            <Route path="/home" element={<HomePage movielist={movies} setUser={setUser} user={user} userList={userList} friend={friend} setFriend={setFriend} />}/>
+            <Route path="/genres" element={<Genre setGenre={setGenre} user={user} genre={genre} />}/>
             <Route path="/genrepage" element={<GenrePage user={user} genre={genre} movielist={movies} setMovies={setMovies} />}/>
             <Route path="/viewtogether" element={<ViewTogetherPage user={user} friend={friend} setGenre={setGenre}/>}/>
         </Routes>
     </Layout>
-    // {/* {!logedIn ? <Navigate to="login" replace/> : <Navigate to="/" replace />} */}
-  
+  </>
   )
 }
 
