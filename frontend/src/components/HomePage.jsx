@@ -4,11 +4,10 @@ import MovieCard from "./MovieCard";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react"; 
 import { getMovies } from "../App";
-import { Link } from "react-router-dom";
 import { fetchWishlistForUsers, fetchFavoritesForUsers} from "../../services/userServices";
 
 
-export default function HomePage({user, friend, setFriend, movielist, userList/*, title*/}){
+export default function HomePage({user, userList/*, title*/}){
 
     // En konstant som holder på alle filmer
     // const movieWishList = movielist?.docs;
@@ -16,7 +15,7 @@ export default function HomePage({user, friend, setFriend, movielist, userList/*
 
     const otherUsers = userList.filter(friends => friends !== user)
     const redirectToViewTogetherPage = useNavigate();
-    const movieWishList = movielist;
+
     const [userWishlist, setUserWishlist] = useState(null)
     const [wishlist, setWishlist] = useState(null)
     const [wishlistIds, setWishlistIds] = useState("")
