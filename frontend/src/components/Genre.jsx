@@ -5,7 +5,7 @@ import { addFavoriteGenre, fetchUser, removeFavoriteGenre } from "../../services
 import { FaRegStar } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
 
-export default function Genre({genre, setGenre}) {
+export default function Genre({setGenre}) {
 
     const currentUser = fetchUser(localStorage.getItem("username"));
     // localStorage.setItem("genre", genre)

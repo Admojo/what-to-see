@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import MovieCard from "./MovieCard";
 import { options } from "../App";
 
-export default function GenrePage({user, genre, movielist, setMovies}){
+export default function GenrePage({genre, movielist, setMovies}){
 
 
     const localgenre = localStorage.getItem("genre", genre)
