@@ -7,6 +7,7 @@ export async function fetchAllUsers(){
         name,
         genrelist,
         wishlist,
+        favorites
     }
     `)
     return data
@@ -18,7 +19,8 @@ export async function fetchUser(username){
         _type,
         name,
         genrelist,
-        wishlist
+        wishlist,
+        favorites
     }
     `)
     return data
@@ -71,7 +73,7 @@ export async function fetchGenresForUsers(user1, user2) {
     return data
 }
 
-export async function fetchMoviesForUsers(user1, user2) {
+export async function fetchWishlistForUsers(user1, user2) {
     const query = `{
         "user1movies": *[_type == "users" && name == $user1][0].wishlist,
         "user2movies": *[_type == "users" && name == $user2][0].wishlist,
@@ -80,30 +82,21 @@ export async function fetchMoviesForUsers(user1, user2) {
         }[0].wishlist[(@ in *[_type == "users" && name == $user1][0].wishlist) && (@ in *[_type == "users" && name == $user2][0].wishlist)]    
     }`;
 
-    const params = { user1, user2 };
+    const params = { user1, user2};
     const data = await client.fetch(query, params)
     return data
 }
 
+export async function fetchFavoritesForUsers(user1, user2) {
+    const query = `{
+        "user1movies": *[_type == "users" && name == $user1][0].favorites,
+        "user2movies": *[_type == "users" && name == $user2][0].favorites,
+        "sharedMovies": *[_type == "users" && name in [$user1, $user2]] {
+            favorites
+        }[0].favorites[(@ in *[_type == "users" && name == $user1][0].favorites) && (@ in *[_type == "users" && name == $user2][0].favorites)]    
+    }`;
 
-// // Hente favoritt-sjanger for to brukere
-// export async function fetchFavoriteGenresForTwoUsers(userOne, userTwo) {
-
-//     // Sende inn to user.id som input
-//     const data = await client.fetch(`*[_type == "users" && id == ${userOne}] {
-//         id,
-//         genrelist[]->,
-//         "Felles sjangere": *[_type == "users" && id == ${userTwo}].genrelist
-//     }`)
-// }
-
-// TESTING: Hente favoritt-sjanger for to brukere
-// export async function fetchFavoriteGenresForTwoUsersStatic() {
-
-//     // Sende inn to user.id som input
-//     const data = await client.fetch(`*[_type == "users" && name] {
-//         id,
-//         genrelist[]->,
-//         "Felles sjangere": *[_type == "users" && id == ${userTwo}].genrelist
-//     }`)
-// }
+    const params = { user1, user2};
+    const data = await client.fetch(query, params)
+    return data
+}

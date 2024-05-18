@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { fetchGenresForUsers, fetchMoviesForUsers } from "../../services/userServices";
+import { fetchGenresForUsers, fetchWishlistForUsers, fetchFavoritesForUsers} from "../../services/userServices";
 import MovieCard from "./MovieCard";
 import { useState, useEffect } from "react"; 
 import { getMovies } from "../App";
@@ -7,10 +7,14 @@ import { getMovies } from "../App";
 export default function ViewTogetherPage({user, friend, setGenre}){
 
     const [sharedGenres, setSharedGenres] = useState(null)
-    const [usersMovies, setUsersMovies] = useState(null)
-    const [sharedMovies, setSharedMovies] = useState(null)
-    const [sharedMoviesIds, setSharedMoviesIds] = useState("")
-    const [sharedMoviesUrl, setSharedMoviesUrl] = useState(null)
+    const [usersWishlist, setUsersWishlist] = useState(null)
+    const [sharedWishlist, setSharedWishlist] = useState(null)
+    const [sharedWishlistIds, setSharedWishlistIds] = useState("")
+    const [sharedWishlistUrl, setSharedWishlistUrl] = useState(null)
+    const [usersFavorites, setUsersFavorites] = useState(null)
+    const [sharedFavorites, setSharedFavorites] = useState(null)
+    const [sharedFavoritesIds, setSharedFavoritesIds] = useState("")
+    const [sharedFavoritesUrl, setSharedFavoritesUrl] = useState(null)
 
 
     const options = {
@@ -26,48 +30,58 @@ export default function ViewTogetherPage({user, friend, setGenre}){
         const getGeneresAndMovies = async () => {
             const genresData = await fetchGenresForUsers(user.name, friend.name);
             setSharedGenres(genresData);
-            const Moviesdata = await fetchMoviesForUsers(user.name, friend.name);
-            setUsersMovies(Moviesdata);
+            const Wishlistdata = await fetchWishlistForUsers(user.name, friend.name);
+            setUsersWishlist(Wishlistdata);
+            const Favoritesdata = await fetchFavoritesForUsers(user.name, friend.name);
+            setUsersFavorites(Favoritesdata);
           };
           getGeneresAndMovies()
     },[user, friend])
 
     useEffect(() => {
-        if (usersMovies?.sharedMovies) {
-            const ids = usersMovies.sharedMovies.join(",");
-            setSharedMoviesIds(ids);
+        if (usersWishlist?.sharedMovies && usersFavorites?.sharedMovies) {
+            const wishlistIds = usersWishlist.sharedMovies.join(",");
+            const favoritesIds = usersFavorites.sharedMovies.join(",");
+            setSharedWishlistIds(wishlistIds);
+            setSharedFavoritesIds(favoritesIds);
         }
-    }, [usersMovies]);
+    }, [usersWishlist, usersFavorites]);
 
     useEffect(() => {
-        if (sharedMoviesIds) {
-            const url = `https://moviesdatabase.p.rapidapi.com/titles/x/titles-by-ids?idsList=${sharedMoviesIds}&info=base_info`;
-            setSharedMoviesUrl(url);
+        if (sharedWishlistIds && sharedFavoritesIds) {
+            const wishlistUrl = `https://moviesdatabase.p.rapidapi.com/titles/x/titles-by-ids?idsList=${sharedWishlistIds}&info=base_info`;
+            const favoritesUrl = `https://moviesdatabase.p.rapidapi.com/titles/x/titles-by-ids?idsList=${sharedFavoritesIds}&info=base_info`;
+            setSharedWishlistUrl(wishlistUrl);
+            setSharedFavoritesUrl(favoritesUrl);
         }
-    }, [sharedMoviesIds]);
+    }, [sharedWishlistIds, sharedFavoritesIds]);
 
     useEffect(() => {
         const fetchMoviesDetails = async () => {
-            if (sharedMoviesUrl) {
-                const movies = await getMovies(sharedMoviesUrl, options);
-                setSharedMovies(movies);
+            if (sharedWishlistUrl && sharedFavoritesUrl) {
+                const wishlist = await getMovies(sharedWishlistUrl, options);
+                const favorites = await getMovies(sharedFavoritesUrl, options);
+                setSharedWishlist(wishlist);
+                setSharedFavorites(favorites)
             }
         };
 
         fetchMoviesDetails();
-    }, [sharedMoviesUrl]);
+    }, [sharedWishlistUrl, sharedFavoritesUrl]);
 
-    console.log("SHARED MOVIES", sharedMovies)
-    console.log("URL", sharedMoviesUrl)
+    console.log("SHARED Wishlist", sharedWishlist)
+    console.log("SHARED Favorites", sharedFavorites)
+    console.log("Wish URL", sharedWishlistUrl)
+    console.log("Fav URL", sharedFavoritesUrl)
     return (
         <>
             <h1>Forslag for {user.name} og {friend.name}</h1>
             <div>
                 <section id="moviesWatchLaterSection">
                     <h2>Catch up!</h2>
-                    <p>Dere har {sharedMovies?.entries} filmer felles i ønskelisten deres.</p>
+                    <p>Dere har {sharedWishlist?.entries} filmer felles i ønskelisten deres.</p>
                     <ul>
-                        {sharedMovies?.results?.map((movie, i) =>
+                        {sharedWishlist?.results?.map((movie, i) =>
                             <li key={i+"bus"}>
                                 <MovieCard key={i+"yes"} imdb={movie.id} title={movie.titleText.text} image={movie.primaryImage?.url}/>
                             </li>
@@ -76,34 +90,14 @@ export default function ViewTogetherPage({user, friend, setGenre}){
                 </section>
                 <section id="wishlistSection">
                     <h2>Go safe!</h2>
-                    <p>Dere har ANTALL filmer felles i favorittlisten deres.</p>
+                    <p>Dere har {sharedFavorites?.entries} filmer felles i favorittlisten deres.</p>
                     <ul>
-                        <li>
-                            <MovieCard />
-                        </li>
-                        <li>
-                            <MovieCard />
-                        </li>
-                        <li>
-                            <MovieCard />
-                        </li>
-                        <li>
-                            <MovieCard />
-                        </li>
-                        <li>
-                            <MovieCard />
-                        </li>
-                    </ul>
-                    {/* <span className='movie-card-wrapper'>
-                        {movieWishList?.map((movie, id) =>
-                        <li key={id}>
-                            <MovieCard key={movie?.id} 
-                            title={movie?.title} 
-                            imdb={movie?.imdb} 
-                            moviecover={movie?.moviecover} />
-                        </li>
+                        {sharedFavorites?.results?.map((movie, i) =>
+                            <li key={i+"bus"}>
+                                <MovieCard key={i+"yes"} imdb={movie.id} title={movie.titleText.text} image={movie.primaryImage?.url}/>
+                            </li>
                         )}
-                    </span> */}
+                    </ul>
                 </section>
                 <section>
                     <h2>Utforsk!</h2>
