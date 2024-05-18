@@ -6,7 +6,7 @@ import Genre from './components/Genre';
 import { Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import GenrePage from './components/GenrePage';
-import { fetchAllUsers } from "../services/userServices"
+import { fetchAllUsers, fetchUser } from "../services/userServices"
 import ViewTogetherPage from './components/ViewTogetherPage';
 
 export async function getMovies(url, options) {
@@ -30,40 +30,43 @@ export const options = {
 
 function App() {
 
-const [user, setUser] = useState(null)
-const [friend, setFriend] = useState(null)
-const [movies, setMovies] = useState (null)
-const [genre, setGenre] = useState (null)
-const [userList, setUserList] = useState(null)
+  const currentUserName = localStorage.getItem("username");
+  const currentUser = fetchUser(currentUserName);
 
-// const url = `https://moviesdatabase.p.rapidapi.com/titles?info=base_info&genre&limit`;  Alle Filmer
-// const urlSearch = `https://moviesdatabase.p.rapidapi.com/titles/search/akas/${keyword}?info=base_info`;  URL FOR SEARCH FUNCTION
-// const urlGenre = `https://moviesdatabase.p.rapidapi.com/titles?info=base_info&genre=${genre}`; FILM SØK PÅ SJANGER
-// const urlMovies = `https://moviesdatabase.p.rapidapi.com/titles/x/titles-by-ids?idsList=${user.favorites}&info=base_info`;  @@ Må % mellom id i listen @@ SØK FLERE FILMERS ID
-const urlAllMovies = `https://moviesdatabase.p.rapidapi.com/titles?info=base_info`;
+  const [user, setUser] = useState(currentUser)
+  const [friend, setFriend] = useState(null)
+  const [movies, setMovies] = useState (null)
+  const [genre, setGenre] = useState (null)
+  const [userList, setUserList] = useState(null)
 
-const getAllUsers = async () => {
-  const data = await fetchAllUsers()
-  setUserList(data)
-}
+  // const url = `https://moviesdatabase.p.rapidapi.com/titles?info=base_info&genre&limit`;  Alle Filmer
+  // const urlSearch = `https://moviesdatabase.p.rapidapi.com/titles/search/akas/${keyword}?info=base_info`;  URL FOR SEARCH FUNCTION
+  // const urlGenre = `https://moviesdatabase.p.rapidapi.com/titles?info=base_info&genre=${genre}`; FILM SØK PÅ SJANGER
+  // const urlMovies = `https://moviesdatabase.p.rapidapi.com/titles/x/titles-by-ids?idsList=${user.favorites}&info=base_info`;  @@ Må % mellom id i listen @@ SØK FLERE FILMERS ID
+  const urlAllMovies = `https://moviesdatabase.p.rapidapi.com/titles?info=base_info`;
 
-useEffect(() => {
-  setMovies(getMovies(urlAllMovies, options))
-  getAllUsers()
-},[])
+  const getAllUsers = async () => {
+    const data = await fetchAllUsers()
+    setUserList(data)
+  }
 
-  return (<>
-    <Layout user={user} setUser={setUser} userList={userList}>
-      <Routes>
-            <Route path="/login" element={<LoginPage setUser={setUser} userList={userList} />}/>
-            <Route path="/home" element={<HomePage movielist={movies} setUser={setUser} user={user} userList={userList} friend={friend} setFriend={setFriend} />}/>
-            <Route path="/genres" element={<Genre setGenre={setGenre} user={user} genre={genre} />}/>
-            <Route path="/genrepage" element={<GenrePage user={user} genre={genre} movielist={movies} setMovies={setMovies} />}/>
-            <Route path="/viewtogether" element={<ViewTogetherPage user={user} friend={friend} setGenre={setGenre}/>}/>
-        </Routes>
-    </Layout>
-  </>
-  )
+  useEffect(() => {
+    setMovies(getMovies(urlAllMovies, options))
+    getAllUsers()
+  },[])
+
+    return (<>
+      <Layout user={user} setUser={setUser} userList={userList}>
+        <Routes>
+              <Route path="/login" element={<LoginPage setUser={setUser} userList={userList} />}/>
+              <Route path="/home" element={<HomePage movielist={movies} setUser={setUser} user={user} userList={userList} friend={friend} setFriend={setFriend} />}/>
+              <Route path="/genres" element={<Genre setGenre={setGenre} user={user} genre={genre} />}/>
+              <Route path="/genrepage" element={<GenrePage user={user} genre={genre} movielist={movies} setMovies={setMovies} />}/>
+              <Route path="/viewtogether" element={<ViewTogetherPage user={user} friend={friend} setGenre={setGenre}/>}/>
+          </Routes>
+      </Layout>
+    </>
+    )
 }
 
 export default App 
