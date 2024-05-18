@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700&display=swap');
 header {
+    #noNavbar {
+        position: absolute;
+        left: 300000px;
+        background-color: aqua;
+    }
     nav {
         display: flex;
         flex-wrap: wrap;
