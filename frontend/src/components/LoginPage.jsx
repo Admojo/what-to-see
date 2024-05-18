@@ -1,7 +1,19 @@
 import { useNavigate } from 'react-router-dom'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { fetchAllUsers } from '../../services/userServices';
 
-export default function LoginPage({setUser, userList}) {
+export default function LoginPage({setUser}) {
+
+    const [userList, setUserList] = useState(null)
+
+    const getAllUsers = async () => {
+        const data = await fetchAllUsers()
+        setUserList(data)
+      }
+      
+      useEffect(() => {
+        getAllUsers()
+      },[])
 
     const redirectToHomepage = useNavigate();
 
