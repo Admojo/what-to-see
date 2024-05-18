@@ -83,7 +83,7 @@ export default function ViewTogetherPage({user, friend, setGenre}){
                     <ul>
                         {sharedWishlist?.results?.map((movie, i) =>
                             <li key={i+"bus"}>
-                                <MovieCard key={i+"yes"} imdb={movie.id} title={movie.titleText.text} image={movie.primaryImage?.url}/>
+                                <MovieCard key={i+"yes"} imdb={movie.id} title={movie.originalTitleText.text} image={movie.primaryImage?.url}/>
                             </li>
                         )}
                     </ul>
@@ -94,7 +94,7 @@ export default function ViewTogetherPage({user, friend, setGenre}){
                     <ul>
                         {sharedFavorites?.results?.map((movie, i) =>
                             <li key={i+"bus"}>
-                                <MovieCard key={i+"yes"} imdb={movie.id} title={movie.titleText.text} image={movie.primaryImage?.url}/>
+                                <MovieCard key={i+"yes"} imdb={movie.id} title={movie.originalTitleText.text} image={movie.primaryImage?.url}/>
                             </li>
                         )}
                     </ul>
