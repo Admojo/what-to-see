@@ -1,26 +1,24 @@
 import Nav from "./Nav"
-import LoginPage from "./LoginPage"
 
-export default function Layout({children, user, setUser, userList}){
+export default function Layout({children}){
 
-    if (user != null) {
+    const currentUsername = localStorage.getItem("username")
+
         return(
-        <>
+        <> {currentUsername ? (
             <header>
-                <Nav user={user}></Nav>
+                <Nav />
             </header>
+        ) : (
+            <header id="noNavBar">
+                <Nav />
+            </header>
+        )}
             <main>
                 {children}
             </main>
-            {/* <footer> Copyright Gruppe 4 - 2024 </footer> */}
-        </>
-        )
-    }
-    else {
-        return(
-            <main>
-                <LoginPage setUser={setUser} userList={userList}/>
-            </main>
-        )
-    }
+            <footer>
+                <p>WhatToSee © 2024</p>
+            </footer>
+        </>)
 }
