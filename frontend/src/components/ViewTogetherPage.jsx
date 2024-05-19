@@ -3,6 +3,7 @@ import { fetchGenresForUsers, fetchWishlistForUsers, fetchFavoritesForUsers} fro
 import MovieCard from "./MovieCard";
 import { useState, useEffect } from "react"; 
 import { getMovies, options } from "../App";
+import WishlistAndFavorites from "./WishlistAndFavorites";
 
 export default function ViewTogetherPage({user, friend, setGenre}){
 
@@ -107,6 +108,7 @@ export default function ViewTogetherPage({user, friend, setGenre}){
                     </ul>
                 </section>
             </div>
+            <WishlistAndFavorites/>
         </>
     ) 
 }
