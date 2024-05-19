@@ -12,6 +12,7 @@ export default function Nav() {
         // fant løsningen på stackowerflow: https://stackoverflow.com/questions/41481522/how-to-refresh-a-page-using-react-route-link
         localStorage.clear()
         //window.location.reload();
+        localStorage.clear();
     }
     return(
     <nav>
