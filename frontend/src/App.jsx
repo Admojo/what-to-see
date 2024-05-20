@@ -9,6 +9,27 @@ import GenrePage from './components/GenrePage';
 import { fetchAllUsers, fetchUser } from "../services/userServices"
 import ViewTogetherPage from './components/ViewTogetherPage';
 
+export async function getUser() {
+  const currentUserName = localStorage.getItem("username");
+  if (currentUserName !== null){
+    const user = (currentUserName !== null ? await fetchUser(currentUserName) : null)
+    return user
+  }
+  else {
+    return null
+  }
+}
+
+export async function getAllUsers () {
+  const userlist = await fetchAllUsers()
+  try {
+    return userlist
+  }
+  catch (error) {
+    console.error(error)
+  }
+}
+
 export async function getMovies(url, options) {
   try {
     const response = await fetch(url, options);
@@ -55,18 +76,18 @@ const urlAllMovies = `https://moviesdatabase.p.rapidapi.com/titles?info=base_inf
     getAllUsers()
   },[])
 
-  return (<>
-    <Layout>
-      <Routes>
-            <Route path="/login" element={<LoginPage setUser={setUser} />}/>
-            <Route path="/home" element={<HomePage movielist={movies} setUser={setUser} user={user} userList={userList} friend={friend} setFriend={setFriend} />}/>
-            <Route path="/genres" element={<Genre setGenre={setGenre} />}/>
-            <Route path="/genrepage" element={<GenrePage genre={genre} movielist={movies} setMovies={setMovies} />}/>
-            <Route path="/viewtogether" element={<ViewTogetherPage user={user} friend={friend} setGenre={setGenre}/>}/>
-        </Routes>
-    </Layout>
-  </>
-  )
+    return (<>
+      <Layout>
+        <Routes>
+              <Route path="/login" element={<LoginPage setUser={setUser} userList={userList} setUserList={setUserList} />}/>
+              <Route path="/home" element={<HomePage movielist={movies} setUser={setUser} user={user} userList={userList} setUserList={setUserList} friend={friend} setFriend={setFriend} />}/>
+              <Route path="/genres" element={<Genre setGenre={setGenre} user={user} genre={genre} />}/>
+              <Route path="/genrepage" element={<GenrePage user={user} genre={genre} movielist={movies} setMovies={setMovies} />}/>
+              <Route path="/viewtogether" element={<ViewTogetherPage user={user} friend={friend} setGenre={setGenre}/>}/>
+          </Routes>
+      </Layout>
+    </>
+    )
 }
 
 export default App 
