@@ -50,11 +50,17 @@ const urlAllMovies = `https://moviesdatabase.p.rapidapi.com/titles?info=base_inf
     setUserList(data)
   }
 
+  const getAllUsers = async () => {
+    const data = await fetchAllUsers()
+    setUserList(data)
+  }
+
   useEffect(() => {
     setMovies(getMovies(urlAllMovies, options))
     getAllUsers()
   },[])
 
+<<<<<<< HEAD
   return (<>
     <Layout>
       <Routes>
@@ -67,6 +73,20 @@ const urlAllMovies = `https://moviesdatabase.p.rapidapi.com/titles?info=base_inf
     </Layout>
   </>
   )
+=======
+    return (<>
+      <Layout user={user} setUser={setUser} userList={userList}>
+        <Routes>
+              <Route path="/login" element={<LoginPage setUser={setUser} userList={userList} />}/>
+              <Route path="/home" element={<HomePage movielist={movies} setUser={setUser} user={user} userList={userList} friend={friend} setFriend={setFriend} />}/>
+              <Route path="/genres" element={<Genre setGenre={setGenre} user={user} genre={genre} />}/>
+              <Route path="/genrepage" element={<GenrePage user={user} genre={genre} movielist={movies} setMovies={setMovies} />}/>
+              <Route path="/viewtogether" element={<ViewTogetherPage user={user} friend={friend} setGenre={setGenre}/>}/>
+          </Routes>
+      </Layout>
+    </>
+    )
+>>>>>>> parent of a8afab0 (videre jobbing med local storage)
 }
 
 export default App 

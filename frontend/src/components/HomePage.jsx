@@ -9,7 +9,11 @@ import { fetchWishlistForUsers, fetchFavoritesForUsers} from "../../services/use
 
 export default function HomePage({user, setFriend, userList}){
 
+<<<<<<< HEAD
     const otherUsers = userList.filter(friends => friends.name !== user.name)
+=======
+    const otherUsers = userList.filter(friends => friends !== user)
+>>>>>>> parent of a8afab0 (videre jobbing med local storage)
     const redirectToViewTogetherPage = useNavigate();
     const [userWishlist, setUserWishlist] = useState(null)
     const [wishlist, setWishlist] = useState(null)
