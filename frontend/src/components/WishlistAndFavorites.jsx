@@ -72,7 +72,8 @@ export default function WishlistAndFavorites({user, friend}){
         //     console.log("Celco Borges",sharedWishlist)
         //     result = [...sharedWishlist]
         // }
-
+        console.log("Hans Erik Ramberg",sharedFavorites)
+        console.log("Celco Borges",sharedWishlist)
         const tmp = {...sharedWishlist, ...sharedFavorites};
         console.log("tmp",tmp)
         setFinalResult(tmp);
