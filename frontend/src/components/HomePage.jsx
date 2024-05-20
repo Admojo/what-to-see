@@ -3,13 +3,17 @@ import { VscSmiley } from "react-icons/vsc";
 import MovieCard from "./MovieCard";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react"; 
-import { getAllUsers, getMovies, options } from "../App";
+import { getMovies, options } from "../App";
 import { fetchWishlistForUsers, fetchFavoritesForUsers} from "../../services/userServices";
 
 
-export default function HomePage({user, userList, setFriend}){
+export default function HomePage({user, setFriend, userList}){
 
+<<<<<<< HEAD
     const otherUsers = userList.filter(friends => friends.name !== user.name)
+=======
+    const otherUsers = userList.filter(friends => friends !== user)
+>>>>>>> parent of a8afab0 (videre jobbing med local storage)
     const redirectToViewTogetherPage = useNavigate();
     const [userWishlist, setUserWishlist] = useState(null)
     const [wishlist, setWishlist] = useState(null)
@@ -21,16 +25,6 @@ export default function HomePage({user, userList, setFriend}){
     const [favoritesUrl, setFavoritesUrl] = useState(null)
 
     useEffect(() => {
-        const getUserlist = async () => {
-            const data = await getAllUsers()
-            const otherUsersList = data.filter(friends => friends !== user)
-            setOtherUsers(otherUsersList)
-        }
-        getUserlist()
-        console.log("OTHER USERS HOME LOAD", otherUsers)
-    },[user])
-
-    useEffect(() => {
         const getMovies = async () => {
             const Wishlistdata = await fetchWishlistForUsers(user.name, user.name);
             setUserWishlist(Wishlistdata);
@@ -39,10 +33,6 @@ export default function HomePage({user, userList, setFriend}){
           };
           getMovies()
     },[user])
-
-    useEffect(() => {
-        
-    })
 
     useEffect(() => {
         if (userWishlist?.user1movies) {
@@ -85,8 +75,7 @@ export default function HomePage({user, userList, setFriend}){
         setFriend(user)
         redirectToViewTogetherPage("/viewtogether")
     }
-
-    console.log("USERLIST HOMEPAGEEE BOTTOM:", userList, typeof userList)
+ // tt0222518, tt0237765, tt0230804, tt0388629
     return (
         <>
             <h1>Hei, {user.name}</h1>

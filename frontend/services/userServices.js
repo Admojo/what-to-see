@@ -22,7 +22,7 @@ export async function fetchUser(username){
         wishlist,
         favorites
     }
-    `, [username])
+    `)
     return data
 }
 
