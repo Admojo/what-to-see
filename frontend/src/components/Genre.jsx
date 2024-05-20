@@ -1,25 +1,13 @@
 import { Link } from "react-router-dom"
 import { fetchAllGenres } from "../../services/genreServices"
 import { useState, useEffect } from "react"
-import { addFavoriteGenre, fetchUser, removeFavoriteGenre } from "../../services/userServices"
+import { addFavoriteGenre, removeFavoriteGenre } from "../../services/userServices"
 import { FaRegStar } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
 
 export default function Genre({user, setUser, setGenre}) {
 
-    const [genreList, setGenrelist] = useState([])
-    const [userGenreList, setUserGenreList] = useState([])
-    useEffect(() => {
-        async function fetchUserData() {
-            const currentUserName = localStorage.getItem("username");
-            if (currentUserName){
-                const currentuser = await fetchUser(currentUserName)
-                setUser(currentuser)
-                setUserGenreList(currentuser.genrelist || [])}
-            }
-            fetchUserData()
-    },[])
-
+    const [genreList, setGenrelist] = useState(user.genrelist)
 
     const getAllGenres = async () => {
         const data = await fetchAllGenres()
@@ -65,8 +53,6 @@ export default function Genre({user, setUser, setGenre}) {
         localStorage.setItem("genre", genre)
     }
         
-
-    
     return (
         <>
             <h1>Sjangere</h1>

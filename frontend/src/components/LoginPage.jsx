@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { fetchAllUsers } from '../../services/userServices';
 
 export default function LoginPage({setUser, userList, setUserList}) {

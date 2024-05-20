@@ -1,9 +1,4 @@
-
 export default function MovieCardTest (index, titleSanity) {
-
-
-
-
     return (
         <> 
             <article className="movieCard">

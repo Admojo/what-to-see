@@ -104,7 +104,7 @@ export default function HomePage({user, setUser, setFriend, userList, setUserLis
             <h1>Hei, {user[0]?.name}</h1>
             <div>
                 <section id="moviesWatchLaterSection">
-                    <h2><FaStar /> Filmer jeg skal se!</h2>
+                    <h2><FaStar /> Mine favoritter:</h2>
                     <ul>
                         {favorites?.results ?
                         favorites?.results?.map((movie, i) =>
@@ -115,7 +115,7 @@ export default function HomePage({user, setUser, setFriend, userList, setUserLis
                     </ul>
                 </section>
                 <section id="wishlistSection">
-                    <h2> Filmer i min ønskeliste </h2>
+                    <h2> Min ønskeliste: </h2>
                     <ul>
                         {wishlist?.results?.map((movie, i) =>
                             <li key={i+"bus"}>

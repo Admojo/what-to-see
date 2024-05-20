@@ -89,26 +89,16 @@ export default function ViewTogetherPage({user, setUser, friend, setFriend, setG
         fetchMoviesDetails();
     }, [sharedWishlistUrl, sharedFavoritesUrl]);
 
-    // console.log("SHARED Wishlist", sharedWishlist)
-    // console.log("SHARED Favorites", sharedFavorites)
-    // console.log("Wish URL", sharedWishlistUrl)
-    // console.log("Fav URL", sharedFavoritesUrl)
+    const handleGenreClicked = (genre) => {
+        setGenre(genre)
+        localStorage.setItem("genre", genre)
+    }
+
     return (
         <>
             <h1>Forslag for {user[0]?.name} og {friend[0]?.name}</h1>
             <div>
-                <section id="moviesWatchLaterSection">
-                    <h2>Catch up!</h2>
-                    {sharedWishlist ? <p>Dere har {sharedWishlist?.entries} filmer felles i ønskelisten deres.</p> : <p>Dere har ingen filmer til felles i ønskelisten deres.</p>}
-                    <ul>
-                        {sharedWishlist?.results?.map((movie, i) =>
-                            <li key={i+"bus"}>
-                                <MovieCard key={i+"yes"} imdb={movie.id} title={movie.originalTitleText.text} image={movie.primaryImage?.url}/>
-                            </li>
-                        )}
-                    </ul>
-                </section>
-                <section id="wishlistSection">
+            <section id="moviesWatchLaterSection">
                     <h2>Go safe!</h2>
                     {sharedFavorites ? <p>Dere har {sharedFavorites?.entries} filmer felles i favorittlisten deres.</p> : <p>Dere har ingen filmer til felles i favorittlisten deres.</p>}
                     <ul>
@@ -119,13 +109,24 @@ export default function ViewTogetherPage({user, setUser, friend, setFriend, setG
                         )}
                     </ul>
                 </section>
-                <section>
+                <section id="wishlistSection">
+                    <h2>Catch up!</h2>
+                    {sharedWishlist ? <p>Dere har {sharedWishlist?.entries} filmer felles i ønskelisten deres.</p> : <p>Dere har ingen filmer til felles i ønskelisten deres.</p>}
+                    <ul>
+                        {sharedWishlist?.results?.map((movie, i) =>
+                            <li key={i+"bus"}>
+                                <MovieCard key={i+"yes"} imdb={movie.id} title={movie.originalTitleText.text} image={movie.primaryImage?.url}/>
+                            </li>
+                        )}
+                    </ul>
+                </section>
+                <section id="exploresection">
                     <h2>Utforsk!</h2>
                     {sharedGenres?.sharedGenres?.length > 0 ? <p>Dere liker begge disse sjangerne, sjekk hvilke filmer som finnes å velge mellom:</p> : <p>Dere har ingen sjangere til felles.</p>}
                     <ul>
                         {sharedGenres?.sharedGenres?.map((item, i) =>
                             <li key={i+"car"}>
-                                <Link to="/genrepage" onClick={()=> setGenre(item)}>{item}</Link>
+                                <Link to="/genrepage" onClick={()=> handleGenreClicked(item)}>{item}</Link>
                             </li>
                         )}
                     </ul>
