@@ -97,7 +97,7 @@ export default function ViewTogetherPage({user, friend, setGenre}){
                         )}
                     </ul>
                 </section>
-                <section>
+                <section id="exploresection">
                     <h2>Utforsk!</h2>
                     {sharedGenres?.sharedGenres?.length > 0 ? <p>Dere liker begge disse sjangerne, sjekk hvilke filmer som finnes å velge mellom:</p> : <p>Dere har ingen sjangere til felles.</p>}
                     <ul>
