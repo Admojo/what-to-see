@@ -7,8 +7,6 @@ import { FaStar } from "react-icons/fa";
 
 export default function Genre({user, setGenre}) {
 
-    // const currentUser = fetchUser(localStorage.getItem("username"));
-    // localStorage.setItem("genre", genre)
     const [genreList, setGenrelist] = useState(user.genrelist)
 
     const getAllGenres = async () => {
@@ -24,7 +22,6 @@ export default function Genre({user, setGenre}) {
     }
     const handleClick = async (genre) => {
         const result = await addFavoriteGenre(user._id, genre)
-        console.log("result", result)
         if (result === "Success") {
             user.genreList.push(genre)
         }

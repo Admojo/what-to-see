@@ -65,26 +65,15 @@ export default function WishlistAndFavorites({user, friend}){
     useEffect(()=> {
         let result = {};
         // if (sharedFavorites != null) {
-        //     console.log("Hans Erik Ramberg",sharedFavorites)
         //     result = [...sharedFavorites]
         // }
         // if (sharedWishlist != null) {
-        //     console.log("Celco Borges",sharedWishlist)
         //     result = [...sharedWishlist]
         // }
-        console.log("Hans Erik Ramberg",sharedFavorites)
-        console.log("Celco Borges",sharedWishlist)
         const tmp = {...sharedWishlist, ...sharedFavorites};
-        console.log("tmp",tmp)
         setFinalResult(tmp);
     },[sharedFavorites, sharedWishlist])
     
-
-    // console.log("SHARED Wishlist", sharedWishlist)
-    // console.log("SHARED Favorites", sharedFavorites)
-    // console.log("Wish URL", sharedWishlistUrl)
-    // console.log("Fav URL", sharedFavoritesUrl)
-    console.log("FINAL RESULT @@@@@@@@@@@@@",finalResult);
     return(
         <>
         <section id="wishlistAndFavoritesSection">

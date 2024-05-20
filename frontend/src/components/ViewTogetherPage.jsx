@@ -66,10 +66,6 @@ export default function ViewTogetherPage({user, friend, setGenre}){
         fetchMoviesDetails();
     }, [sharedWishlistUrl, sharedFavoritesUrl]);
 
-    // console.log("SHARED Wishlist", sharedWishlist)
-    // console.log("SHARED Favorites", sharedFavorites)
-    // console.log("Wish URL", sharedWishlistUrl)
-    // console.log("Fav URL", sharedFavoritesUrl)
     return (
         <>
             <h1>Forslag for {user.name} og {friend.name}</h1>
