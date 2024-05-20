@@ -3,14 +3,13 @@ import { VscSmiley } from "react-icons/vsc";
 import MovieCard from "./MovieCard";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react"; 
-import { getAllUsers, getMovies, options, getUser } from "../App";
+import { getMovies, options } from "../App";
 import { fetchWishlistForUsers, fetchFavoritesForUsers} from "../../services/userServices";
 
 
 export default function HomePage({user, setFriend, userList}){
 
     const otherUsers = userList.filter(friends => friends.name !== user.name)
-    //const [otherUsers, setOtherUsers] = useState([])
     const redirectToViewTogetherPage = useNavigate();
     const [userWishlist, setUserWishlist] = useState(null)
     const [wishlist, setWishlist] = useState(null)

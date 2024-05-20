@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { fetchAllGenres } from "../../services/genreServices"
 import { useState, useEffect } from "react"
-import { addFavoriteGenre, fetchUser, removeFavoriteGenre } from "../../services/userServices"
+import { addFavoriteGenre, removeFavoriteGenre } from "../../services/userServices"
 import { FaRegStar } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
 
@@ -42,8 +42,6 @@ export default function Genre({user, setGenre}) {
         localStorage.setItem("genre", genre)
     }
         
-
-    
     return (
         <>
             <h1>Sjangere</h1>
