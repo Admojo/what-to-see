@@ -1,13 +1,24 @@
 import { Link } from "react-router-dom"
 import { fetchAllGenres } from "../../services/genreServices"
 import { useState, useEffect } from "react"
-import { addFavoriteGenre, removeFavoriteGenre } from "../../services/userServices"
+import { addFavoriteGenre, fetchUser, removeFavoriteGenre } from "../../services/userServices"
 import { FaRegStar } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
 
 export default function Genre({user, setUser, setGenre}) {
 
-    const [genreList, setGenrelist] = useState(user.genrelist)
+    const [genreList, setGenrelist] = useState([])
+    const [userGenreList, setUserGenreList] = useState([])
+    useEffect(() => {
+        async function fetchUserData() {
+            const currentUserName = localStorage.getItem("username");
+            if (currentUserName){
+                const currentuser = await fetchUser(currentUserName)
+                setUser(currentuser)
+                setUserGenreList(currentuser.genrelist || [])}
+            }
+            fetchUserData()
+    },[])
 
     const getAllGenres = async () => {
         const data = await fetchAllGenres()
@@ -27,13 +38,15 @@ export default function Genre({user, setUser, setGenre}) {
     
     const handleFavoriteClick = (genre) => {
         setGenre(genre)
+        console.log("€€€ genrelist", genreList)
+        console.log("€€€ genre", genre)
         handleClick(genre)
     }
     const handleClick = async (genre) => {
-        const result = await addFavoriteGenre(user._id, genre)
+        const result = await addFavoriteGenre(user[0]._id, genre)
         if (result === "Success") {
             console.log("Favorite Success")
-            user.genreList.push(genre)
+            userGenreList.push(genre)
         }
         else{console.log("Favorite Error")}
     }
@@ -41,7 +54,7 @@ export default function Genre({user, setUser, setGenre}) {
         handleClickUnfavorite(genre)
     }
     const handleClickUnfavorite = async (genre) => {
-        const result = await removeFavoriteGenre(user._id, genre)
+        const result = await removeFavoriteGenre(user[0]._id, genre)
         if (result === "Success") {
             console.log("UNfavorite Success")
         }
