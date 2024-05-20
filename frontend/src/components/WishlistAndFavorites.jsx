@@ -89,7 +89,7 @@ export default function WishlistAndFavorites({user, friend}){
         <>
         <section id="wishlistAndFavoritesSection">
             <h2>ØNSKELISTER OG FAVORITTER</h2>
-            {user1WishlistUser2Favorites && user1FavoritesUser2Wishlist ? 
+            {finalResult?.results ? 
             <p>Dere har noen filmer som er på ønskelisten til en av dere og favorittlisten til den andre! 
                 Kanskje kan en av dere få innføre den andre i en ny filmopplevelse...?!</p>
              : <p>Dere har ingen filmer til felles fra ønskelister og favoritter.</p>}
