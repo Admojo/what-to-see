@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import MovieCard from "./MovieCard";
 import { options } from "../App";
 
-export default function GenrePage({genre, movielist, setMovies}){
+export default function GenrePage({genre, movies, setMovies}){
   
     const [page, setPage] = useState(1)
     const localgenre = localStorage.getItem("genre", genre)
@@ -33,13 +33,13 @@ export default function GenrePage({genre, movielist, setMovies}){
     return (
       <>
         <h1>{localgenre}</h1>
-        <section id="singleGenreContent">
-        {movielist?.results?.map((item, i) => 
+        <section className="singleGenreContent">
+        {movies?.results?.map((item, i) => 
             <MovieCard key={i+"ok"} imdb={item.id} title={item.titleText.text} image={item.primaryImage?.url}/>
         )}
         </section>
         <nav>
-          <ul id="pageselector">
+          <ul className="pageselector">
             <button onClick={handlePrevClick}>Forrige Side</button>
             <button onClick={handleNextClick}>Neste Side</button>
           </ul>
