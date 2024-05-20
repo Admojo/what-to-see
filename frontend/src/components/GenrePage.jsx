@@ -32,6 +32,7 @@ export default function GenrePage({genre, movielist, setMovies}){
     
     return (
       <>
+        <h1>{localgenre}</h1>
         <section id="singleGenreContent">
         {movielist?.results?.map((item, i) => 
             <MovieCard key={i+"ok"} imdb={item.id} title={item.titleText.text} image={item.primaryImage?.url}/>
