@@ -7,9 +7,17 @@
     min-width: 350px;
     height: 650px;
     box-shadow: 10px 10px 5px rgba(155, 72, 203, 0.388);
-    @media only screen and (max-width: 925px) {
-        max-width: 80%;
-        max-height: 80%;
+
+    // @media only screen and (max-width: 925px) {
+    //     max-width: 80%;
+    //     max-height: 80%;
+    // }
+    @media only screen and (max-width: 1300px) {
+        box-shadow: none;
+        background-color: transparent;
+        background-image: linear-gradient(rgba(238, 238, 238, 0.194),rgba(155, 72, 203, 0.055));
+        border: 0.1px rgba(226, 226, 226, 0.508) solid;
+        height: 550px;
     }
     img {
         border-radius: 5px;
@@ -19,15 +27,30 @@
         border-bottom: 2px solid var(--midnight-blue);
         // Fant ut av hvordan jeg skulle justere bildet på hvert moviecard riktig med object-fit: cover. Linken under er hvor leste meg opp.
         // https://www.w3schools.com/css/css3_object-fit.asp
+        @media only screen and (max-width: 1300px) {
+            object-fit: scale-down;
+            border-bottom: none;
+            border-radius: 0px;
+        }
     }
     h3 {
         text-align: center;
+        @media only screen and (max-width: 1300px) {
+            text-shadow: 2px 2px 10px rgba(255, 0, 0, 0.231);
+            color: black;
+        }
         a {
             color: white;
+            @media only screen and (max-width: 1300px) {
+                color: rgb(237, 162, 176);
+            }
         }
         a:hover {
             color: rgb(237, 162, 176);
             text-decoration: underline;
+            @media only screen and (max-width: 1300px) {
+                color: black
+            }
           }
     }
 }

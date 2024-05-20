@@ -19,6 +19,9 @@ main {
             background-color: rgba(213, 213, 213, 0.133);
             border-radius: 20px;
             box-shadow: 40px;
+            @media only screen and (max-width: 1300px) {
+                background-color: transparent;
+            }
             h2 {
                 margin: 1rem;
                 padding: 1rem;
@@ -36,10 +39,10 @@ main {
                     flex-direction: row;
                     align-items: center; 
                 }
-                @media only screen and (max-width: 725px) {
-                    flex-direction: column;
-                    width: 100%;
-                }
+                // @media only screen and (max-width: 900px) {
+                //     flex-direction: column;
+                //     width: 100%;
+                // }
                 li {
                     flex: 1;
                 }
@@ -65,10 +68,10 @@ main {
                     flex-direction: row;
                     align-items: center; 
                 }
-                @media only screen and (max-width: 725px) {
-                    flex-direction: column;
-                    width: 100%;
-                }
+                // @media only screen and (max-width: 900px) {
+                //     flex-direction: column;
+                //     width: 100%;
+                // }
                 li {
                     flex: 1;
                 }
