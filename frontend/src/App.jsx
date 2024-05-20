@@ -34,7 +34,6 @@ export async function getMovies(url, options) {
   try {
     const response = await fetch(url, options);
     const result = await response.json();
-    console.log("result:",result);
     return result;
   } catch (error) {
     console.error(error);

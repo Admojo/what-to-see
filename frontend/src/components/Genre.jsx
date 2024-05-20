@@ -7,19 +7,7 @@ import { FaStar } from "react-icons/fa";
 
 export default function Genre({user, setUser, setGenre}) {
 
-    const [genreList, setGenrelist] = useState([])
-    const [userGenreList, setUserGenreList] = useState([])
-    useEffect(() => {
-        async function fetchUserData() {
-            const currentUserName = localStorage.getItem("username");
-            if (currentUserName){
-                const currentuser = await fetchUser(currentUserName)
-                setUser(currentuser)
-                setUserGenreList(currentuser.genrelist || [])}
-            }
-            fetchUserData()
-    },[])
-
+    const [genreList, setGenrelist] = useState(user.genrelist)
 
     const getAllGenres = async () => {
         const data = await fetchAllGenres()
