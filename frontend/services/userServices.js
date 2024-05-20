@@ -100,3 +100,33 @@ export async function fetchFavoritesForUsers(user1, user2) {
     const data = await client.fetch(query, params)
     return data
 }
+
+export async function fetchFavoritesUser1AndWishlistUser2(user1, user2) {
+    const query = `{
+        "user1movies": *[_type == "users" && name == $user1][0].favorites,
+        "user2movies": *[_type == "users" && name == $user2][0].wishlist,
+        "sharedMovies": *[_type == "users" && name in [$user1, $user2]] {
+            favorites, 
+            wishlist
+        }[0].favorites[(@ in *[_type == "users" && name == $user1][0].favorites) && (@ in *[_type == "users" && name == $user2][0].wishlist)]    
+    }`;
+
+    const params = { user1, user2};
+    const data = await client.fetch(query, params)
+    return data
+}
+
+export async function fetchWishlistUser1AndFavoritesUser2(user1, user2) {
+    const query = `{
+        "user1movies": *[_type == "users" && name == $user1][0].wishlist,
+        "user2movies": *[_type == "users" && name == $user2][0].favorites,
+        "sharedMovies": *[_type == "users" && name in [$user1, $user2]] {
+            wishlist, 
+            favorites
+        }[0].wishlist[(@ in *[_type == "users" && name == $user1][0].wishlist) && (@ in *[_type == "users" && name == $user2][0].favorites)]    
+    }`;
+
+    const params = { user1, user2};
+    const data = await client.fetch(query, params)
+    return data
+}
