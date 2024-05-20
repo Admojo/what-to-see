@@ -34,7 +34,7 @@ export default function Genre({user, setUser, setGenre}) {
             setUserGenreList(user[0].genrelist)
             else{setUserGenreList(user.genrelist)}
         }
-    }, [user, genreList, userGenreList]);
+    }, [user, genreList]);
     
     const handleFavoriteClick = (genre) => {
         setGenre(genre)
@@ -46,7 +46,7 @@ export default function Genre({user, setUser, setGenre}) {
         const result = await addFavoriteGenre(user[0]._id, genre)
         if (result === "Success") {
             console.log("Favorite Success")
-            userGenreList.push(genre)
+            setUserGenreList(prevGenres => [...prevGenres, genre]);
         }
         else{console.log("Favorite Error")}
     }
@@ -57,6 +57,7 @@ export default function Genre({user, setUser, setGenre}) {
         const result = await removeFavoriteGenre(user[0]._id, genre)
         if (result === "Success") {
             console.log("UNfavorite Success")
+            setUserGenreList(prevGenres => prevGenres.filter(g => g !== genre));
         }
         else{console.log("UNfavorite Error")}
     }
