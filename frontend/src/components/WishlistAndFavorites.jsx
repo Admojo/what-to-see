@@ -93,7 +93,7 @@ export default function WishlistAndFavorites({user, friend}){
             <p>Dere har noen filmer som er på ønskelisten til en av dere og favorittlisten til den andre! 
                 Kanskje kan en av dere få innføre den andre i en ny filmopplevelse...?!</p>
              : <p>Dere har ingen filmer til felles fra ønskelister og favoritter.</p>}
-             <ul>
+             <ul id="ul-wishlistAndFavoritesSection">
              {finalResult?.results?.map((movie, i) =>
                             <li key={i+"bus"}>
                                 <MovieCard key={i+"raymondKvisvikFFK"} imdb={movie.id} title={movie.originalTitleText.text} image={movie.primaryImage?.url}/>
