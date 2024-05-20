@@ -11,9 +11,7 @@ export default function Layout({children}){
                 <Nav />
             </header>
         ) : (
-            <header id="noNavBar">
-                <Nav />
-            </header>
+            <></>
         )}
             <main>
                 {children}
