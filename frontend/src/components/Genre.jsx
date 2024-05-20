@@ -1,15 +1,13 @@
 import { Link } from "react-router-dom"
 import { fetchAllGenres } from "../../services/genreServices"
 import { useState, useEffect } from "react"
-import { addFavoriteGenre, fetchUser, removeFavoriteGenre } from "../../services/userServices"
+import { addFavoriteGenre, removeFavoriteGenre } from "../../services/userServices"
 import { FaRegStar } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
 
-export default function Genre({setGenre}) {
+export default function Genre({user, setUser, setGenre}) {
 
-    const currentUser = fetchUser(localStorage.getItem("username"));
-    // localStorage.setItem("genre", genre)
-    const [genreList, setGenrelist] = useState(currentUser.genrelist)
+    const [genreList, setGenrelist] = useState(user.genrelist)
 
     const getAllGenres = async () => {
         const data = await fetchAllGenres()
@@ -18,23 +16,36 @@ export default function Genre({setGenre}) {
     useEffect(() => {
         getAllGenres()
         }, [])
+
+    useEffect(() => {
+        if (user){
+            if (user[0])
+            setUserGenreList(user[0].genrelist)
+            else{setUserGenreList(user.genrelist)}
+        }
+    }, [user, genreList, userGenreList]);
+    
     const handleFavoriteClick = (genre) => {
         setGenre(genre)
         handleClick(genre)
     }
     const handleClick = async (genre) => {
-        const result = await addFavoriteGenre(currentUser._id, genre)
-        console.log("result", result)
+        const result = await addFavoriteGenre(user._id, genre)
         if (result === "Success") {
-            currentUser.genreList.push(genre)
+            console.log("Favorite Success")
+            user.genreList.push(genre)
         }
+        else{console.log("Favorite Error")}
     }
     const handleUnFavoriteClick = (genre) => {
-        //setGenre(null)
         handleClickUnfavorite(genre)
     }
     const handleClickUnfavorite = async (genre) => {
-        const result = await removeFavoriteGenre(currentUser._id, genre)
+        const result = await removeFavoriteGenre(user._id, genre)
+        if (result === "Success") {
+            console.log("UNfavorite Success")
+        }
+        else{console.log("UNfavorite Error")}
     }
 
     const handleGenreClicked = (genre) => {
@@ -42,8 +53,6 @@ export default function Genre({setGenre}) {
         localStorage.setItem("genre", genre)
     }
         
-
-    
     return (
         <>
             <h1>Sjangere</h1>
@@ -52,7 +61,7 @@ export default function Genre({setGenre}) {
                         {genreList?.map((item, i) =>
                         <li key={i+"rat"}>
                             <Link to="/genrepage" onClick={()=> handleGenreClicked(item.genre)}>{item.genre}</Link>
-                            {currentUser?.genrelist?.includes(item.genre) ? (
+                            {userGenreList?.includes(item.genre) ? (
                                 <button className="removeFavoriteGenreButton" onClick={() => handleUnFavoriteClick(item.genre)}><FaStar color="orange"/> Favorittsjanger</button>
                             ) : (
                                 <button className="addFavoriteGenreButton" onClick={() => handleFavoriteClick(item.genre)}><FaRegStar /> Legg til i favorittliste</button>

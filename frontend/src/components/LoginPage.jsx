@@ -1,10 +1,8 @@
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { fetchAllUsers } from '../../services/userServices';
 
-export default function LoginPage({setUser}) {
-
-    const [userList, setUserList] = useState(null)
+export default function LoginPage({setUser, userList, setUserList}) {
 
     const getAllUsers = async () => {
         const data = await fetchAllUsers()
@@ -24,7 +22,7 @@ export default function LoginPage({setUser}) {
     }
 
     useEffect(() => {
-        localStorage.setItem("username", "")
+        localStorage.clear("username")
         }, [])
 
     return (

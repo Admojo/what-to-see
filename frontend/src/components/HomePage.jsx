@@ -22,10 +22,13 @@ export default function HomePage({user, setFriend, userList}){
 
     useEffect(() => {
         const getMovies = async () => {
+            if (user !== null){
             const Wishlistdata = await fetchWishlistForUsers(user.name, user.name);
             setUserWishlist(Wishlistdata);
             const Favoritesdata = await fetchFavoritesForUsers(user.name, user.name);
             setUserFavorites(Favoritesdata);
+            }
+            else{return}
           };
           getMovies()
     },[user])
@@ -71,13 +74,13 @@ export default function HomePage({user, setFriend, userList}){
         setFriend(user)
         redirectToViewTogetherPage("/viewtogether")
     }
- // tt0222518, tt0237765, tt0230804, tt0388629
+
     return (
         <>
             <h1>Hei, {user.name}</h1>
             <div>
                 <section id="moviesWatchLaterSection">
-                    <h2><FaStar /> Filmer jeg skal se!</h2>
+                    <h2><FaStar /> Mine favoritter:</h2>
                     <ul>
                         {favorites?.results ?
                         favorites?.results?.map((movie, i) =>
@@ -88,7 +91,7 @@ export default function HomePage({user, setFriend, userList}){
                     </ul>
                 </section>
                 <section id="wishlistSection">
-                    <h2> Filmer i min ønskeliste </h2>
+                    <h2> Min ønskeliste: </h2>
                     <ul>
                         {wishlist?.results?.map((movie, i) =>
                             <li key={i+"bus"}>

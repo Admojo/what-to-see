@@ -65,35 +65,24 @@ export default function WishlistAndFavorites({user, friend}){
     useEffect(()=> {
         let result = {};
         // if (sharedFavorites != null) {
-        //     console.log("Hans Erik Ramberg",sharedFavorites)
         //     result = [...sharedFavorites]
         // }
         // if (sharedWishlist != null) {
-        //     console.log("Celco Borges",sharedWishlist)
         //     result = [...sharedWishlist]
         // }
-        console.log("Hans Erik Ramberg",sharedFavorites)
-        console.log("Celco Borges",sharedWishlist)
         const tmp = {...sharedWishlist, ...sharedFavorites};
-        console.log("tmp",tmp)
         setFinalResult(tmp);
     },[sharedFavorites, sharedWishlist])
     
-
-    // console.log("SHARED Wishlist", sharedWishlist)
-    // console.log("SHARED Favorites", sharedFavorites)
-    // console.log("Wish URL", sharedWishlistUrl)
-    // console.log("Fav URL", sharedFavoritesUrl)
-    console.log("FINAL RESULT @@@@@@@@@@@@@",finalResult);
     return(
         <>
         <section id="wishlistAndFavoritesSection">
             <h2>ØNSKELISTER OG FAVORITTER</h2>
-            {user1WishlistUser2Favorites && user1FavoritesUser2Wishlist ? 
+            {finalResult?.results ? 
             <p>Dere har noen filmer som er på ønskelisten til en av dere og favorittlisten til den andre! 
                 Kanskje kan en av dere få innføre den andre i en ny filmopplevelse...?!</p>
              : <p>Dere har ingen filmer til felles fra ønskelister og favoritter.</p>}
-             <ul>
+             <ul id="ul-wishlistAndFavoritesSection">
              {finalResult?.results?.map((movie, i) =>
                             <li key={i+"bus"}>
                                 <MovieCard key={i+"raymondKvisvikFFK"} imdb={movie.id} title={movie.originalTitleText.text} image={movie.primaryImage?.url}/>
