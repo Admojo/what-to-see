@@ -9,9 +9,9 @@ import GenrePage from './components/GenrePage';
 import { fetchAllUsers, fetchUser } from "../services/userServices"
 import ViewTogetherPage from './components/ViewTogetherPage';
 
-export const getUser = async () => {
+export async function getUser() {
   const currentUserName = localStorage.getItem("username");
-  if (currentUserName !== ""){
+  if (currentUserName !== null){
     const user = (currentUserName !== null ? await fetchUser(currentUserName) : null)
     return user
   }
@@ -20,7 +20,7 @@ export const getUser = async () => {
   }
 }
 
-export const getAllUsers = async () => {
+export async function getAllUsers () {
   const userlist = await fetchAllUsers()
   try {
     return userlist
@@ -51,8 +51,8 @@ export const options = {
 
 function App() {
 
-  const [user, setUser] = useState(getUser())
-  const [userList, setUserList] = useState(getAllUsers())
+  const [user, setUser] = useState(null)
+  const [userList, setUserList] = useState(null)
   const [friend, setFriend] = useState(null)
   const [movies, setMovies] = useState (null)
   const [genre, setGenre] = useState (null)
@@ -65,6 +65,7 @@ function App() {
 
   useEffect(() => {
     setMovies(getMovies(urlAllMovies, options))
+    setUser(getUser())
   },[])
 
   console.log("USER APP @@@ : ", user)
@@ -72,7 +73,7 @@ function App() {
     return (<>
       <Layout>
         <Routes>
-              <Route path="/login" element={<LoginPage setUser={setUser} userList={userList} />}/>
+              <Route path="/login" element={<LoginPage setUser={setUser} userList={userList} setUserList={setUserList} />}/>
               <Route path="/home" element={<HomePage movielist={movies} setUser={setUser} user={user} userList={userList} setUserList={setUserList} friend={friend} setFriend={setFriend} />}/>
               <Route path="/genres" element={<Genre setGenre={setGenre} user={user} genre={genre} />}/>
               <Route path="/genrepage" element={<GenrePage user={user} genre={genre} movielist={movies} setMovies={setMovies} />}/>

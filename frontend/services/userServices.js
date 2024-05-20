@@ -14,16 +14,17 @@ export async function fetchAllUsers(){
 }
 
 export async function fetchUser(username){
-    const data = await client.fetch(`*[_type == "users" && name == ${username}] {
+    const query = `*[_type == "users" && name == $username] {
         _id,
         _type,
         name,
         genrelist,
         wishlist,
         favorites
-    }
-    `, [username])
-    return data
+    }`
+    const param = { username }
+    const user = await client.fetch(query, param)
+    return user
 }
 
 export async function addFavoriteGenre(usersid, genre) {

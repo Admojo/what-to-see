@@ -3,13 +3,14 @@ import { VscSmiley } from "react-icons/vsc";
 import MovieCard from "./MovieCard";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react"; 
-import { getAllUsers, getMovies, options } from "../App";
+import { getAllUsers, getMovies, options, getUser } from "../App";
 import { fetchWishlistForUsers, fetchFavoritesForUsers} from "../../services/userServices";
 
 
-export default function HomePage({user, userList, setFriend}){
+export default function HomePage({user, setUser, userList, setFriend}){
 
     const otherUsers = userList.filter(friends => friends.name !== user.name)
+    //const [otherUsers, setOtherUsers] = useState([])
     const redirectToViewTogetherPage = useNavigate();
     const [userWishlist, setUserWishlist] = useState(null)
     const [wishlist, setWishlist] = useState(null)
@@ -20,22 +21,24 @@ export default function HomePage({user, userList, setFriend}){
     const [favoritesIds, setFavoritesIds] = useState("")
     const [favoritesUrl, setFavoritesUrl] = useState(null)
 
-    useEffect(() => {
+    /*useEffect(() => {
         const getUserlist = async () => {
             const data = await getAllUsers()
             const otherUsersList = data.filter(friends => friends !== user)
             setOtherUsers(otherUsersList)
         }
         getUserlist()
-        console.log("OTHER USERS HOME LOAD", otherUsers)
-    },[user])
+    },[user])*/
 
     useEffect(() => {
         const getMovies = async () => {
+            if (user !== null){
             const Wishlistdata = await fetchWishlistForUsers(user.name, user.name);
             setUserWishlist(Wishlistdata);
             const Favoritesdata = await fetchFavoritesForUsers(user.name, user.name);
             setUserFavorites(Favoritesdata);
+            }
+            else{return}
           };
           getMovies()
     },[user])
@@ -86,7 +89,6 @@ export default function HomePage({user, userList, setFriend}){
         redirectToViewTogetherPage("/viewtogether")
     }
 
-    console.log("USERLIST HOMEPAGEEE BOTTOM:", userList, typeof userList)
     return (
         <>
             <h1>Hei, {user.name}</h1>
