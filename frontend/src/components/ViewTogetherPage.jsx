@@ -66,6 +66,11 @@ export default function ViewTogetherPage({user, friend, setGenre}){
         fetchMoviesDetails();
     }, [sharedWishlistUrl, sharedFavoritesUrl]);
 
+    const handleGenreClicked = (genre) => {
+        setGenre(genre)
+        localStorage.setItem("genre", genre)
+    }
+
     return (
         <>
             <h1>Forslag for {user.name} og {friend.name}</h1>
@@ -98,7 +103,7 @@ export default function ViewTogetherPage({user, friend, setGenre}){
                     <ul>
                         {sharedGenres?.sharedGenres?.map((item, i) =>
                             <li key={i+"car"}>
-                                <Link to="/genrepage" onClick={()=> setGenre(item)}>{item}</Link>
+                                <Link to="/genrepage" onClick={()=> handleGenreClicked(item)}>{item}</Link>
                             </li>
                         )}
                     </ul>
