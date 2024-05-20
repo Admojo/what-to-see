@@ -51,7 +51,9 @@ export default function HomePage({user, setUser, setFriend, userList, setUserLis
             }
             else{return}
           };
-          fetchMovies()
+          if (user[0]){
+            fetchMovies()
+          }
     },[user])
 
     useEffect(() => {
