@@ -1,19 +1,13 @@
 import { useEffect } from "react";
 import MovieCard from "./MovieCard";
+import { options } from "../App";
 
-export default function GenrePage({user, genre, movielist, setMovies}){
- 
-    console.log("genrepage genre", genre)
-    console.log("genrepage user", user)
+export default function GenrePage({genre, movielist, setMovies}){
 
-    const url = `https://moviesdatabase.p.rapidapi.com/titles?info=base_info&genre=${genre}`;
-    const options = {
-        method: 'GET',
-        headers: {
-          'X-RapidAPI-Key': 'ad97b2da57mshea14e44c7ca71c2p19c8c9jsn525facd6154e',
-          'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
-        }
-    };
+
+    const localgenre = localStorage.getItem("genre", genre)
+    console.log("genrepage GENRE@@@", localgenre)
+    const url = `https://moviesdatabase.p.rapidapi.com/titles?info=base_info&genre=${localgenre}`;
 
     const getData = async(url) => {
         try {
@@ -28,9 +22,8 @@ export default function GenrePage({user, genre, movielist, setMovies}){
 
     useEffect(() => {
         getData(url)
-      },[genre])
+      },[])
 
-    console.log("genrepage movielist", movielist)
     
     return (
         <section id="singleGenreContent">

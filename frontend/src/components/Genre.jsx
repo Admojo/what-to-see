@@ -8,7 +8,7 @@ import { FaStar } from "react-icons/fa";
 export default function Genre({setGenre}) {
 
     const currentUser = fetchUser(localStorage.getItem("username"));
-
+    // localStorage.setItem("genre", genre)
     const [genreList, setGenrelist] = useState(currentUser.genrelist)
 
     const getAllGenres = async () => {
@@ -37,6 +37,13 @@ export default function Genre({setGenre}) {
         const result = await removeFavoriteGenre(currentUser._id, genre)
     }
 
+    const handleGenreClicked = (genre) => {
+        setGenre(genre)
+        localStorage.setItem("genre", genre)
+    }
+        
+
+    
     return (
         <>
             <h1>Sjangere</h1>
@@ -44,7 +51,7 @@ export default function Genre({setGenre}) {
                     <ul>
                         {genreList?.map((item, i) =>
                         <li key={i+"rat"}>
-                            <Link to="/genrepage" onClick={()=> setGenre(item.genre)}>{item.genre}</Link>
+                            <Link to="/genrepage" onClick={()=> handleGenreClicked(item.genre)}>{item.genre}</Link>
                             {currentUser?.genrelist?.includes(item.genre) ? (
                                 <button className="removeFavoriteGenreButton" onClick={() => handleUnFavoriteClick(item.genre)}><FaStar color="orange"/> Favorittsjanger</button>
                             ) : (
@@ -54,7 +61,6 @@ export default function Genre({setGenre}) {
                         )}
                     </ul>
             </section>
-            {/* Skrive ut liste med sjangere */}
         </>
     )
 }

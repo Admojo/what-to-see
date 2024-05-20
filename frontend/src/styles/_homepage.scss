@@ -1,8 +1,9 @@
 main {
-    margin-left: 60px;
-    margin-right: 60px;
+    // margin-left: 60px;
+    // margin-right: 60px;
     h1 {
-        font-size: xx-large;
+        font-size: xx-large; // #TODO: Fikse font size calc 
+        padding: 2rem;
     }
     div {
         display: flex;
@@ -15,6 +16,7 @@ main {
             flex-direction: column;
             h2 {
                 margin: 1rem;
+                padding: 1rem;
             }
             ul {
                 padding-left: 0;
@@ -38,9 +40,10 @@ main {
         #wishlistSection {
             display: flex;
             flex-direction: column;
-            p { 
+            h2 { 
                 margin: 1rem;
-                margin-top: 1.7rem;
+                padding: 1rem;
+                // margin-top: 1.7rem;
             }
             ul {
                 padding-left: 0;
@@ -62,13 +65,15 @@ main {
             }
         }
         #watchTogetherSection {
-            background-image: linear-gradient(rgb(187, 187, 187), white);
+            background-image: linear-gradient(rgb(187, 187, 187,), white);
             height: 400px;
             padding-top: 7px;
             padding-left: 10px;
             width: 40%;
+            margin-top: 7.7rem;
             @media only screen and (max-width: 1300px) {   
                 width: 100%;
+
             }
         }
     }
