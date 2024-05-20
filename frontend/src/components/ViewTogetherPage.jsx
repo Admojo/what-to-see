@@ -75,18 +75,7 @@ export default function ViewTogetherPage({user, friend, setGenre}){
         <>
             <h1>Forslag for {user.name} og {friend.name}</h1>
             <div>
-                <section id="moviesWatchLaterSection">
-                    <h2>Catch up!</h2>
-                    {sharedWishlist ? <p>Dere har {sharedWishlist?.entries} filmer felles i ønskelisten deres.</p> : <p>Dere har ingen filmer til felles i ønskelisten deres.</p>}
-                    <ul>
-                        {sharedWishlist?.results?.map((movie, i) =>
-                            <li key={i+"bus"}>
-                                <MovieCard key={i+"yes"} imdb={movie.id} title={movie.originalTitleText.text} image={movie.primaryImage?.url}/>
-                            </li>
-                        )}
-                    </ul>
-                </section>
-                <section id="wishlistSection">
+            <section id="moviesWatchLaterSection">
                     <h2>Go safe!</h2>
                     {sharedFavorites ? <p>Dere har {sharedFavorites?.entries} filmer felles i favorittlisten deres.</p> : <p>Dere har ingen filmer til felles i favorittlisten deres.</p>}
                     <ul>
@@ -97,7 +86,18 @@ export default function ViewTogetherPage({user, friend, setGenre}){
                         )}
                     </ul>
                 </section>
-                <section>
+                <section id="wishlistSection">
+                    <h2>Catch up!</h2>
+                    {sharedWishlist ? <p>Dere har {sharedWishlist?.entries} filmer felles i ønskelisten deres.</p> : <p>Dere har ingen filmer til felles i ønskelisten deres.</p>}
+                    <ul>
+                        {sharedWishlist?.results?.map((movie, i) =>
+                            <li key={i+"bus"}>
+                                <MovieCard key={i+"yes"} imdb={movie.id} title={movie.originalTitleText.text} image={movie.primaryImage?.url}/>
+                            </li>
+                        )}
+                    </ul>
+                </section>
+                <section id="exploresection">
                     <h2>Utforsk!</h2>
                     {sharedGenres?.sharedGenres?.length > 0 ? <p>Dere liker begge disse sjangerne, sjekk hvilke filmer som finnes å velge mellom:</p> : <p>Dere har ingen sjangere til felles.</p>}
                     <ul>

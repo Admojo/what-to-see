@@ -8,3 +8,19 @@
         text-align: center;
     }
 }
+#exploresection {
+    background-color: rgba(51, 29, 93, 0.173);
+    h2 {
+        padding: 1rem;
+        padding-bottom: 0px;
+    }
+    p {
+        padding: 1rem;
+    }
+    a {
+        color: rgb(200, 82, 103);
+    }
+    a:hover {
+        text-decoration: underline;
+      }
+}
