@@ -131,7 +131,7 @@ export default function ViewTogetherPage({user, setUser, friend, setFriend, setG
                     </ul>
                 </section>
             </div>
-            <WishlistAndFavorites user={user} friend={friend}/>
+            <WishlistAndFavorites user={user} setUser={setUser} friend={friend} setFriend={setFriend}/>
         </>
     ) 
 }

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
-import { fetchFavoritesUser1AndWishlistUser2, fetchWishlistUser1AndFavoritesUser2 } from "../../services/userServices";
+import { fetchFavoritesUser1AndWishlistUser2, fetchUser, fetchWishlistUser1AndFavoritesUser2 } from "../../services/userServices";
 import { getMovies, options } from "../App";
 import MovieCard from "./MovieCard";
 
-export default function WishlistAndFavorites({user, friend}){
+export default function WishlistAndFavorites({user, setUser, friend, setFriend}){
 
     const [user1WishlistUser2Favorites, setUser1WishlistUser2Favorites] = useState(null)
     const [user1FavoritesUser2Wishlist, setUser1FavoritesUser2Wishlist] = useState(null)
@@ -15,15 +15,36 @@ export default function WishlistAndFavorites({user, friend}){
     const [sharedFavorites, setSharedFavorites] = useState(null)
     const [finalResult, setFinalResult] = useState({})
 
+    useEffect(() => {
+        async function fetchUserData() {
+            const currentUserName = localStorage.getItem("username");
+            const currentFriendName = localStorage.getItem("friend")
+            if (currentUserName){
+                const currentUser = await fetchUser(currentUserName)
+                setUser(currentUser)
+                console.log("VIEW Curr User", currentUser[0].name)
+                }
+            if (currentFriendName){
+                const currentFriend = await fetchUser(currentFriendName)
+                setFriend(currentFriend)
+                console.log("VIEW Friend User", currentFriend[0].name)
+                }
+            }
+        fetchUserData()
+    },[])
 
     useEffect(() => {
         const getResultFavAndWishlist = async () => {
-            const FavWishdata = await fetchFavoritesUser1AndWishlistUser2(user.name, friend.name);
+            if (user != null && friend != null){
+            const FavWishdata = await fetchFavoritesUser1AndWishlistUser2(user[0].name, friend[0].name);
             setUser1WishlistUser2Favorites(FavWishdata);
-            const wishFavdata = await fetchWishlistUser1AndFavoritesUser2(user.name, friend.name);
+            const wishFavdata = await fetchWishlistUser1AndFavoritesUser2(user[0].name, friend[0].name);
             setUser1FavoritesUser2Wishlist(wishFavdata);
-          };
+            };
+        }
+        if(user[0] && friend[0]){
           getResultFavAndWishlist()
+        }
     },[user, friend])
 
     useEffect(() => {
