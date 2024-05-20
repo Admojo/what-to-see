@@ -12,7 +12,7 @@ import ViewTogetherPage from './components/ViewTogetherPage';
 export async function getUser() {
   const currentUserName = localStorage.getItem("username");
   if (currentUserName !== null){
-    const user = (currentUserName !== null ? await fetchUser(currentUserName) : null)
+    const user = await fetchUser(currentUserName)
     return user
   }
   else {
@@ -51,14 +51,8 @@ export const options = {
 
 function App() {
 
-  const currentUserName = localStorage.getItem("username");
-  const currentUser = ()=> {
-      if (currentUserName){
-        fetchUser(currentUserName)}
-      else {return}
-    }
 
-  const [user, setUser] = useState(currentUser)
+  const [user, setUser] = useState([])
   const [friend, setFriend] = useState(null)
   const [movies, setMovies] = useState (null)
   const [genre, setGenre] = useState (null)
@@ -72,6 +66,13 @@ const urlAllMovies = `https://moviesdatabase.p.rapidapi.com/titles?info=base_inf
   }
 
   useEffect(() => {
+    async function fetchUser() {
+      const currentUser = await getUser()
+      if (currentUser){
+        setUser(currentUser)
+      }
+    }
+    fetchUser()
     setMovies(getMovies(urlAllMovies, options))
     getAllUsers()
   },[])
@@ -81,7 +82,7 @@ const urlAllMovies = `https://moviesdatabase.p.rapidapi.com/titles?info=base_inf
         <Routes>
               <Route path="/login" element={<LoginPage setUser={setUser} userList={userList} setUserList={setUserList} />}/>
               <Route path="/home" element={<HomePage movielist={movies} setUser={setUser} user={user} userList={userList} setUserList={setUserList} friend={friend} setFriend={setFriend} />}/>
-              <Route path="/genres" element={<Genre setGenre={setGenre} user={user} genre={genre} setUser={setUser} />}/>
+              <Route path="/genres" element={<Genre setGenre={setGenre} user={user} genre={genre} setUser={setUser}/>}/>
               <Route path="/genrepage" element={<GenrePage user={user} genre={genre} movielist={movies} setMovies={setMovies} />}/>
               <Route path="/viewtogether" element={<ViewTogetherPage user={user} friend={friend} setGenre={setGenre}/>}/>
           </Routes>

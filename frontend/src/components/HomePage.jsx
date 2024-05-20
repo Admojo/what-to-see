@@ -4,14 +4,15 @@ import MovieCard from "./MovieCard";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react"; 
 import { getAllUsers, getMovies, options, getUser } from "../App";
-import { fetchWishlistForUsers, fetchFavoritesForUsers} from "../../services/userServices";
+import { fetchWishlistForUsers, fetchFavoritesForUsers, fetchAllUsers, fetchUser} from "../../services/userServices";
 
 
-export default function HomePage({user, setFriend, userList}){
+export default function HomePage({user, setUser, setFriend, userList, setUserList}){
 
-    const otherUsers = userList.filter(friends => friends.name !== user.name)
-    //const [otherUsers, setOtherUsers] = useState([])
+
+    // const otherUsers = userList.filter(friends => friends.name !== user.name)
     const redirectToViewTogetherPage = useNavigate();
+    const [otherUsers, setOtherUsers] = useState([])
     const [userWishlist, setUserWishlist] = useState(null)
     const [wishlist, setWishlist] = useState(null)
     const [wishlistIds, setWishlistIds] = useState("")
@@ -22,16 +23,35 @@ export default function HomePage({user, setFriend, userList}){
     const [favoritesUrl, setFavoritesUrl] = useState(null)
 
     useEffect(() => {
-        const getMovies = async () => {
-            if (user !== null){
-            const Wishlistdata = await fetchWishlistForUsers(user.name, user.name);
+        async function fetchUserData() {
+            const currentUserName = localStorage.getItem("username");
+            if (currentUserName){
+                const currentUser = await fetchUser(currentUserName)
+                setUser(currentUser)
+                console.log("HOME Curr User", currentUser.name)
+                const currentUserList = await fetchAllUsers()
+                setUserList(currentUserList)
+                console.log("HOME Curr UserLIST", currentUserList)
+                setOtherUsers(currentUserList.filter(friends => friends.name !== currentUser[0].name))
+                console.log("HOME Other", otherUsers)
+                }
+            }
+        fetchUserData()
+    },[])
+
+    useEffect(() => {
+        console.log("HOME USER FUNCTION", user)
+        const fetchMovies = async () => {
+            if (user != null){
+            console.log("USER GETMOVIES FUNCTION @@@", user)
+            const Wishlistdata = await fetchWishlistForUsers(user[0].name, user[0].name);
             setUserWishlist(Wishlistdata);
-            const Favoritesdata = await fetchFavoritesForUsers(user.name, user.name);
+            const Favoritesdata = await fetchFavoritesForUsers(user[0].name, user[0].name);
             setUserFavorites(Favoritesdata);
             }
             else{return}
           };
-          getMovies()
+          fetchMovies()
     },[user])
 
     useEffect(() => {
@@ -78,7 +98,7 @@ export default function HomePage({user, setFriend, userList}){
 
     return (
         <>
-            <h1>Hei, {user.name}</h1>
+            <h1>Hei, {user[0]?.name}</h1>
             <div>
                 <section id="moviesWatchLaterSection">
                     <h2><FaStar /> Filmer jeg skal se!</h2>
