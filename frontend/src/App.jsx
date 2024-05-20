@@ -81,7 +81,7 @@ const urlAllMovies = `https://moviesdatabase.p.rapidapi.com/titles?info=base_inf
         <Routes>
               <Route path="/login" element={<LoginPage setUser={setUser} userList={userList} setUserList={setUserList} />}/>
               <Route path="/home" element={<HomePage movielist={movies} setUser={setUser} user={user} userList={userList} setUserList={setUserList} friend={friend} setFriend={setFriend} />}/>
-              <Route path="/genres" element={<Genre setGenre={setGenre} user={user} genre={genre} />}/>
+              <Route path="/genres" element={<Genre setGenre={setGenre} user={user} genre={genre} setUser={setUser} />}/>
               <Route path="/genrepage" element={<GenrePage user={user} genre={genre} movielist={movies} setMovies={setMovies} />}/>
               <Route path="/viewtogether" element={<ViewTogetherPage user={user} friend={friend} setGenre={setGenre}/>}/>
           </Routes>
