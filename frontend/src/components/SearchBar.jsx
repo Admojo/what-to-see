@@ -18,6 +18,7 @@ export default function SearchBar({setQuery}){
 
     return(
         <section id="searchbar">
+            <h2>Søk etter film</h2>
             <form onSubmit={handleSubmit}>
                 <div id="searchinput">
                     <input id="searchfield" type="text" placeholder="Harry Potter" onChange={handleChange}></input>
