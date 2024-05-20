@@ -7,7 +7,7 @@ export default function Nav() {
     const redirectToLoginPage = useNavigate();
 
     const handleLogout = () => {
-        redirectToLoginPage("/login")
+        redirectToLoginPage("/")
         // for å kunne være på loginpage uten at nav-bar er synlig så må man refreshe siden først. Dette løste vi med en quickfix med linjen under.
         // fant løsningen på stackowerflow: https://stackoverflow.com/questions/41481522/how-to-refresh-a-page-using-react-route-link
         localStorage.clear()
