@@ -18,8 +18,15 @@ export default function Layout({children}){
             <main>
                 {children}
             </main>
+            {currentUsername ? (
             <footer>
                 <p>WhatToSee © 2024</p>
             </footer>
+        ) : (
+            <></>
+        )}
         </>)
 }
+
+
+
