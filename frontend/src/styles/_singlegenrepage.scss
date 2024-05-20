@@ -9,3 +9,21 @@
         align-self: flex-start;
     }
 }
+#pageselector{
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+    button{
+        background-color: rgb(234, 234, 234);
+        padding: 1rem 2rem;
+        &:hover{
+            background-color: black;
+            color: white;
+        }
+        &:active{
+            color: black;
+            background-color: rgb(234, 234, 234);
+        }
+    }
+}
