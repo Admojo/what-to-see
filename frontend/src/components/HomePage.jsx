@@ -88,7 +88,7 @@ export default function HomePage({user, setFriend, userList}){
                     </ul>
                 </section>
                 <section id="wishlistSection">
-                    <p>Disse filmene ligger i ønskelisten din:</p>
+                    <h2> Filmer i min ønskeliste </h2>
                     <ul>
                         {wishlist?.results?.map((movie, i) =>
                             <li key={i+"bus"}>
