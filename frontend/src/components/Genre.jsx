@@ -65,8 +65,6 @@ export default function Genre({user, setUser, setGenre}) {
         localStorage.setItem("genre", genre)
     }
         
-
-    
     return (
         <>
             <h1>Sjangere</h1>

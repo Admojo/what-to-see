@@ -77,4 +77,18 @@ main {
             }
         }
     }
+    #wishlistAndFavoritesSection {
+        p {
+            text-align: center;
+        }
+        #ul-wishlistAndFavoritesSection {
+            display: flex;
+            flex-wrap: wrap;
+           justify-content: center;
+            li {
+                max-width: 400px;
+            }
+            
+        }
+    }
 }

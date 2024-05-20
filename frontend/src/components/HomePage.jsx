@@ -3,14 +3,13 @@ import { VscSmiley } from "react-icons/vsc";
 import MovieCard from "./MovieCard";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react"; 
-import { getAllUsers, getMovies, options, getUser } from "../App";
+import { getMovies, options } from "../App";
 import { fetchWishlistForUsers, fetchFavoritesForUsers} from "../../services/userServices";
 
 
 export default function HomePage({user, setFriend, userList}){
 
     const otherUsers = userList.filter(friends => friends.name !== user.name)
-    //const [otherUsers, setOtherUsers] = useState([])
     const redirectToViewTogetherPage = useNavigate();
     const [userWishlist, setUserWishlist] = useState(null)
     const [wishlist, setWishlist] = useState(null)
@@ -81,7 +80,7 @@ export default function HomePage({user, setFriend, userList}){
             <h1>Hei, {user.name}</h1>
             <div>
                 <section id="moviesWatchLaterSection">
-                    <h2><FaStar /> Filmer jeg skal se!</h2>
+                    <h2><FaStar /> Mine favoritter:</h2>
                     <ul>
                         {favorites?.results ?
                         favorites?.results?.map((movie, i) =>
@@ -92,7 +91,7 @@ export default function HomePage({user, setFriend, userList}){
                     </ul>
                 </section>
                 <section id="wishlistSection">
-                    <h2> Filmer i min ønskeliste </h2>
+                    <h2> Min ønskeliste: </h2>
                     <ul>
                         {wishlist?.results?.map((movie, i) =>
                             <li key={i+"bus"}>
