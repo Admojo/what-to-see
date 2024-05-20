@@ -75,11 +75,11 @@ export default function ViewTogetherPage({user, friend, setGenre}){
         <>
             <h1>Forslag for {user.name} og {friend.name}</h1>
             <div>
-                <section id="moviesWatchLaterSection">
-                    <h2>Catch up!</h2>
-                    {sharedWishlist ? <p>Dere har {sharedWishlist?.entries} filmer felles i ønskelisten deres.</p> : <p>Dere har ingen filmer til felles i ønskelisten deres.</p>}
+            <section id="moviesWatchLaterSection">
+                    <h2>Go safe!</h2>
+                    {sharedFavorites ? <p>Dere har {sharedFavorites?.entries} filmer felles i favorittlisten deres.</p> : <p>Dere har ingen filmer til felles i favorittlisten deres.</p>}
                     <ul>
-                        {sharedWishlist?.results?.map((movie, i) =>
+                        {sharedFavorites?.results?.map((movie, i) =>
                             <li key={i+"bus"}>
                                 <MovieCard key={i+"yes"} imdb={movie.id} title={movie.originalTitleText.text} image={movie.primaryImage?.url}/>
                             </li>
@@ -87,10 +87,10 @@ export default function ViewTogetherPage({user, friend, setGenre}){
                     </ul>
                 </section>
                 <section id="wishlistSection">
-                    <h2>Go safe!</h2>
-                    {sharedFavorites ? <p>Dere har {sharedFavorites?.entries} filmer felles i favorittlisten deres.</p> : <p>Dere har ingen filmer til felles i favorittlisten deres.</p>}
+                    <h2>Catch up!</h2>
+                    {sharedWishlist ? <p>Dere har {sharedWishlist?.entries} filmer felles i ønskelisten deres.</p> : <p>Dere har ingen filmer til felles i ønskelisten deres.</p>}
                     <ul>
-                        {sharedFavorites?.results?.map((movie, i) =>
+                        {sharedWishlist?.results?.map((movie, i) =>
                             <li key={i+"bus"}>
                                 <MovieCard key={i+"yes"} imdb={movie.id} title={movie.originalTitleText.text} image={movie.primaryImage?.url}/>
                             </li>
