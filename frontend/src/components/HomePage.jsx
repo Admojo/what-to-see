@@ -28,22 +28,22 @@ export default function HomePage({user, setUser, setFriend, userList, setUserLis
             if (currentUserName){
                 const currentUser = await fetchUser(currentUserName)
                 setUser(currentUser)
-                console.log("HOME Curr User", currentUser.name)
+                //console.log("HOME Curr User", currentUser.name)
                 const currentUserList = await fetchAllUsers()
                 setUserList(currentUserList)
-                console.log("HOME Curr UserLIST", currentUserList)
+                //console.log("HOME Curr UserLIST", currentUserList)
                 setOtherUsers(currentUserList.filter(friends => friends.name !== currentUser[0].name))
-                console.log("HOME Other", otherUsers)
+                //console.log("HOME Other", otherUsers)
                 }
             }
         fetchUserData()
     },[])
 
     useEffect(() => {
-        console.log("HOME USER FUNCTION", user)
+        //console.log("HOME USER FUNCTION", user)
         const fetchMovies = async () => {
             if (user != null){
-            console.log("USER GETMOVIES FUNCTION @@@", user)
+            //console.log("USER GETMOVIES FUNCTION @@@", user)
             const Wishlistdata = await fetchWishlistForUsers(user[0].name, user[0].name);
             setUserWishlist(Wishlistdata);
             const Favoritesdata = await fetchFavoritesForUsers(user[0].name, user[0].name);
@@ -93,8 +93,9 @@ export default function HomePage({user, setUser, setFriend, userList, setUserLis
         fetchMoviesDetails();
     }, [wishlistUrl, favoritesUrl]);
 
-    const handleFriendClick = (user) => {
-        setFriend(user)
+    const handleFriendClick = (friend) => {
+        localStorage.setItem("friend", friend.name)
+        setFriend(friend)
         redirectToViewTogetherPage("/viewtogether")
     }
 
@@ -126,9 +127,9 @@ export default function HomePage({user, setUser, setFriend, userList, setUserLis
                 <section id="watchTogetherSection">
                     <h3><VscSmiley /> Jeg skal se sammen med...</h3>
                     <ul>
-                        {otherUsers?.map((user, i) => 
+                        {otherUsers?.map((friend, i) => 
                         <li key={i+"mouse"}>
-                            <button onClick={() => handleFriendClick(user)}>{user.name}</button>
+                            <button onClick={() => handleFriendClick(friend)}>{friend.name}</button>
                         </li>)}
                     </ul>
                 </section>

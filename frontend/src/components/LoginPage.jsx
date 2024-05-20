@@ -23,6 +23,7 @@ export default function LoginPage({setUser, userList, setUserList}) {
 
     useEffect(() => {
         localStorage.clear("username")
+        localStorage.clear("friend")
         }, [])
 
     return (

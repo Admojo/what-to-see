@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import { fetchGenresForUsers, fetchWishlistForUsers, fetchFavoritesForUsers} from "../../services/userServices";
+import { fetchGenresForUsers, fetchWishlistForUsers, fetchFavoritesForUsers, fetchUser} from "../../services/userServices";
 import MovieCard from "./MovieCard";
 import { useState, useEffect } from "react"; 
 import { getMovies, options } from "../App";
 import WishlistAndFavorites from "./WishlistAndFavorites";
 
-export default function ViewTogetherPage({user, friend, setGenre}){
+export default function ViewTogetherPage({user, setUser, friend, setFriend, setGenre}){
 
     const [sharedGenres, setSharedGenres] = useState(null)
     const [usersWishlist, setUsersWishlist] = useState(null)
@@ -18,16 +18,39 @@ export default function ViewTogetherPage({user, friend, setGenre}){
     const [sharedFavoritesUrl, setSharedFavoritesUrl] = useState(null)
     
     useEffect(() => {
+        async function fetchUserData() {
+            const currentUserName = localStorage.getItem("username");
+            const currentFriendName = localStorage.getItem("friend")
+            if (currentUserName){
+                const currentUser = await fetchUser(currentUserName)
+                setUser(currentUser)
+                console.log("VIEW Curr User", currentUser[0].name)
+                }
+            if (currentFriendName){
+                const currentFriend = await fetchUser(currentFriendName)
+                setFriend(currentFriend)
+                console.log("VIEW Friend User", currentFriend[0].name)
+                }
+            }
+        fetchUserData()
+    },[])
+
+    useEffect(() => {
         const getGeneresAndMovies = async () => {
-            const genresData = await fetchGenresForUsers(user.name, friend.name);
+            if (user != null && friend != null){
+            const genresData = await fetchGenresForUsers(user[0].name, friend[0].name);
             setSharedGenres(genresData);
-            const Wishlistdata = await fetchWishlistForUsers(user.name, friend.name);
+            const Wishlistdata = await fetchWishlistForUsers(user[0].name, friend[0].name);
             setUsersWishlist(Wishlistdata);
-            const Favoritesdata = await fetchFavoritesForUsers(user.name, friend.name);
+            const Favoritesdata = await fetchFavoritesForUsers(user[0].name, friend[0].name);
             setUsersFavorites(Favoritesdata);
-          };
-          getGeneresAndMovies()
-    },[user, friend])
+            };
+        }
+        if(user[0] && friend[0]){
+            console.log("FRIEND", friend)
+            getGeneresAndMovies()
+          }
+    },[friend])
 
     useEffect(() => {
         if (usersWishlist?.sharedMovies) {
@@ -72,7 +95,7 @@ export default function ViewTogetherPage({user, friend, setGenre}){
     // console.log("Fav URL", sharedFavoritesUrl)
     return (
         <>
-            <h1>Forslag for {user.name} og {friend.name}</h1>
+            <h1>Forslag for {user[0]?.name} og {friend[0]?.name}</h1>
             <div>
                 <section id="moviesWatchLaterSection">
                     <h2>Catch up!</h2>

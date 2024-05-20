@@ -53,7 +53,7 @@ function App() {
 
 
   const [user, setUser] = useState([])
-  const [friend, setFriend] = useState(null)
+  const [friend, setFriend] = useState([])
   const [movies, setMovies] = useState (null)
   const [genre, setGenre] = useState (null)
   const [userList, setUserList] = useState(null)
@@ -84,7 +84,7 @@ const urlAllMovies = `https://moviesdatabase.p.rapidapi.com/titles?info=base_inf
               <Route path="/home" element={<HomePage movielist={movies} setUser={setUser} user={user} userList={userList} setUserList={setUserList} friend={friend} setFriend={setFriend} />}/>
               <Route path="/genres" element={<Genre setGenre={setGenre} user={user} genre={genre} setUser={setUser}/>}/>
               <Route path="/genrepage" element={<GenrePage user={user} genre={genre} movielist={movies} setMovies={setMovies} />}/>
-              <Route path="/viewtogether" element={<ViewTogetherPage user={user} friend={friend} setGenre={setGenre}/>}/>
+              <Route path="/viewtogether" element={<ViewTogetherPage user={user} setUser={setUser} friend={friend} setFriend={setFriend} setGenre={setGenre}/>}/>
           </Routes>
       </Layout>
     </>
