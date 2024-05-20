@@ -3,13 +3,14 @@ import { VscSmiley } from "react-icons/vsc";
 import MovieCard from "./MovieCard";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react"; 
-import { getMovies, options } from "../App";
+import { getAllUsers, getMovies, options, getUser } from "../App";
 import { fetchWishlistForUsers, fetchFavoritesForUsers} from "../../services/userServices";
 
 
 export default function HomePage({user, setFriend, userList}){
 
     const otherUsers = userList.filter(friends => friends.name !== user.name)
+    //const [otherUsers, setOtherUsers] = useState([])
     const redirectToViewTogetherPage = useNavigate();
     const [userWishlist, setUserWishlist] = useState(null)
     const [wishlist, setWishlist] = useState(null)
@@ -22,10 +23,13 @@ export default function HomePage({user, setFriend, userList}){
 
     useEffect(() => {
         const getMovies = async () => {
+            if (user !== null){
             const Wishlistdata = await fetchWishlistForUsers(user.name, user.name);
             setUserWishlist(Wishlistdata);
             const Favoritesdata = await fetchFavoritesForUsers(user.name, user.name);
             setUserFavorites(Favoritesdata);
+            }
+            else{return}
           };
           getMovies()
     },[user])
@@ -71,7 +75,7 @@ export default function HomePage({user, setFriend, userList}){
         setFriend(user)
         redirectToViewTogetherPage("/viewtogether")
     }
- // tt0222518, tt0237765, tt0230804, tt0388629
+
     return (
         <>
             <h1>Hei, {user.name}</h1>
