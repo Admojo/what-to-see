@@ -21,7 +21,7 @@ export default function Nav() {
             <li id="pinkButtonNav">< Link to="/home"><button><FaTv /> Hva skal jeg se?</button></Link></li>
             <li><Link to ="/genres">Bla gjennom sjangere</Link></li>
             <li><FaCircleUser /> {localStorage.getItem("username")}</li>
-            <li><button onClick={handleLogout}>Logout</button></li>
+            <li><button id="logout" onClick={handleLogout}>Logg ut</button></li>
         </ul>
     </nav>
     )
