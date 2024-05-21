@@ -4,7 +4,7 @@ import MovieCard from "./MovieCard";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react"; 
 import { getAllUsers, getMovies, options, getUser } from "../App";
-import { fetchWishlistForUsers, fetchFavoritesForUsers, fetchAllUsers, fetchUser} from "../../services/userServices";
+import { fetchWishlistForUsers, fetchFavoritesForUsers} from "../../services/userServices";
 import SearchBar from "./SearchBar";
 
 
@@ -24,20 +24,20 @@ export default function HomePage({user, setUser, setFriend, userList, setUserLis
     const [favoritesUrl, setFavoritesUrl] = useState(null)
 
     useEffect(() => {
-        async function fetchUserData() {
+        async function getUserData() {
             const currentUserName = localStorage.getItem("username");
             if (currentUserName){
-                const currentUser = await fetchUser(currentUserName)
+                const currentUser = await getUser(currentUserName)
                 setUser(currentUser)
                 //console.log("HOME Curr User", currentUser.name)
-                const currentUserList = await fetchAllUsers()
+                const currentUserList = await getAllUsers()
                 setUserList(currentUserList)
                 //console.log("HOME Curr UserLIST", currentUserList)
                 setOtherUsers(currentUserList.filter(friends => friends.name !== currentUser[0].name))
                 //console.log("HOME Other", otherUsers)
                 }
             }
-        fetchUserData()
+        getUserData()
     },[])
 
     useEffect(() => {
