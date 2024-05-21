@@ -28,22 +28,17 @@ export default function HomePage({user, setUser, setFriend, setUserList, query, 
             if (currentUserName){
                 const currentUser = await getUser(currentUserName)
                 setUser(currentUser)
-                //console.log("HOME Curr User", currentUser.name)
                 const currentUserList = await getAllUsers()
                 setUserList(currentUserList)
-                //console.log("HOME Curr UserLIST", currentUserList)
                 setOtherUsers(currentUserList.filter(friends => friends.name !== currentUser[0].name))
-                //console.log("HOME Other", otherUsers)
                 }
             }
         getUserData()
     },[])
 
     useEffect(() => {
-        //console.log("HOME USER FUNCTION", user)
         const fetchMovies = async () => {
             if (user != null){
-            //console.log("USER GETMOVIES FUNCTION @@@", user)
             const Wishlistdata = await fetchWishlistForUsers(user[0].name, user[0].name);
             setUserWishlist(Wishlistdata);
             const Favoritesdata = await fetchFavoritesForUsers(user[0].name, user[0].name);
