@@ -133,7 +133,7 @@ export default function HomePage({user, setUser, setFriend, userList, setUserLis
                     <ul>
                         {otherUsers?.map((friend, i) => 
                         <li key={i+"mouse"}>
-                            <button onClick={() => handleFriendClick(friend)}>{friend.name}</button>
+                            <button className="buttonBW" onClick={() => handleFriendClick(friend)}>{friend.name}</button>
                         </li>)}
                     </ul>
                 </section>

@@ -134,6 +134,12 @@ main {
                 width: 100%;
 
             }
+            .buttonBW{
+                &:hover{
+                    background-color: black;
+                    color: white;
+                }
+            }
         }
     }
     #wishlistAndFavoritesSection {
