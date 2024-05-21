@@ -4,14 +4,13 @@ import MovieCard from "./MovieCard";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react"; 
 import { getAllUsers, getMovies, options, getUser } from "../App";
-import { fetchWishlistForUsers, fetchFavoritesForUsers, fetchAllUsers, fetchUser} from "../../services/userServices";
+import { fetchWishlistForUsers, fetchFavoritesForUsers} from "../../services/userServices";
 import SearchBar from "./SearchBar";
 
+export default function HomePage({user, setUser, setFriend, setUserList, query, setQuery}){
 
-export default function HomePage({user, setUser, setFriend, userList, setUserList, query, setQuery}){
-
-
-    // const otherUsers = userList.filter(friends => friends.name !== user.name)
+    // vi prøvde først med "redirect", men fikk ikke til. Derfor prøvde vi med useNavidate(). Det fungerte.
+    // vi leste oss opp på useNavigate() her: https://reactrouter.com/en/main/hooks/use-navigate
     const redirectToViewTogetherPage = useNavigate();
     const [otherUsers, setOtherUsers] = useState([])
     const [userWishlist, setUserWishlist] = useState(null)
@@ -24,27 +23,22 @@ export default function HomePage({user, setUser, setFriend, userList, setUserLis
     const [favoritesUrl, setFavoritesUrl] = useState(null)
 
     useEffect(() => {
-        async function fetchUserData() {
+        async function getUserData() {
             const currentUserName = localStorage.getItem("username");
             if (currentUserName){
-                const currentUser = await fetchUser(currentUserName)
+                const currentUser = await getUser(currentUserName)
                 setUser(currentUser)
-                //console.log("HOME Curr User", currentUser.name)
-                const currentUserList = await fetchAllUsers()
+                const currentUserList = await getAllUsers()
                 setUserList(currentUserList)
-                //console.log("HOME Curr UserLIST", currentUserList)
                 setOtherUsers(currentUserList.filter(friends => friends.name !== currentUser[0].name))
-                //console.log("HOME Other", otherUsers)
                 }
             }
-        fetchUserData()
+        getUserData()
     },[])
 
     useEffect(() => {
-        //console.log("HOME USER FUNCTION", user)
         const fetchMovies = async () => {
             if (user != null){
-            //console.log("USER GETMOVIES FUNCTION @@@", user)
             const Wishlistdata = await fetchWishlistForUsers(user[0].name, user[0].name);
             setUserWishlist(Wishlistdata);
             const Favoritesdata = await fetchFavoritesForUsers(user[0].name, user[0].name);
@@ -113,7 +107,7 @@ export default function HomePage({user, setUser, setFriend, userList, setUserLis
                         {favorites?.results ?
                         favorites?.results?.map((movie, i) =>
                             <li key={i+"bus"}>
-                                <MovieCard key={i+"yes"} imdb={movie.id} title={movie.originalTitleText.text} image={movie.primaryImage?.url}/>
+                                <MovieCard key={i+"realMadrid"} imdb={movie.id} title={movie.originalTitleText.text} image={movie.primaryImage?.url}/>
                             </li>
                         ) : <li>Du har ingen filmer i "filmer jeg skal se" listen</li>}
                     </ul>
@@ -123,7 +117,7 @@ export default function HomePage({user, setUser, setFriend, userList, setUserLis
                     <ul>
                         {wishlist?.results?.map((movie, i) =>
                             <li key={i+"bus"}>
-                                <MovieCard key={i+"yes"} imdb={movie.id} title={movie.originalTitleText.text} image={movie.primaryImage?.url}/>
+                                <MovieCard key={i+"daniAlves"} imdb={movie.id} title={movie.originalTitleText.text} image={movie.primaryImage?.url}/>
                             </li>
                         )}
                     </ul>
@@ -132,8 +126,8 @@ export default function HomePage({user, setUser, setFriend, userList, setUserLis
                     <h3><VscSmiley /> Jeg skal se sammen med...</h3>
                     <ul>
                         {otherUsers?.map((friend, i) => 
-                        <li key={i+"mouse"}>
-                            <button onClick={() => handleFriendClick(friend)}>{friend.name}</button>
+                        <li key={i+"onepiece"}>
+                            <button className="buttonBW" onClick={() => handleFriendClick(friend)}>{friend.name}</button>
                         </li>)}
                     </ul>
                 </section>

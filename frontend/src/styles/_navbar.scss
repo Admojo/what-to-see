@@ -21,6 +21,14 @@ header {
             font-weight: bold;
             font-size: 30px;
             padding: 1rem;
+            &:hover{
+                text-decoration: none;
+                color: rgb(201, 255, 204);
+            }
+            &:active{
+                text-decoration: underline;
+                color: rgb(251, 255, 251);
+            }
             @media only screen and (max-width: 1150px) {
                 left: 32%;
                 right: 14%;
@@ -44,14 +52,29 @@ header {
                 margin-right: 1rem;
                 margin-bottom: 1rem;
                 text-decoration: underline;
+                &:hover{
+                    text-decoration: none;
+                }
+                &:active{
+                    text-decoration: underline;
+                }
                 a {
                     color: rgb(255, 255, 255);
                     width: 100%;
                     padding: 0.6em 1.2em;
+                    &:hover{
+                        color: rgb(201, 255, 204);
+                    }
+                    &:active{
+                        color: rgb(255, 255, 255);
+                    }
                     @media only screen and (max-width: 1150px) {
                         padding-left: 0;
                     }
                 }
+            }
+            #loggeduser{
+                text-decoration: none;
             }
             #pinkButtonNav {
                 display: inline;
@@ -61,6 +84,22 @@ header {
                     color: rgb(51, 29, 93);
                     text-decoration: none;
                     font-weight: bold;
+                    &:hover{
+                        background-color: black;
+                        color: white;
+                    }
+                    &:active{
+                        background-color: rgb(237, 162, 176);
+                        color: rgb(51, 29, 93);
+                        text-decoration: none;
+                        font-weight: bold;
+                    }
+                }
+            }
+            .buttonBW{
+                &:hover{
+                    background-color: black;
+                    color: white;
                 }
             }
         }

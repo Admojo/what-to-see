@@ -1,18 +1,20 @@
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react';
-import { fetchAllUsers } from '../../services/userServices';
+import { getAllUsers } from '../App';
 
 export default function LoginPage({setUser, userList, setUserList}) {
 
-    const getAllUsers = async () => {
-        const data = await fetchAllUsers()
+    const getUserList = async () => {
+        const data = await getAllUsers()
         setUserList(data)
       }
       
       useEffect(() => {
-        getAllUsers()
+        getUserList()
       },[])
 
+    // vi prøvde først med "redirect", men fikk ikke til. Derfor prøvde vi med useNavidate(). Det fungerte.
+    // vi leste oss opp på useNavigate() her: https://reactrouter.com/en/main/hooks/use-navigate
     const redirectToHomepage = useNavigate();
 
     const handleLoginClick = (clickedUser) => {
