@@ -3,15 +3,14 @@ import { VscSmiley } from "react-icons/vsc";
 import MovieCard from "./MovieCard";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react"; 
-import { getAllUsers, getMovies, options, getUser } from "../App";
+import { getMovies, options } from "../App";
 import { fetchWishlistForUsers, fetchFavoritesForUsers, fetchAllUsers, fetchUser} from "../../services/userServices";
 import SearchBar from "./SearchBar";
 
+export default function HomePage({user, setUser, setFriend, setUserList, query, setQuery}){
 
-export default function HomePage({user, setUser, setFriend, userList, setUserList, query, setQuery}){
-
-
-    // const otherUsers = userList.filter(friends => friends.name !== user.name)
+    // vi prøvde først med "redirect", men fikk ikke til. Derfor prøvde vi med useNavidate(). Det fungerte.
+    // vi leste oss opp på useNavigate() her: https://reactrouter.com/en/main/hooks/use-navigate
     const redirectToViewTogetherPage = useNavigate();
     const [otherUsers, setOtherUsers] = useState([])
     const [userWishlist, setUserWishlist] = useState(null)
