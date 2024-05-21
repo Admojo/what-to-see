@@ -54,7 +54,7 @@ main {
         display: flex;
         justify-content: space-evenly;
         @media only screen and (max-width: 1300px) {
-            flex-direction: column;
+            flex-direction: column-reverse;
         }
         #moviesWatchLaterSection {
             margin: 2rem;
@@ -87,6 +87,8 @@ main {
                 li {
                     flex: 1;
                     @media only screen and (min-width: 1300px) {
+                        display: flex;
+                        justify-content: center;
                         max-width: 500px;
                     }
                 }
@@ -114,6 +116,8 @@ main {
                 li {
                     flex: 1;
                     @media only screen and (min-width: 1300px) {
+                        display: flex;
+                        justify-content: center;
                         max-width: 500px;
                     }
                 }
