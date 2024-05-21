@@ -31,6 +31,9 @@ a:hover {
 li {
   list-style: none;
 }
+li button {
+  margin-bottom: .5rem;
+}
 
 body {
   margin: 0;
