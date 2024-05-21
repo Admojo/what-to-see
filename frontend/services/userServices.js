@@ -52,6 +52,7 @@ export async function removeFavoriteGenre(usersid, genre) {
     return result
 }
 
+// Se vedlegg 1 og eksamensdokument_gruppe4 i root for kilde
 export async function fetchFavoriteGenresForUser(id) {
     const data = await client.fetch(`*[_type == "users" && _id == ${id}] {
         genrelist
@@ -60,6 +61,7 @@ export async function fetchFavoriteGenresForUser(id) {
     return data
 }
 
+// Se vedlegg 1 og eksamensdokument_gruppe4 i root for kilde
 export async function fetchGenresForUsers(user1, user2) {
     const query = `{
         "user1genres": *[_type == "users" && name == $user1][0].genrelist,
@@ -74,6 +76,7 @@ export async function fetchGenresForUsers(user1, user2) {
     return data
 }
 
+// Se vedlegg 1 og eksamensdokument_gruppe4 i root for kilde
 export async function fetchWishlistForUsers(user1, user2) {
     const query = `{
         "user1movies": *[_type == "users" && name == $user1][0].wishlist,
@@ -88,6 +91,7 @@ export async function fetchWishlistForUsers(user1, user2) {
     return data
 }
 
+// Se vedlegg 1 og eksamensdokument_gruppe4 i root for kilde
 export async function fetchFavoritesForUsers(user1, user2) {
     const query = `{
         "user1movies": *[_type == "users" && name == $user1][0].favorites,
@@ -102,6 +106,7 @@ export async function fetchFavoritesForUsers(user1, user2) {
     return data
 }
 
+// Se vedlegg 1 og eksamensdokument_gruppe4 i root for kilde
 export async function fetchFavoritesUser1AndWishlistUser2(user1, user2) {
     const query = `{
         "user1movies": *[_type == "users" && name == $user1][0].favorites,
@@ -117,6 +122,7 @@ export async function fetchFavoritesUser1AndWishlistUser2(user1, user2) {
     return data
 }
 
+// Se vedlegg 1 og eksamensdokument_gruppe4 i root for kilde
 export async function fetchWishlistUser1AndFavoritesUser2(user1, user2) {
     const query = `{
         "user1movies": *[_type == "users" && name == $user1][0].wishlist,
