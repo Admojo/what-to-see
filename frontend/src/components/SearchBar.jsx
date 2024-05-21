@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react"
-import { getMovies, options } from "../App";
+import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 
 export default function SearchBar({setQuery}){
