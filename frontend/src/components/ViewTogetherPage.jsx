@@ -42,8 +42,10 @@ export default function ViewTogetherPage({user, setUser, friend, setFriend, setG
             setSharedGenres(genresData);
             const Wishlistdata = await fetchWishlistForUsers(user[0].name, friend[0].name);
             setUsersWishlist(Wishlistdata);
+            // console.log("userWishlist:", Wishlistdata)
             const Favoritesdata = await fetchFavoritesForUsers(user[0].name, friend[0].name);
             setUsersFavorites(Favoritesdata);
+            // console.log("favoUser:", Favoritesdata)
             };
         }
         if(user[0] && friend[0]){
@@ -51,6 +53,20 @@ export default function ViewTogetherPage({user, setUser, friend, setFriend, setG
             getGeneresAndMovies()
           }
     },[friend])
+
+    // Funksjon for å skrive ut data om hvilken bruker og hvilken liste et element er gjenstand i: 
+
+
+    // Hente current.user.favlist 
+    // Hente current.user.wishlist
+
+    // Hente friend.wishList
+    // Hente friend.Favlist 
+
+    // Sammenligne current element id  vs liste 
+
+
+
 
     useEffect(() => {
         if (usersWishlist?.sharedMovies) {
