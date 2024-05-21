@@ -9,8 +9,7 @@ import SearchBar from "./SearchBar";
 
 export default function HomePage({user, setUser, setFriend, setUserList, query, setQuery}){
 
-    // vi prøvde først med "redirect", men fikk ikke til. Derfor prøvde vi med useNavidate(). Det fungerte.
-    // vi leste oss opp på useNavigate() her: https://reactrouter.com/en/main/hooks/use-navigate
+    // vi prøvde først med "redirect", men fikk ikke til. Derfor prøvde vi med useNavidate() (Remix Software, Inc, 2024).
     const redirectToViewTogetherPage = useNavigate();
     const [otherUsers, setOtherUsers] = useState([])
     const [userWishlist, setUserWishlist] = useState(null)
