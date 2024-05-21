@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 export default function SearchBar({setQuery}){
 
     const [search, setSearch] = useState("")
+    // vi prøvde først med "redirect", men fikk ikke til. Derfor prøvde vi med useNavidate(). Det fungerte.
+    // vi leste oss opp på useNavigate() her: https://reactrouter.com/en/main/hooks/use-navigate
     const redirectToMoviesPage = useNavigate()
 
     const handleSubmit = (e)=>{

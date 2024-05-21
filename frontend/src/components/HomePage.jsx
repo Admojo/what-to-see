@@ -7,11 +7,10 @@ import { getAllUsers, getMovies, options, getUser } from "../App";
 import { fetchWishlistForUsers, fetchFavoritesForUsers} from "../../services/userServices";
 import SearchBar from "./SearchBar";
 
+export default function HomePage({user, setUser, setFriend, setUserList, query, setQuery}){
 
-export default function HomePage({user, setUser, setFriend, userList, setUserList, query, setQuery}){
-
-
-    // const otherUsers = userList.filter(friends => friends.name !== user.name)
+    // vi prøvde først med "redirect", men fikk ikke til. Derfor prøvde vi med useNavidate(). Det fungerte.
+    // vi leste oss opp på useNavigate() her: https://reactrouter.com/en/main/hooks/use-navigate
     const redirectToViewTogetherPage = useNavigate();
     const [otherUsers, setOtherUsers] = useState([])
     const [userWishlist, setUserWishlist] = useState(null)

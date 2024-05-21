@@ -84,15 +84,11 @@ export default function WishlistAndFavorites({user, setUser, friend, setFriend})
     }, [sharedWishlistUrl, sharedFavoritesUrl]);
 
     useEffect(()=> {
-        let result = {};
-        // if (sharedFavorites != null) {
-        //     result = [...sharedFavorites]
-        // }
-        // if (sharedWishlist != null) {
-        //     result = [...sharedWishlist]
-        // }
-        const tmp = {...sharedWishlist, ...sharedFavorites};
-        setFinalResult(tmp);
+        // for å legge til alle elementer fra to stykk arrayer til ett og samme array brukte jeg lenken under:
+        // https://stackoverflow.com/questions/10118204/how-can-i-add-javascript-object-to-another-object-in-dynamic
+        // Da fant jeg ut at jeg kunne gjøre dette: const tmp = {...sharedWishlist, ...sharedFavorites};
+        const resultOfBothQueries = {...sharedWishlist, ...sharedFavorites};
+        setFinalResult(resultOfBothQueries);
     },[sharedFavorites, sharedWishlist])
     
     return(
@@ -105,12 +101,11 @@ export default function WishlistAndFavorites({user, setUser, friend, setFriend})
              : <p>Dere har ingen filmer til felles fra ønskelister og favoritter.</p>}
              <ul id="ul-wishlistAndFavoritesSection">
              {finalResult?.results?.map((movie, i) =>
-                            <li key={i+"bus"}>
+                            <li key={i+"davidBeckham"}>
                                 <MovieCard key={i+"raymondKvisvikFFK"} imdb={movie.id} title={movie.originalTitleText.text} image={movie.primaryImage?.url}/>
                             </li>
                         )}
              </ul>
-
         </section>
         </>
     )

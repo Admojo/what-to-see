@@ -13,6 +13,8 @@ export default function LoginPage({setUser, userList, setUserList}) {
         getUserList()
       },[])
 
+    // vi prøvde først med "redirect", men fikk ikke til. Derfor prøvde vi med useNavidate(). Det fungerte.
+    // vi leste oss opp på useNavigate() her: https://reactrouter.com/en/main/hooks/use-navigate
     const redirectToHomepage = useNavigate();
 
     const handleLoginClick = (clickedUser) => {

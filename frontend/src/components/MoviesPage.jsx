@@ -15,7 +15,7 @@ export default function MoviePage({movies, setPage, query}){
         <>  <h1>Search results for: {query}</h1>
             <section className="singleGenreContent">
             {movies?.results?.map((item, i) => 
-                <MovieCard key={i+"ok"} imdb={item.id} title={item.originalTitleText.text} image={item.primaryImage?.url}/>
+                <MovieCard key={i+"andreaPirlo"} imdb={item.id} title={item.originalTitleText.text} image={item.primaryImage?.url}/>
             )}
             </section>
             <nav>

@@ -4,14 +4,12 @@ import { FaTv } from "react-icons/fa";
 
 export default function Nav() {
 
+    // vi prøvde først med "redirect", men fikk ikke til. Derfor prøvde vi med useNavidate(). Det fungerte.
+    // vi leste oss opp på useNavigate() her: https://reactrouter.com/en/main/hooks/use-navigate
     const redirectToLoginPage = useNavigate();
 
     const handleLogout = () => {
-        redirectToLoginPage("/")
-        // for å kunne være på loginpage uten at nav-bar er synlig så må man refreshe siden først. Dette løste vi med en quickfix med linjen under.
-        // fant løsningen på stackowerflow: https://stackoverflow.com/questions/41481522/how-to-refresh-a-page-using-react-route-link
-        //window.location.reload();
-        
+        redirectToLoginPage("/")        
         localStorage.clear()
     }
     return(
