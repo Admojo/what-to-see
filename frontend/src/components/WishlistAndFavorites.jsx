@@ -94,32 +94,6 @@ export default function WishlistAndFavorites({user, setUser, friend, setFriend})
     },[sharedFavorites, sharedWishlist])
     // console.log("finalResult:", finalResult)
 
-
-   // Funksjon for å skrive ut data om hvilken bruker og hvilken liste et element er gjenstand i: 
-    // const getMovieItemSource = async(user, friend) => {
-    //     const FavWishdata = await fetchFavoritesUser1AndWishlistUser2(user[0].name, friend[0].name)
-            
-    //         const user1Wishlist = user[0].wishlist
-    //         const user1Favlist = user[0].favorites
-
-    //         const user2Wishlist = friend[0].wishlist
-    //         const user2Favlist = friend[0].favorites
-
-          
-    //         user1Wishlist.forEach(movie => {
-    //             if (FavWishdata.some(movie)) {
-    //                 console.log(`Hurra! Movie: ${movie}, User: ${user[0].name}`);
-    //             }
-    //         });
-
-    //     console.log("user1favlist", user1Favlist, "user1Wishlist", user1Wishlist)
-    //     console.log("user2favlist", user2Favlist, "user2Wishlist", user2Wishlist)
-
-    // }
-    // // console.log("user", user, "friend", friend)
-    // console.log("getMovieItemsource:", getMovieItemSource(user, friend))
-
-
     
     return(
         <>
@@ -132,10 +106,6 @@ export default function WishlistAndFavorites({user, setUser, friend, setFriend})
              <ul id="ul-wishlistAndFavoritesSection">
              {finalResult?.results?.map((movie, i) =>
                             <li key={i+"davidBeckham"}>
-                                {/* <section>
-                                    <p> filmen tilhører bruker  </p>
-                                    <p> filmen ligger i liste </p>
-                                </section> */}
                                 <MovieCard key={i+"raymondKvisvikFFK"} imdb={movie.id} title={movie.originalTitleText.text} image={movie.primaryImage?.url}/>
                             </li>
                         )}
