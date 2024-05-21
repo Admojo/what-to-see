@@ -107,7 +107,7 @@ export default function HomePage({user, setUser, setFriend, setUserList, query, 
                         {favorites?.results ?
                         favorites?.results?.map((movie, i) =>
                             <li key={i+"bus"}>
-                                <MovieCard key={i+"yes"} imdb={movie.id} title={movie.originalTitleText.text} image={movie.primaryImage?.url}/>
+                                <MovieCard key={i+"realMadrid"} imdb={movie.id} title={movie.originalTitleText.text} image={movie.primaryImage?.url}/>
                             </li>
                         ) : <li>Du har ingen filmer i "filmer jeg skal se" listen</li>}
                     </ul>
@@ -117,7 +117,7 @@ export default function HomePage({user, setUser, setFriend, setUserList, query, 
                     <ul>
                         {wishlist?.results?.map((movie, i) =>
                             <li key={i+"bus"}>
-                                <MovieCard key={i+"yes"} imdb={movie.id} title={movie.originalTitleText.text} image={movie.primaryImage?.url}/>
+                                <MovieCard key={i+"daniAlves"} imdb={movie.id} title={movie.originalTitleText.text} image={movie.primaryImage?.url}/>
                             </li>
                         )}
                     </ul>
@@ -126,7 +126,7 @@ export default function HomePage({user, setUser, setFriend, setUserList, query, 
                     <h3><VscSmiley /> Jeg skal se sammen med...</h3>
                     <ul>
                         {otherUsers?.map((friend, i) => 
-                        <li key={i+"mouse"}>
+                        <li key={i+"onepiece"}>
                             <button className="buttonBW" onClick={() => handleFriendClick(friend)}>{friend.name}</button>
                         </li>)}
                     </ul>
