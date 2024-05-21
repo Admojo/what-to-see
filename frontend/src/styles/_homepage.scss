@@ -70,8 +70,7 @@ main {
             h2 {
                 margin: 1rem;
                 padding: 1rem;
-                // fikk inspirasjon fra w3schools for text-shadow effekter:
-                // https://www.w3schools.com/css/css3_shadows.asp
+                // hentet inspirasjon med text-shadow fra w3schools (W3schools, 2024).
                 text-shadow: 1px 0px 2px rgb(196, 196, 196), 0 0 20px rgb(246, 255, 0);
             }
             ul {
@@ -124,8 +123,7 @@ main {
             }
         }
         #watchTogetherSection {
-            // for å få ønsket effekt på bakgrundsfargen brukte jeg metoden: "linear-gradient" som er hentet fra stackowerflow.
-            // https://stackoverflow.com/questions/55568895/how-to-make-background-slightly-fade-from-top-and-bottom
+            // for å få ønsket effekt på bakgrundsfargen brukte jeg metoden: "linear-gradient" som er hentet fra stackowerflow (Quentin, 2024).
             background-image: linear-gradient(rgb(187, 187, 187,), white);
             height: 400px;
             padding-top: 7px;
