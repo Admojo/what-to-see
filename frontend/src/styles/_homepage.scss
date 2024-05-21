@@ -1,6 +1,4 @@
 main {
-    // margin-left: 60px;
-    // margin-right: 60px;
     #topSectionHome{
             display: flex;
             gap: 23rem;
@@ -80,10 +78,6 @@ main {
                     flex-direction: row;
                     align-items: center; 
                 }
-                // @media only screen and (max-width: 900px) {
-                //     flex-direction: column;
-                //     width: 100%;
-                // }
                 li {
                     flex: 1;
                 }
@@ -97,7 +91,6 @@ main {
             h2 { 
                 margin: 1rem;
                 padding: 1rem;
-                // margin-top: 1.7rem;
             }
             ul {
                 padding-left: 0;
@@ -109,10 +102,6 @@ main {
                     flex-direction: row;
                     align-items: center; 
                 }
-                // @media only screen and (max-width: 900px) {
-                //     flex-direction: column;
-                //     width: 100%;
-                // }
                 li {
                     flex: 1;
                 }
