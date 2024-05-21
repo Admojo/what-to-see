@@ -124,6 +124,8 @@ main {
             }
         }
         #watchTogetherSection {
+            // for å få ønsket effekt på bakgrundsfargen brukte jeg metoden: "linear-gradient" som er hentet fra stackowerflow.
+            // https://stackoverflow.com/questions/55568895/how-to-make-background-slightly-fade-from-top-and-bottom
             background-image: linear-gradient(rgb(187, 187, 187,), white);
             height: 400px;
             padding-top: 7px;
@@ -132,7 +134,6 @@ main {
             margin-top: 7.7rem;
             @media only screen and (max-width: 1300px) {   
                 width: 100%;
-
             }
             .buttonBW{
                 &:hover{

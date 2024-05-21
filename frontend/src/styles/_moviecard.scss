@@ -10,6 +10,8 @@
     @media only screen and (max-width: 1300px) {
         box-shadow: none;
         background-color: transparent;
+        // for å få ønsket effekt på bakgrundsfargen brukte jeg metoden: "linear-gradient" som er hentet fra stackowerflow.
+        // https://stackoverflow.com/questions/55568895/how-to-make-background-slightly-fade-from-top-and-bottom
         background-image: linear-gradient(rgba(238, 238, 238, 0.194),rgba(155, 72, 203, 0.055));
         border: none;
         height: 475px;
@@ -18,9 +20,8 @@
         border-radius: 5px;
         min-width: 100%;
         max-width: 250px;
-        //height: 80%;
         border-bottom: 2px solid var(--midnight-blue);
-        // Fant ut av hvordan jeg skulle justere bildet på hvert moviecard riktig med object-fit: cover. Linken under er hvor leste meg opp.
+        // Fant ut av hvordan jeg skulle justere bildet på hvert moviecard riktig med "object-fit: cover". Linken under er hvor leste meg opp.
         // https://www.w3schools.com/css/css3_object-fit.asp
         object-fit: cover;
         @media only screen and (max-width: 1300px) {
@@ -34,6 +35,8 @@
     h3 {
         text-align: center;
         @media only screen and (max-width: 1300px) {
+            // hentet inspirasjon med text-shadow fra w3schools.
+            // https://www.w3schools.com/cssref/css3_pr_text-shadow.php
             text-shadow: 2px 2px 10px rgba(245, 106, 245, 0.588);
             color: rgb(0, 0, 0);
         }
