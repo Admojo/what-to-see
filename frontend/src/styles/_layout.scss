@@ -12,6 +12,8 @@ body {
             margin-top: 3rem;
             bottom: 0;
             text-align: center;
+            // Leste meg opp på linken under for å finne ut hvordan footer kan ligge på bunnen av siden.
+            // https://stackoverflow.com/questions/643879/css-to-make-html-page-footer-stay-at-bottom-of-the-page-with-a-minimum-height-b
             position: relative;
             bottom: -100%;
             p {
