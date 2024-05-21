@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import GenrePage from './components/GenrePage';
 import { fetchAllUsers, fetchUser } from "../services/userServices"
 import ViewTogetherPage from './components/ViewTogetherPage';
+import MoviePage from './components/MoviesPage';
 
 export async function getUser() {
   const currentUserName = localStorage.getItem("username");
@@ -50,14 +51,14 @@ export const options = {
 
 function App() {
 
-
   const [user, setUser] = useState([])
   const [friend, setFriend] = useState([])
-  const [movies, setMovies] = useState (null)
+  const [movies, setMovies] = useState ([])
   const [genre, setGenre] = useState (null)
   const [userList, setUserList] = useState(null)
-
-const urlAllMovies = `https://moviesdatabase.p.rapidapi.com/titles?info=base_info`;
+  const [query, setQuery] = useState("")
+  const [page, setPage] = useState(1)
+  const url = `https://moviesdatabase.p.rapidapi.com/titles/search/akas/${query}?info=base_info&page=${page}`;
 
   const getAllUsers = async () => {
     const data = await fetchAllUsers()
@@ -72,19 +73,28 @@ const urlAllMovies = `https://moviesdatabase.p.rapidapi.com/titles?info=base_inf
       }
     }
     fetchUser()
-    setMovies(getMovies(urlAllMovies, options))
     getAllUsers()
   },[])
 
+  useEffect(()=>{
+    const fetchMovies = async ()=>{
+      const result = await getMovies(url, options)
+      setMovies(result)
+    }
+    if (query){
+      fetchMovies()
+    }
+  },[query, page])
 
     return (<>
       <Layout>
         <Routes>
               <Route path="/" element={<LoginPage setUser={setUser} userList={userList} setUserList={setUserList} />}/>
-              <Route path="/home" element={<HomePage movielist={movies} setUser={setUser} user={user} userList={userList} setUserList={setUserList} friend={friend} setFriend={setFriend} />}/>
+              <Route path="/home" element={<HomePage movies={movies} setUser={setUser} user={user} userList={userList} setUserList={setUserList} friend={friend} setFriend={setFriend} query={query} setQuery={setQuery}/>}/>
               <Route path="/genres" element={<Genre setGenre={setGenre} user={user} genre={genre} setUser={setUser}/>}/>
-              <Route path="/genrepage" element={<GenrePage user={user} genre={genre} movielist={movies} setMovies={setMovies} />}/>
+              <Route path="/genrepage" element={<GenrePage user={user} genre={genre} movies={movies} setMovies={setMovies} />}/>
               <Route path="/viewtogether" element={<ViewTogetherPage user={user} setUser={setUser} friend={friend} setFriend={setFriend} setGenre={setGenre}/>}/>
+              <Route path="/movies" element={<MoviePage movies={movies} setMovies={setMovies} query={query} page={page} setPage={setPage}/>}/>
           </Routes>
       </Layout>
     </>

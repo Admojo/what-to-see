@@ -38,8 +38,6 @@ export default function Genre({user, setUser, setGenre}) {
     
     const handleFavoriteClick = (genre) => {
         setGenre(genre)
-        console.log("€€€ genrelist", genreList)
-        console.log("€€€ genre", genre)
         handleClick(genre)
     }
     const handleClick = async (genre) => {

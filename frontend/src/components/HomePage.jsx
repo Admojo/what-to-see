@@ -5,9 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react"; 
 import { getAllUsers, getMovies, options, getUser } from "../App";
 import { fetchWishlistForUsers, fetchFavoritesForUsers, fetchAllUsers, fetchUser} from "../../services/userServices";
+import SearchBar from "./SearchBar";
 
 
-export default function HomePage({user, setUser, setFriend, userList, setUserList}){
+export default function HomePage({user, setUser, setFriend, userList, setUserList, query, setQuery}){
 
 
     // const otherUsers = userList.filter(friends => friends.name !== user.name)
@@ -100,8 +101,11 @@ export default function HomePage({user, setUser, setFriend, userList, setUserLis
     }
 
     return (
-        <>
-            <h1>Hei, {user[0]?.name}</h1>
+        <>  
+            <section id="topSectionHome">
+                <h1>Hei, {user[0]?.name}</h1>
+                <SearchBar query={query} setQuery={setQuery}/>
+            </section>
             <div>
                 <section id="moviesWatchLaterSection">
                     <h2><FaStar /> Mine favoritter:</h2>

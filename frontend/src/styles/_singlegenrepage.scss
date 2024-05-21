@@ -1,4 +1,4 @@
-#singleGenreContent {
+.singleGenreContent {
     //background-color: black;
     display: flex;
     flex-wrap: wrap;
@@ -9,7 +9,7 @@
         align-self: flex-start;
     }
 }
-#pageselector{
+.pageselector{
     display: flex;
     gap: 1rem;
     justify-content: center;
